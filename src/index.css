@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Share+Tech+Mono&display=swap');
+
+:root {
+  font-family: 'IBM Plex Mono', 'Share Tech Mono', 'Courier New', monospace;
+  color: #f5f5f5;
+  background-color: #000000;
+  line-height: 1.6;
+  font-weight: 400;
+  --dos-bg: #000000;
+  --dos-muted: #c7c7c7;
+  --dos-border: #2f2f2f;
+  --dos-highlight: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--dos-bg);
+  color: var(--dos-highlight);
+  letter-spacing: 0.08em;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--dos-bg);
+  color: var(--dos-highlight);
+  padding: 2.5rem 1.5rem;
+}
+
+.dos-shell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 3.5rem;
+}
+
+.dos-banner {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: var(--dos-muted);
+}
+
+.dos-banner p + p {
+  margin-top: 0.35rem;
+}
+
+.dos-screen {
+  padding: 1.5rem 0 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  outline: none;
+}
+
+.dos-screen[data-mode='insert'] {
+  background-color: #050505;
+}
+
+.dos-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dos-line {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.ascii-cat {
+  font-family: inherit;
+  white-space: pre;
+  margin: 0.5rem 0 1rem;
+}
+
+.dos-highlight {
+  color: var(--dos-highlight);
+}
+
+.dos-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.dos-list.inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dos-list li {
+  color: var(--dos-highlight);
+}
+
+.dos-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.dos-link {
+  border-bottom: 1px dotted var(--dos-highlight);
+  text-decoration: none;
+  padding-bottom: 0.1rem;
+}
+
+.dos-entry {
+  margin-top: 0.35rem;
+}
+
+.dos-muted {
+  color: var(--dos-muted);
+}
+
+.dos-status {
+  border-top: 1px solid var(--dos-border);
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  color: var(--dos-muted);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.vim-mode,
+.vim-message,
+.vim-hint,
+.vim-command {
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.vim-mode {
+  font-weight: 700;
+  color: var(--dos-highlight);
+}
+
+.vim-message {
+  justify-content: center;
+  text-align: center;
+}
+
+.vim-hint {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.vim-command {
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.vim-command-cursor {
+  width: 0.6ch;
+  height: 1.1em;
+  background: var(--dos-highlight);
+  animation: blink 1s steps(2, start) infinite;
+}
