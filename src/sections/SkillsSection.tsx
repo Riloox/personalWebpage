@@ -1,9 +1,13 @@
-import { skills } from '../data/profile';
+import { skills, type LanguageKey } from '../data/profile';
 
-const SkillsSection = () => (
+interface SkillsSectionProps {
+  language: LanguageKey;
+}
+
+const SkillsSection = ({ language }: SkillsSectionProps) => (
   <section className="dos-section" id="skills">
     <p className="dos-line">fprunell@portfolio:~/skills$ ls -1 groups</p>
-    {skills.map((group) => (
+    {skills[language].map((group) => (
       <article key={group.group} className="dos-entry">
         <p>{group.group.toUpperCase()}</p>
         <ul className="dos-list inline">

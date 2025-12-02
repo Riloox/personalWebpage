@@ -5,6 +5,7 @@ import SkillsSection from './sections/SkillsSection';
 import ExperienceSection from './sections/ExperienceSection';
 import ProjectsSection from './sections/ProjectsSection';
 import ContactSection from './sections/ContactSection';
+import type { LanguageKey } from './data/profile';
 
 const App = () => {
   const [mode, setMode] = useState<'NORMAL' | 'INSERT'>('NORMAL');
@@ -12,6 +13,7 @@ const App = () => {
   const [commandActive, setCommandActive] = useState(false);
   const [commandLine, setCommandLine] = useState('');
   const [customHtml, setCustomHtml] = useState<string | null>(null);
+  const [language, setLanguage] = useState<LanguageKey>('en');
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -83,6 +85,18 @@ const App = () => {
         case 'load':
           setStatusMessage('Select a JSON export to load.');
           fileInputRef.current?.click();
+          break;
+        case 'esp':
+        case ':esp':
+          setLanguage('es');
+          setCustomHtml(null);
+          setStatusMessage('Idioma cambiado a español.');
+          break;
+        case 'en':
+        case ':en':
+          setLanguage('en');
+          setCustomHtml(null);
+          setStatusMessage('Language switched to English.');
           break;
         case 'q':
         case 'q!':
@@ -177,11 +191,11 @@ const App = () => {
             <div dangerouslySetInnerHTML={{ __html: customHtml }} />
           ) : (
             <>
-              <HeroSection />
-              <SkillsSection />
-              <ExperienceSection />
-              <ProjectsSection />
-              <ContactSection />
+              <HeroSection language={language} />
+              <SkillsSection language={language} />
+              <ExperienceSection language={language} />
+              <ProjectsSection language={language} />
+              <ContactSection language={language} />
             </>
           )}
         </main>
@@ -202,7 +216,7 @@ const App = () => {
               <span className="vim-command-cursor" />
             </span>
           ) : (
-            <span className="vim-hint">Type i to edit - :w to save/export - :load to import - Esc to return</span>
+            <span className="vim-hint">Type i to edit - :w to save/export - :load to import - :esp / :en to switch language - Esc to return</span>
           )}
         </div>
       </div>
