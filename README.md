@@ -38,3 +38,9 @@ npm run preview # preview the production build locally
 - Additional sections can be added under `src/sections/`, each receiving the current `language` prop to keep the bilingual behavior consistent.
 
 Deploy the resulting build wherever static sites are supported—Vite outputs the final bundle to `dist/`.
+
+## GitHub Pages
+
+- Vite already uses `base`/`publicPath` pointing to `/personalWebpage/` when `NODE_ENV=production`, so the build references the right URLs on `https://<your-user>.github.io/personalWebpage/`.
+- Run `npm run deploy` to let `gh-pages` publish the `dist/` output to the `gh-pages` branch automatically (the `predeploy` script makes sure the app is built first).
+- In your repository settings, configure GitHub Pages to serve from the `gh-pages` branch and leave the site path as `/personalWebpage/`. This prevents the browser from loading the raw `src/main.tsx` file with the wrong MIME type.
