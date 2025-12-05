@@ -41,6 +41,7 @@ Deploy the resulting build wherever static sites are supported—Vite outputs th
 
 ## GitHub Pages
 
-- Vite already uses `base`/`publicPath` pointing to `/personalWebpage/` when `NODE_ENV=production`, so the build references the right URLs on `https://<your-user>.github.io/personalWebpage/`.
-- Run `npm run deploy` to let `gh-pages` publish the `dist/` output to the `gh-pages` branch automatically (the `predeploy` script makes sure the app is built first).
-- In your repository settings, configure GitHub Pages to serve from the `gh-pages` branch and leave the site path as `/personalWebpage/`. This prevents the browser from loading the raw `src/main.tsx` file with the wrong MIME type.
+- Vite assumes `/personalWebpage/` as the `base` for production builds, but you can override it with `VITE_BASE_PATH`. For example, `VITE_BASE_PATH=/ npm run deploy` builds the app for a root path deployment such as a custom domain.
+- Run `npm run deploy` (it wraps `npm run build`) so `gh-pages` publishes the updated `dist/` output to the `gh-pages` branch automatically.
+- In the Pages settings, choose the `gh-pages` branch and keep the folder set to `/ (root)`; GitHub Pages will serve the files from `https://<your-user>.github.io/personalWebpage/`.
+- For a custom domain like `riloox.site`, we ship a `public/CNAME` file so GitHub knows the desired hostname. With that domain you should run `VITE_BASE_PATH=/ npm run deploy` (or set `VITE_BASE_PATH=/` before `npm run build`) so the site references `/assets/...` instead of `/personalWebpage/assets/...`.
