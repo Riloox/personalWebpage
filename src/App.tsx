@@ -14,19 +14,22 @@ const App = () => {
   const [commandLine, setCommandLine] = useState('');
   const [customHtml, setCustomHtml] = useState<string | null>(null);
   const [language, setLanguage] = useState<LanguageKey>('en');
+  const [easyMode, setEasyMode] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const draftHtmlRef = useRef('');
 
   const getEditorHtml = () => editorRef.current?.innerHTML ?? '';
 
   const handleSave = () => {
-    const html = getEditorHtml();
+    const html = draftHtmlRef.current || getEditorHtml();
     if (!html.trim()) {
       setStatusMessage('Nothing to save.');
       return;
     }
 
     setCustomHtml(html);
+    draftHtmlRef.current = html;
     const payload = JSON.stringify({ html }, null, 2);
     const blob = new Blob([payload], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -40,83 +43,126 @@ const App = () => {
     setStatusMessage(`Saved buffer to ${filename}`);
   };
 
-  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target;
+    const file = input.files?.[0];
     if (!file) {
       setStatusMessage('No file selected.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const parsed = JSON.parse(reader.result as string);
-        if (!parsed || typeof parsed.html !== 'string') {
-          throw new Error('Invalid file format.');
-        }
-        setCustomHtml(parsed.html);
-        setStatusMessage('Loaded content from JSON export.');
-      } catch (error) {
-        setStatusMessage(error instanceof Error ? error.message : 'Unable to load JSON file.');
-      } finally {
-        event.target.value = '';
+    try {
+      const parsed = JSON.parse(await file.text());
+      if (!parsed || typeof parsed.html !== 'string') {
+        throw new Error('Invalid file format.');
       }
-    };
 
-    reader.readAsText(file);
-  };
-
-  const handleEditorInput = () => {
-    const html = getEditorHtml();
-    if (html.trim()) {
-      setCustomHtml(html);
+      draftHtmlRef.current = parsed.html;
+      setCustomHtml(parsed.html);
+      setMode('NORMAL');
+      setCommandActive(false);
+      setCommandLine('');
+      setStatusMessage('Loaded content from JSON export.');
+      editorRef.current?.blur();
+    } catch (error) {
+      setStatusMessage(error instanceof Error ? error.message : 'Unable to load JSON file.');
+    } finally {
+      input.value = '';
     }
   };
 
-  useEffect(() => {
-    const runCommand = (cmd: string) => {
-      const trimmed = cmd.trim();
-      const normalized = trimmed.toLowerCase();
-      switch (normalized) {
-        case 'w':
-        case 'wq':
-          handleSave();
-          break;
-        case 'load':
-          setStatusMessage('Select a JSON export to load.');
-          fileInputRef.current?.click();
-          break;
-        case 'esp':
-        case ':esp':
-          setLanguage('es');
-          setCustomHtml(null);
-          setStatusMessage('Idioma cambiado a español.');
-          break;
-        case 'en':
-        case ':en':
-          setLanguage('en');
-          setCustomHtml(null);
-          setStatusMessage('Language switched to English.');
-          break;
-        case 'q':
-        case 'q!':
-          setStatusMessage('Cannot quit. Shell must stay open.');
-          break;
-        case 'cls':
-          setCustomHtml(null);
-          setStatusMessage('Screen cleared. Default content restored.');
-          break;
-        default:
-          setStatusMessage(trimmed ? `Bad command or file name: ${trimmed}` : 'Command cancelled');
-      }
-    };
+  const handleEditorInput = () => {
+    draftHtmlRef.current = getEditorHtml();
+  };
 
+  const easyCommandConfig = [
+    { label: 'Save', cmd: 'w' },
+    { label: 'Load JSON', cmd: 'load' },
+    { label: 'Espa\u00f1ol', cmd: ':esp' },
+    { label: 'English', cmd: ':en' },
+    { label: 'Clear', cmd: 'cls' },
+  ];
+
+  const easyModeLabel = language === 'es' ? 'Modo f\u00e1cil' : 'Easy mode';
+  const easyModeStateLabel = language === 'es' ? (easyMode ? 'ACTIVO' : 'APAGADO') : easyMode ? 'ON' : 'OFF';
+  const isEditable = mode === 'INSERT' && customHtml !== null;
+
+  const exitInsertMode = () => {
+    if (mode !== 'INSERT') {
+      return;
+    }
+    setMode('NORMAL');
+    if (draftHtmlRef.current.trim()) {
+      setCustomHtml(draftHtmlRef.current);
+    }
+    editorRef.current?.blur();
+  };
+
+  const runCommand = (cmd: string) => {
+    const trimmed = cmd.trim();
+    const normalized = trimmed.toLowerCase();
+    switch (normalized) {
+      case 'w':
+      case 'wq':
+        handleSave();
+        break;
+      case 'load':
+        exitInsertMode();
+        setStatusMessage('Select a JSON export to load.');
+        fileInputRef.current?.click();
+        break;
+      case 'esp':
+      case ':esp':
+        exitInsertMode();
+        setLanguage('es');
+        setCustomHtml(null);
+        draftHtmlRef.current = '';
+        setStatusMessage('Idioma cambiado a espa\u00f1ol.');
+        break;
+      case 'en':
+      case ':en':
+        exitInsertMode();
+        setLanguage('en');
+        setCustomHtml(null);
+        draftHtmlRef.current = '';
+        setStatusMessage('Language switched to English.');
+        break;
+      case 'q':
+      case 'q!':
+        setStatusMessage('Cannot quit. Shell must stay open.');
+        break;
+      case 'cls':
+        exitInsertMode();
+        setCustomHtml(null);
+        draftHtmlRef.current = '';
+        setStatusMessage('Screen cleared. Default content restored.');
+        break;
+      default:
+        setStatusMessage(trimmed ? `Bad command or file name: ${trimmed}` : 'Command cancelled');
+    }
+  };
+
+  const handleEasyToggle = () => {
+    setEasyMode((prev) => {
+      const next = !prev;
+      if (next) {
+        setCommandActive(false);
+        setCommandLine('');
+        setStatusMessage('Easy mode enabled. Use the buttons below to run commands.');
+      } else {
+        setStatusMessage('Easy mode disabled. Type : to enter command mode.');
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.metaKey || event.ctrlKey || event.altKey) {
         return;
       }
 
-      if (commandActive) {
+      if (!easyMode && commandActive) {
         if (event.key === 'Enter') {
           runCommand(commandLine);
           setCommandLine('');
@@ -146,7 +192,7 @@ const App = () => {
         return;
       }
 
-      if (mode === 'NORMAL' && event.key === ':') {
+      if (!easyMode && mode === 'NORMAL' && event.key === ':') {
         setCommandActive(true);
         setCommandLine('');
         setStatusMessage('Command mode');
@@ -155,6 +201,11 @@ const App = () => {
       }
 
       if (mode === 'NORMAL' && event.key === 'i') {
+        const html = getEditorHtml();
+        if (!customHtml) {
+          setCustomHtml(html);
+        }
+        draftHtmlRef.current = html;
         setMode('INSERT');
         setStatusMessage('-- INSERT -- editing buffer');
         requestAnimationFrame(() => editorRef.current?.focus());
@@ -163,26 +214,33 @@ const App = () => {
       }
 
       if (mode === 'INSERT' && event.key === 'Escape') {
-        setMode('NORMAL');
+        exitInsertMode();
         setStatusMessage('-- NORMAL -- press i to edit again');
-        editorRef.current?.blur();
         event.preventDefault();
       }
     };
 
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [mode, commandActive, commandLine]);
+  }, [mode, commandActive, commandLine, easyMode, customHtml]);
 
   return (
     <div className="app-shell">
       <div className="dos-shell">
+        <button
+          type="button"
+          className={`easy-toggle${easyMode ? ' active' : ''}`}
+          aria-pressed={easyMode}
+          onClick={handleEasyToggle}
+        >
+          {easyModeLabel} {easyModeStateLabel}
+        </button>
         <main
           className="dos-screen"
           tabIndex={0}
           ref={editorRef}
           data-mode={mode.toLowerCase()}
-          contentEditable={mode === 'INSERT'}
+          contentEditable={isEditable}
           suppressContentEditableWarning
           spellCheck={false}
           onInput={handleEditorInput}
@@ -208,9 +266,25 @@ const App = () => {
         />
 
         <div className="dos-status" aria-live="polite">
-          <span className="vim-mode">{mode}</span>
+          <span className="vim-mode">
+            {mode}
+            {easyMode ? ' \u00b7 EASY' : ''}
+          </span>
           <span className="vim-message">{statusMessage}</span>
-          {commandActive ? (
+          {easyMode ? (
+            <div className="easy-command-group" role="group" aria-label="Easy mode commands">
+              {easyCommandConfig.map(({ label, cmd }) => (
+                <button
+                  key={cmd}
+                  type="button"
+                  className="easy-command-button"
+                  onClick={() => runCommand(cmd)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          ) : commandActive ? (
             <span className="vim-command">
               :{commandLine}
               <span className="vim-command-cursor" />

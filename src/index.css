@@ -3,10 +3,10 @@
 :root {
   font-family: 'IBM Plex Mono', 'Share Tech Mono', 'Courier New', monospace;
   color: #f5f5f5;
-  background-color: #000000;
+  background-color: #111111;
   line-height: 1.6;
   font-weight: 400;
-  --dos-bg: #000000;
+  --dos-bg: #111111;
   --dos-muted: #c7c7c7;
   --dos-border: #2f2f2f;
   --dos-highlight: #ffffff;
@@ -52,7 +52,74 @@ a {
   margin: 0;
   min-height: 100vh;
   position: relative;
+  padding-top: 2rem;
   padding-bottom: 3.5rem;
+}
+
+.easy-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  border: 1px solid var(--dos-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--dos-highlight);
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1.3rem;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.55);
+}
+
+.easy-toggle.active {
+  background: var(--dos-highlight);
+  color: var(--dos-bg);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.easy-command-group {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  padding-top: 0.35rem;
+}
+
+.easy-command-button {
+  border: 1px solid var(--dos-border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dos-highlight);
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.easy-command-button:hover,
+.easy-command-button:focus-visible {
+  background: var(--dos-highlight);
+  color: var(--dos-bg);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .easy-toggle {
+    position: static;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .easy-command-group {
+    justify-content: flex-start;
+  }
 }
 
 .dos-banner {
@@ -75,7 +142,7 @@ a {
 }
 
 .dos-screen[data-mode='insert'] {
-  background-color: #050505;
+  background-color: var(--dos-bg);
 }
 
 .dos-section {
@@ -150,7 +217,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #000000;
+  background: var(--dos-bg);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
