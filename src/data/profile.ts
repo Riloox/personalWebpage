@@ -14,7 +14,7 @@ export const heroContent: Record<
     name: 'Federico Prunell',
     title: 'Software Development Analyst',
     summary:
-      'Fourth-year Information Technology student and backend-focused engineer building Java/Python services, gameplay tooling, and automation utilities. Focused on backend reliability and automation, ready to contribute as a junior software developer.',
+      'Bachelor in Information Technologies and backend-focused engineer building Java/Python services, gameplay tooling, and automation utilities. Focused on backend reliability and automation, ready to contribute as a junior software developer.',
     location: 'Montevideo, Uruguay',
     cta: {
       label: 'Open contact',
@@ -25,7 +25,7 @@ export const heroContent: Record<
     name: 'Federico Prunell',
     title: 'Analista de Desarrollo de Software',
     summary:
-      'Estudiante de cuarto ano de Tecnologia de la Informacion y desarrollador backend que crea servicios en Java/Python, herramientas de juego y utilidades de automatizacion. Enfocado en confiabilidad y automatizacion, listo para aportar como desarrollador de software junior.',
+      'Licenciado en Tecnologías de la Información y desarrollador backend que crea servicios en Java/Python, herramientas de juego y utilidades de automatización. Enfocado en confiabilidad y automatización, listo para aportar como desarrollador de software junior.',
     location: 'Montevideo, Uruguay',
     cta: {
       label: 'Abrir contacto',
@@ -74,15 +74,15 @@ export const skills: Record<
     },
     {
       group: 'Backend y Plataformas',
-      items: ['GeneXus', 'Spigot API', 'REST', 'Diseno orientado a eventos', 'Conceptos de concurrencia'],
+      items: ['GeneXus', 'Spigot API', 'REST', 'Diseño orientado a eventos', 'Conceptos de concurrencia'],
     },
     {
       group: 'Sistemas y CS',
-      items: ['Estructuras de datos', 'Algoritmos', 'POO', 'Analisis de complejidad'],
+      items: ['Estructuras de datos', 'Algoritmos', 'POO', 'Análisis de complejidad'],
     },
     {
       group: 'Pruebas y Calidad',
-      items: ['JUnit', 'PyTest (basico)', 'Registro/Metricas', 'Revisiones de codigo'],
+      items: ['JUnit', 'PyTest (básico)', 'Registro/Métricas', 'Revisiones de código'],
     },
     {
       group: 'Herramientas',
@@ -119,7 +119,7 @@ export const experience: Record<
       role: 'Analista de Desarrollo de Software',
       duration: 'Abr 2025 - Presente - Montevideo, Uruguay',
       summary:
-        'Optimizo servicios bancarios en Java (GeneXus), reduciendo la latencia P95 de modulos clave ~20 % mediante mejoras de E/S y cache. Impulso la confiabilidad resolviendo mas de 50 incidentes con foco en observabilidad, registros y alertas.',
+        'Optimizo servicios bancarios en Java (GeneXus), reduciendo la latencia P95 de módulos clave ~20 % mediante mejoras de E/S y caché. Impulso la confiabilidad resolviendo más de 50 incidentes con foco en observabilidad, registros y alertas.',
     },
   ],
 };
@@ -156,19 +156,19 @@ export const projects: Record<
     {
       name: 'Spigot Gameplay Toolkit',
       description:
-        'Utilidades para Minecraft 1.21 que agilizan scripting de eventos, flujos de torneos y moderacion de jugadores.',
-      highlights: ['Java', 'Spigot API', 'Diseno orientado a eventos'],
+        'Utilidades para Minecraft 1.21 que agilizan scripting de eventos, flujos de torneos y moderación de jugadores.',
+      highlights: ['Java', 'Spigot API', 'Diseño orientado a eventos'],
     },
     {
       name: 'Automation Utility Pack',
       description:
-        'Scripts en Python que automatizan estudios, analisis de telemetria y reportes repetibles para cursos y proyectos.',
-      highlights: ['Python', 'Automatizacion', 'PyTest'],
+        'Scripts en Python que automatizan estudios, análisis de telemetría y reportes repetibles para cursos y proyectos.',
+      highlights: ['Python', 'Automatización', 'PyTest'],
     },
     {
       name: 'Cloud Foundations Labs',
       description:
-        'Laboratorios practicos de AWS Academy y Google Cloud que cubren IAM, redes y conceptos basicos de ciberseguridad.',
+        'Laboratorios prácticos de AWS Academy y Google Cloud que cubren IAM, redes y conceptos básicos de ciberseguridad.',
       highlights: ['AWS', 'Google Cloud', 'Fundamentos de seguridad'],
     },
   ],
@@ -196,7 +196,7 @@ export const contact: Record<
   es: {
     emailLabel: 'Correo',
     email: 'fprunell10@gmail.com',
-    blurb: 'Conversemos sobre como puedo ayudar con tu proximo lanzamiento.',
+    blurb: 'Conversemos sobre cómo puedo ayudar con tu próximo lanzamiento.',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
