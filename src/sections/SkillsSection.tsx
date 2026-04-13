@@ -1,4 +1,5 @@
 import { skills, type LanguageKey } from '../data/profile';
+import Prompt from '../components/Prompt';
 
 interface SkillsSectionProps {
   language: LanguageKey;
@@ -6,7 +7,7 @@ interface SkillsSectionProps {
 
 const SkillsSection = ({ language }: SkillsSectionProps) => (
   <section className="dos-section" id="skills">
-    <p className="dos-line">fprunell@portfolio:~/skills$ ls -1 groups</p>
+    <Prompt path="~/skills" cmd="ls -1 groups" />
     {skills[language].map((group) => (
       <article key={group.group} className="dos-entry">
         <p>{group.group.toUpperCase()}</p>

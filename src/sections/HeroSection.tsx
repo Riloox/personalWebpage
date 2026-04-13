@@ -1,4 +1,5 @@
 import { heroContent, type LanguageKey } from '../data/profile';
+import Prompt from '../components/Prompt';
 
 interface HeroSectionProps {
   language: LanguageKey;
@@ -14,7 +15,7 @@ const HeroSection = ({ language }: HeroSectionProps) => {
 
   return (
     <section className="dos-section" id="hero">
-      <p className="dos-line">fprunell@portfolio:~/about$ cat about.md</p>
+      <Prompt path="~/about" cmd="cat about.md" />
       <p>
         {labels.name}: {content.name}
       </p>

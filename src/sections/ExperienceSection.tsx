@@ -1,4 +1,5 @@
 import { experience, type LanguageKey } from '../data/profile';
+import Prompt from '../components/Prompt';
 
 interface ExperienceSectionProps {
   language: LanguageKey;
@@ -6,13 +7,18 @@ interface ExperienceSectionProps {
 
 const ExperienceSection = ({ language }: ExperienceSectionProps) => (
   <section className="dos-section" id="experience">
-    <p className="dos-line">fprunell@portfolio:~/experience$ tail -n 20 history.log</p>
+    <Prompt path="~/experience" cmd="tail -n 20 history.log" />
     {experience[language].map((role) => (
       <article key={role.company} className="dos-entry">
+        <p className="dos-muted">[{role.duration}]</p>
         <p>
-          {role.duration} :: {role.role} @ {role.company}
+          <span className="dos-highlight">{role.role}</span> @ {role.company}
         </p>
-        <p className="dos-muted">{role.summary}</p>
+        <ul className="dos-list">
+          {role.highlights.map((item) => (
+            <li key={item}>- {item}</li>
+          ))}
+        </ul>
       </article>
     ))}
   </section>

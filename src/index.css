@@ -1,15 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  font-family: 'IBM Plex Mono', 'Share Tech Mono', 'Courier New', monospace;
-  color: #f5f5f5;
-  background-color: #111111;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
   line-height: 1.6;
   font-weight: 400;
-  --dos-bg: #111111;
-  --dos-muted: #c7c7c7;
-  --dos-border: #2f2f2f;
-  --dos-highlight: #ffffff;
+  color: #e6e6e6;
+  background-color: #0a0a0c;
+
+  --bg: #0a0a0c;
+  --window-bg: #111114;
+  --window-border: #2a2a30;
+  --titlebar-bg: #17171b;
+  --statusbar-bg: #1a1a20;
+  --text: #e6e6e6;
+  --text-muted: #9a9aa0;
+  --text-dim: #6c6c74;
+  --accent: #7fdbca;
+  --accent-green: #9ece6a;
+  --accent-blue: #7aa2f7;
+  --accent-yellow: #e0af68;
+  --accent-red: #f7768e;
+  --accent-purple: #bb9af7;
+  --selection: rgba(127, 219, 202, 0.25);
 }
 
 * {
@@ -19,151 +31,267 @@
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--selection);
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
   min-height: 100vh;
-  background-color: var(--dos-bg);
-  color: var(--dos-highlight);
-  letter-spacing: 0.08em;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at center top, #14141c 0%, var(--bg) 65%);
+  color: var(--text);
+  letter-spacing: 0.02em;
 }
 
 a {
   color: inherit;
 }
 
-#root {
-  min-height: 100vh;
-}
+/* ---------- App shell / terminal window ---------- */
 
 .app-shell {
   min-height: 100vh;
-  background: var(--dos-bg);
-  color: var(--dos-highlight);
-  padding: 2.5rem 1.5rem;
+  padding: clamp(0.5rem, 2vw, 2rem);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.dos-shell {
+.terminal-window {
   width: 100%;
+  max-width: 1100px;
+  min-height: calc(100vh - clamp(1rem, 4vw, 4rem));
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin: 0;
-  min-height: 100vh;
-  position: relative;
-  padding-top: 2rem;
-  padding-bottom: 3.5rem;
+  background: var(--window-bg);
+  border: 1px solid var(--window-border);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 10px 30px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+/* ---------- Title bar ---------- */
+
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--titlebar-bg);
+  border-bottom: 1px solid var(--window-border);
+  padding: 0.55rem 0.9rem;
+  user-select: none;
+}
+
+.titlebar-controls {
+  display: flex;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.titlebar-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #3a3a42;
+  border: none;
+  padding: 0;
+}
+
+.titlebar-dot.red {
+  background: #ff5f57;
+}
+
+.titlebar-dot.yellow {
+  background: #febc2e;
+}
+
+.titlebar-dot.green {
+  background: #28c840;
+}
+
+.titlebar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .easy-toggle {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  border: 1px solid var(--dos-border);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--dos-highlight);
+  flex-shrink: 0;
+  border: 1px solid var(--window-border);
+  background: transparent;
+  color: var(--text-muted);
   font-family: inherit;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 0.4rem 1.3rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.55);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
-.easy-toggle.active {
-  background: var(--dos-highlight);
-  color: var(--dos-bg);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
-}
-
-.easy-command-group {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.65rem;
-  padding-top: 0.35rem;
-}
-
-.easy-command-button {
-  border: 1px solid var(--dos-border);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--dos-highlight);
-  font-family: inherit;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.78rem;
-  padding: 0.35rem 0.9rem;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.easy-command-button:hover,
-.easy-command-button:focus-visible {
-  background: var(--dos-highlight);
-  color: var(--dos-bg);
-  transform: translateY(-1px);
-}
-
-@media (max-width: 640px) {
-  .easy-toggle {
-    position: static;
-    width: 100%;
-    margin-bottom: 1.25rem;
-    text-align: center;
-  }
-
-  .easy-command-group {
-    justify-content: flex-start;
-  }
-}
-
-.dos-banner {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.95rem;
-  color: var(--dos-muted);
-}
-
-.dos-banner p + p {
-  margin-top: 0.35rem;
-}
-
-.dos-screen {
-  padding: 1.5rem 0 2.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+.easy-toggle:hover,
+.easy-toggle:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
   outline: none;
 }
 
-.dos-screen[data-mode='insert'] {
-  background-color: var(--dos-bg);
+.easy-toggle.active {
+  background: var(--accent);
+  color: var(--window-bg);
+  border-color: var(--accent);
 }
+
+/* ---------- Tab strip ---------- */
+
+.terminal-tabs {
+  display: flex;
+  gap: 1px;
+  background: var(--titlebar-bg);
+  border-bottom: 1px solid var(--window-border);
+  padding: 0 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.terminal-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.terminal-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-top: 2px solid transparent;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.terminal-tab:hover,
+.terminal-tab:focus-visible {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
+}
+
+.terminal-tab .tab-icon {
+  color: var(--accent-blue);
+}
+
+/* ---------- Body ---------- */
+
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: var(--window-bg);
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #2a2a32;
+  border-radius: 5px;
+  border: 2px solid var(--window-bg);
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #3a3a42;
+}
+
+.dos-screen {
+  padding: 1.75rem clamp(1rem, 3vw, 2.25rem) 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  outline: none;
+}
+
+.dos-screen:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: -6px;
+}
+
+.dos-screen[contenteditable='true'] {
+  caret-color: var(--accent);
+}
+
+/* ---------- Sections / prompts ---------- */
 
 .dos-section {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
+  scroll-margin-top: 0.5rem;
+}
+
+.dos-section + .dos-section {
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--window-border);
 }
 
 .dos-line {
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+  margin-bottom: 0.2rem;
 }
 
-.ascii-cat {
-  font-family: inherit;
-  white-space: pre;
-  margin: 0.5rem 0 1rem;
+.prompt-user {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.prompt-sep {
+  color: var(--text-dim);
+}
+
+.prompt-path {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.prompt-symbol {
+  color: var(--accent-purple);
+  font-weight: 600;
+  margin: 0 0.35rem 0 0.1rem;
+}
+
+.prompt-cmd {
+  color: var(--text);
 }
 
 .dos-highlight {
-  color: var(--dos-highlight);
+  color: var(--accent);
+}
+
+.dos-muted {
+  color: var(--text-muted);
 }
 
 .dos-list {
@@ -171,89 +299,371 @@ a {
   padding-left: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .dos-list.inline {
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.35rem 1rem;
 }
 
 .dos-list li {
-  color: var(--dos-highlight);
+  color: var(--text);
+}
+
+.dos-entry {
+  margin-top: 0.45rem;
+}
+
+.dos-entry p + p {
+  margin-top: 0.2rem;
 }
 
 .dos-actions {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 .dos-link {
-  border-bottom: 1px dotted var(--dos-highlight);
+  color: var(--accent);
   text-decoration: none;
-  padding-bottom: 0.1rem;
+  border-bottom: 1px dashed rgba(127, 219, 202, 0.5);
+  padding: 0 0.1rem 0.05rem;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
-.dos-entry {
-  margin-top: 0.35rem;
+.dos-link:hover,
+.dos-link:focus-visible {
+  color: var(--window-bg);
+  background: var(--accent);
+  border-bottom-color: var(--accent);
+  outline: none;
 }
 
-.dos-muted {
-  color: var(--dos-muted);
-}
+/* ---------- Status bar ---------- */
 
 .dos-status {
-  border-top: 1px solid var(--dos-border);
-  padding: 0.6rem 0;
-  font-size: 0.95rem;
-  color: var(--dos-muted);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--dos-bg);
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.vim-mode,
-.vim-message,
-.vim-hint,
-.vim-command {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  background: var(--statusbar-bg);
+  border-top: 1px solid var(--window-border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
   min-height: 2rem;
 }
 
 .vim-mode {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  background: var(--accent);
+  color: var(--window-bg);
   font-weight: 700;
-  color: var(--dos-highlight);
+  letter-spacing: 0.08em;
+}
+
+.vim-mode.mode-insert {
+  background: var(--accent-yellow);
+}
+
+.vim-mode.mode-normal {
+  background: var(--accent);
 }
 
 .vim-message {
-  justify-content: center;
-  text-align: center;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  color: var(--text);
+  min-width: 0;
 }
 
 .vim-hint {
-  justify-content: flex-end;
-  text-align: right;
+  flex-shrink: 0;
+  display: none;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+@media (min-width: 820px) {
+  .vim-hint {
+    display: inline-flex;
+  }
 }
 
 .vim-command {
-  justify-content: flex-end;
-  gap: 0.25rem;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  color: var(--accent);
+  gap: 0.1rem;
 }
 
 .vim-command-cursor {
-  width: 0.6ch;
-  height: 1.1em;
-  background: var(--dos-highlight);
-  animation: blink 1s steps(2, start) infinite;
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  background: var(--accent);
+  margin-left: 0.1rem;
+  animation: blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ---------- Easy mode button row ---------- */
+
+.easy-command-group {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.easy-command-button {
+  border: 1px solid var(--window-border);
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.28rem 0.7rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.easy-command-button:hover,
+.easy-command-button:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+
+/* ---------- Help overlay ---------- */
+
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+  animation: fadein 0.15s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.help-panel {
+  background: var(--window-bg);
+  border: 1px solid var(--window-border);
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  max-width: 540px;
+  width: 100%;
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.help-panel h2 {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.help-panel dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.45rem 1.2rem;
+  font-size: 0.85rem;
+}
+
+.help-panel dt {
+  color: var(--accent-yellow);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.help-panel dd {
+  color: var(--text-muted);
+}
+
+.help-panel .help-hint {
+  margin-top: 1.1rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Boot animation (macOS-style window launch) ---------- */
+
+@keyframes window-launch {
+  0% {
+    opacity: 0;
+    transform: scale(0.86) translateY(18px);
+    filter: blur(10px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  78% {
+    transform: scale(1.015) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes boot-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes boot-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes boot-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dot-pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.app-shell {
+  animation: boot-fade 0.4s ease both;
+}
+
+.terminal-window {
+  animation: window-launch 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: 50% 45%;
+  will-change: transform, opacity, filter;
+}
+
+.terminal-titlebar {
+  animation: boot-slide-down 0.45s ease 0.22s both;
+}
+
+.terminal-tabs {
+  animation: boot-slide-down 0.45s ease 0.3s both;
+}
+
+.terminal-body {
+  animation: boot-rise 0.5s ease 0.35s both;
+}
+
+.dos-status {
+  animation: boot-rise 0.45s ease 0.42s both;
+}
+
+.titlebar-dot {
+  animation: dot-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-origin: center;
+}
+
+.titlebar-dot.red {
+  animation-delay: 0.3s;
+}
+
+.titlebar-dot.yellow {
+  animation-delay: 0.37s;
+}
+
+.titlebar-dot.green {
+  animation-delay: 0.44s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell,
+  .terminal-window,
+  .terminal-titlebar,
+  .terminal-tabs,
+  .terminal-body,
+  .dos-status,
+  .titlebar-dot {
+    animation: none !important;
+  }
+}
+
+/* ---------- Mobile tweaks ---------- */
+
+@media (max-width: 640px) {
+  .terminal-titlebar {
+    padding: 0.5rem 0.7rem;
+    gap: 0.55rem;
+  }
+
+  .titlebar-title {
+    font-size: 0.7rem;
+  }
+
+  .easy-toggle {
+    font-size: 0.62rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .dos-screen {
+    padding: 1.25rem 1rem 1.75rem;
+    gap: 1.5rem;
+  }
+
+  .vim-mode {
+    padding: 0.35rem 0.6rem;
+  }
 }

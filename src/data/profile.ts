@@ -14,7 +14,7 @@ export const heroContent: Record<
     name: 'Federico Prunell',
     title: 'Software Development Analyst',
     summary:
-      'Bachelor in Information Technologies and backend-focused engineer building Java/Python services, gameplay tooling, and automation utilities. Focused on backend reliability and automation, ready to contribute as a junior software developer.',
+      'Software Development Analyst at Bantotal and B.Sc. in IT graduate. Experience building and maintaining backend services using Java and Python. Knowledgeable in data structures, algorithms, and cloud infrastructure. Focused on developing reliable, production-ready software and improving system performance.',
     location: 'Montevideo, Uruguay',
     cta: {
       label: 'Open contact',
@@ -25,7 +25,7 @@ export const heroContent: Record<
     name: 'Federico Prunell',
     title: 'Analista de Desarrollo de Software',
     summary:
-      'Licenciado en Tecnologías de la Información y desarrollador backend que crea servicios en Java/Python, herramientas de juego y utilidades de automatización. Enfocado en confiabilidad y automatización, listo para aportar como desarrollador de software junior.',
+      'Analista de Desarrollo de Software en Bantotal y Licenciado en Tecnologías de la Información. Experiencia construyendo y manteniendo servicios backend con Java y Python. Conocimientos en estructuras de datos, algoritmos e infraestructura en la nube. Enfocado en software confiable y listo para producción, y en mejorar el rendimiento de los sistemas.',
     location: 'Montevideo, Uruguay',
     cta: {
       label: 'Abrir contacto',
@@ -43,54 +43,54 @@ export const skills: Record<
 > = {
   en: [
     {
-      group: 'Core Languages',
-      items: ['Java', 'Python', 'SQL'],
+      group: 'Languages',
+      items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
     },
     {
-      group: 'Backend & Platforms',
-      items: ['GeneXus', 'Spigot API', 'REST APIs', 'Event-driven design', 'Concurrency basics'],
+      group: 'Backend',
+      items: ['REST APIs', 'Node.js', 'Event-driven architecture', 'Concurrency', 'Spigot API'],
     },
     {
-      group: 'Systems & CS',
-      items: ['Data structures', 'Algorithms', 'OOP', 'Complexity analysis'],
+      group: 'Frontend / Mobile',
+      items: ['React Native', 'React.js', 'HTML/CSS'],
+    },
+    {
+      group: 'CS Foundations',
+      items: ['Data Structures', 'Algorithms', 'Complexity Analysis', 'OOP'],
     },
     {
       group: 'Testing & Quality',
-      items: ['JUnit', 'PyTest (basics)', 'Logging/metrics', 'Code reviews'],
+      items: ['JUnit', 'PyTest', 'Logging', 'Observability', 'Code Reviews'],
     },
     {
-      group: 'Tooling',
-      items: ['Git/GitHub', 'Linux/Windows', 'IntelliJ IDEA', 'VS Code'],
-    },
-    {
-      group: 'Cloud Foundations',
-      items: ['AWS Academy CF', 'Google Cloud CF', 'Google Cloud Cybersecurity'],
+      group: 'Tools & Cloud',
+      items: ['Git', 'Docker', 'Linux', 'AWS', 'Google Cloud', 'CI/CD', 'Postman', 'VS Code'],
     },
   ],
   es: [
     {
-      group: 'Lenguajes Principales',
-      items: ['Java', 'Python', 'SQL'],
+      group: 'Lenguajes',
+      items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
     },
     {
-      group: 'Backend y Plataformas',
-      items: ['GeneXus', 'Spigot API', 'REST', 'Diseño orientado a eventos', 'Conceptos de concurrencia'],
+      group: 'Backend',
+      items: ['APIs REST', 'Node.js', 'Arquitectura orientada a eventos', 'Concurrencia', 'Spigot API'],
     },
     {
-      group: 'Sistemas y CS',
-      items: ['Estructuras de datos', 'Algoritmos', 'POO', 'Análisis de complejidad'],
+      group: 'Frontend / Mobile',
+      items: ['React Native', 'React.js', 'HTML/CSS'],
+    },
+    {
+      group: 'Fundamentos de CS',
+      items: ['Estructuras de Datos', 'Algoritmos', 'Análisis de Complejidad', 'POO'],
     },
     {
       group: 'Pruebas y Calidad',
-      items: ['JUnit', 'PyTest (básico)', 'Registro/Métricas', 'Revisiones de código'],
+      items: ['JUnit', 'PyTest', 'Logging', 'Observabilidad', 'Revisiones de Código'],
     },
     {
-      group: 'Herramientas',
-      items: ['Git/GitHub', 'Linux/Windows', 'IntelliJ IDEA', 'VS Code'],
-    },
-    {
-      group: 'Fundamentos Cloud',
-      items: ['AWS Academy CF', 'Google Cloud CF', 'Google Cloud Cybersecurity'],
+      group: 'Herramientas y Cloud',
+      items: ['Git', 'Docker', 'Linux', 'AWS', 'Google Cloud', 'CI/CD', 'Postman', 'VS Code'],
     },
   ],
 };
@@ -101,25 +101,31 @@ export const experience: Record<
     company: string;
     role: string;
     duration: string;
-    summary: string;
+    highlights: string[];
   }>
 > = {
   en: [
     {
       company: 'Bantotal',
       role: 'Software Development Analyst',
-      duration: 'Apr 2025 - Present - Montevideo, Uruguay',
-      summary:
-        'Optimize Java (GeneXus) banking services, trimming core module P95 latency by ~20% via I/O and caching improvements. Drive reliability by resolving 50+ incidents with focus on observability, logging, and alerting hygiene.',
+      duration: 'Apr 2025 - Present · Montevideo, Uruguay',
+      highlights: [
+        'Optimized Java backend services for core banking modules, achieving a ~20% improvement in p95 latency through I/O optimization and caching.',
+        'Resolved 50+ production issues via incident triage, improving system reliability and logging practices.',
+        'Participated in peer code reviews and maintained documentation for system modules.',
+      ],
     },
   ],
   es: [
     {
       company: 'Bantotal',
       role: 'Analista de Desarrollo de Software',
-      duration: 'Abr 2025 - Presente - Montevideo, Uruguay',
-      summary:
-        'Optimizo servicios bancarios en Java (GeneXus), reduciendo la latencia P95 de módulos clave ~20 % mediante mejoras de E/S y caché. Impulso la confiabilidad resolviendo más de 50 incidentes con foco en observabilidad, registros y alertas.',
+      duration: 'Abr 2025 - Presente · Montevideo, Uruguay',
+      highlights: [
+        'Optimización de servicios backend en Java para módulos de core bancario, logrando una mejora de ~20 % en latencia p95 mediante optimización de E/S y caché.',
+        'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
+        'Participación en revisiones de código entre pares y mantenimiento de documentación de módulos del sistema.',
+      ],
     },
   ],
 };
@@ -128,50 +134,151 @@ export const projects: Record<
   LanguageKey,
   Array<{
     name: string;
-    description: string;
+    stack: string;
     highlights: string[];
   }>
 > = {
   en: [
     {
-      name: 'Spigot Gameplay Toolkit',
-      description:
-        'Gameplay-adjacent utilities for Minecraft 1.21 that streamline event scripting, tournament flows, and player moderation.',
-      highlights: ['Java', 'Spigot API', 'Event-driven design'],
+      name: 'Cleta — Shared Bike Management Platform',
+      stack: 'TypeScript · React Native · Node.js',
+      highlights: [
+        'Final degree project: designed and built a full-stack shared mobility system with a mobile interface.',
+        'Developed cross-platform features with React Native, integrating Google Maps and Firebase Auth.',
+        'Implemented backend services on Google Cloud Run with PostgreSQL and automated CI/CD pipelines.',
+      ],
     },
     {
-      name: 'Automation Utility Pack',
-      description:
-        'Python scripts that automate study workflows, telemetry parsing, and repeatable reporting for coursework and side projects.',
-      highlights: ['Python', 'Automation', 'PyTest'],
+      name: 'RilooxDB',
+      stack: 'Python · Data Engineering',
+      highlights: [
+        'Developed a custom in-memory key-value store with file-based persistence and data encryption.',
+        'Implemented custom storage logic for data serialization and secure retrieval without external DB dependencies.',
+      ],
     },
     {
-      name: 'Cloud Foundations Labs',
-      description:
-        'Hands-on labs spanning AWS Academy and Google Cloud foundations covering IAM, networking, and cybersecurity basics.',
-      highlights: ['AWS', 'Google Cloud', 'Security basics'],
+      name: 'Windows 11 Debloater',
+      stack: 'PowerShell · Automation',
+      highlights: [
+        'Created a system utility to automate removal of bloatware and telemetry from Windows 11 environments.',
+        'Focused on system-level optimization and improving OS performance through scripted configuration changes.',
+      ],
+    },
+    {
+      name: 'AFK Timeskip',
+      stack: 'Java · Spigot API',
+      highlights: [
+        'Built an event-driven system to optimize server tick progression and maintain stability under high load.',
+      ],
     },
   ],
   es: [
     {
-      name: 'Spigot Gameplay Toolkit',
-      description:
-        'Utilidades para Minecraft 1.21 que agilizan scripting de eventos, flujos de torneos y moderación de jugadores.',
-      highlights: ['Java', 'Spigot API', 'Diseño orientado a eventos'],
+      name: 'Cleta — Plataforma de Bicicletas Compartidas',
+      stack: 'TypeScript · React Native · Node.js',
+      highlights: [
+        'Proyecto final de grado: diseño e implementación de un sistema full-stack de movilidad compartida con interfaz móvil.',
+        'Desarrollo de funcionalidades multiplataforma con React Native, integrando Google Maps y Firebase Auth.',
+        'Servicios backend en Google Cloud Run con PostgreSQL y pipelines de CI/CD automatizados.',
+      ],
     },
     {
-      name: 'Automation Utility Pack',
-      description:
-        'Scripts en Python que automatizan estudios, análisis de telemetría y reportes repetibles para cursos y proyectos.',
-      highlights: ['Python', 'Automatización', 'PyTest'],
+      name: 'RilooxDB',
+      stack: 'Python · Ingeniería de Datos',
+      highlights: [
+        'Desarrollo de un almacén clave-valor en memoria con persistencia basada en archivos y cifrado de datos.',
+        'Implementación de lógica de almacenamiento propia para serialización y recuperación segura sin dependencias externas de base de datos.',
+      ],
     },
     {
-      name: 'Cloud Foundations Labs',
-      description:
-        'Laboratorios prácticos de AWS Academy y Google Cloud que cubren IAM, redes y conceptos básicos de ciberseguridad.',
-      highlights: ['AWS', 'Google Cloud', 'Fundamentos de seguridad'],
+      name: 'Windows 11 Debloater',
+      stack: 'PowerShell · Automatización',
+      highlights: [
+        'Utilidad que automatiza la eliminación de bloatware y telemetría en entornos Windows 11.',
+        'Enfocado en optimización a nivel de sistema y mejora del rendimiento del SO mediante scripts de configuración.',
+      ],
+    },
+    {
+      name: 'AFK Timeskip',
+      stack: 'Java · Spigot API',
+      highlights: [
+        'Sistema orientado a eventos que optimiza la progresión de ticks del servidor y mantiene la estabilidad bajo alta carga.',
+      ],
     },
   ],
+};
+
+export const education: Record<
+  LanguageKey,
+  Array<{
+    school: string;
+    degree: string;
+    duration: string;
+  }>
+> = {
+  en: [
+    {
+      school: 'Technological University of Uruguay (UTEC)',
+      degree: 'B.Sc. in Information Technology',
+      duration: 'Graduated · Montevideo, Uruguay',
+    },
+    {
+      school: 'Karelia University of Applied Sciences',
+      degree: 'Exchange Program (Information Technology)',
+      duration: 'Aug 2023 - Dec 2023 · Finland',
+    },
+  ],
+  es: [
+    {
+      school: 'Universidad Tecnológica del Uruguay (UTEC)',
+      degree: 'Licenciatura en Tecnologías de la Información',
+      duration: 'Graduado · Montevideo, Uruguay',
+    },
+    {
+      school: 'Karelia University of Applied Sciences',
+      degree: 'Programa de Intercambio (Tecnologías de la Información)',
+      duration: 'Ago 2023 - Dic 2023 · Finlandia',
+    },
+  ],
+};
+
+export const certifications: Record<
+  LanguageKey,
+  {
+    certLabel: string;
+    langLabel: string;
+    certs: string[];
+    languages: Array<{ name: string; level: string }>;
+  }
+> = {
+  en: {
+    certLabel: 'CERTIFICATIONS',
+    langLabel: 'LANGUAGES',
+    certs: [
+      'AWS Academy Cloud Foundations',
+      'Google Cloud Computing Foundations',
+      'Google Cloud Cybersecurity',
+      'Kaggle: Machine Learning',
+    ],
+    languages: [
+      { name: 'English', level: 'C2' },
+      { name: 'Spanish', level: 'Native' },
+    ],
+  },
+  es: {
+    certLabel: 'CERTIFICACIONES',
+    langLabel: 'IDIOMAS',
+    certs: [
+      'AWS Academy Cloud Foundations',
+      'Google Cloud Computing Foundations',
+      'Google Cloud Cybersecurity',
+      'Kaggle: Machine Learning',
+    ],
+    languages: [
+      { name: 'Inglés', level: 'C2' },
+      { name: 'Español', level: 'Nativo' },
+    ],
+  },
 };
 
 export const contact: Record<
