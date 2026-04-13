@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const defaultProductionBase = '/personalWebpage/';
+const defaultProductionBase = '/';
 const ensureTrailingSlash = (value: string) => (value.endsWith('/') ? value : `${value}/`);
 
 export default defineConfig(({ mode }) => {
