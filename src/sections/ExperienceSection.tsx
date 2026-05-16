@@ -1,27 +1,37 @@
+import GlassCard from '../components/GlassCard';
 import { experience, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
 
 interface ExperienceSectionProps {
   language: LanguageKey;
 }
 
-const ExperienceSection = ({ language }: ExperienceSectionProps) => (
-  <section className="dos-section" id="experience">
-    <Prompt path="~/experience" cmd="tail -n 20 history.log" />
-    {experience[language].map((role) => (
-      <article key={role.company} className="dos-entry">
-        <p className="dos-muted">[{role.duration}]</p>
-        <p>
-          <span className="dos-highlight">{role.role}</span> @ {role.company}
-        </p>
-        <ul className="dos-list">
-          {role.highlights.map((item) => (
-            <li key={item}>- {item}</li>
-          ))}
-        </ul>
-      </article>
-    ))}
-  </section>
-);
+const TITLE: Record<LanguageKey, string> = {
+  en: 'Experience',
+  es: 'Experiencia',
+};
+
+const ExperienceSection = ({ language }: ExperienceSectionProps) => {
+  const items = experience[language];
+  return (
+    <GlassCard span="xl" className="section-block experience-block" hoverLift={false}>
+      <h2 className="section-title">{TITLE[language]}</h2>
+      <ul className="experience-list">
+        {items.map((item) => (
+          <li key={item.company + item.role} className="experience-item">
+            <p className="exp-role">
+              {item.company} · <span className="display-italic">{item.role}</span>
+            </p>
+            <p className="exp-meta">{item.duration}</p>
+            <ul className="exp-highlights">
+              {item.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </GlassCard>
+  );
+};
 
 export default ExperienceSection;
