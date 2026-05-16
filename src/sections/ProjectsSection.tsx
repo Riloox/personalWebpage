@@ -1,27 +1,32 @@
+import CletaCard from '../components/CletaCard';
+import ProjectCard from '../components/ProjectCard';
 import { projects, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
 
 interface ProjectsSectionProps {
   language: LanguageKey;
 }
 
-const ProjectsSection = ({ language }: ProjectsSectionProps) => (
-  <section className="dos-section" id="projects">
-    <Prompt path="~/projects" cmd="cat projects.md" />
-    {projects[language].map((project) => (
-      <article key={project.name} className="dos-entry">
-        <p>
-          <span className="dos-highlight">{project.name}</span>
-        </p>
-        <p className="dos-muted">[{project.stack}]</p>
-        <ul className="dos-list">
-          {project.highlights.map((item) => (
-            <li key={item}>- {item}</li>
-          ))}
-        </ul>
-      </article>
-    ))}
-  </section>
-);
+const ProjectsSection = ({ language }: ProjectsSectionProps) => {
+  const items = projects[language];
+  const [cleta, ...rest] = items;
+  return (
+    <>
+      <CletaCard
+        name={cleta.name}
+        stack={cleta.stack}
+        links={cleta.links}
+        delay={0.1}
+      />
+      {rest.slice(0, 3).map((project, i) => (
+        <ProjectCard
+          key={project.name}
+          project={project}
+          language={language}
+          delay={0.15 + i * 0.05}
+        />
+      ))}
+    </>
+  );
+};
 
 export default ProjectsSection;
