@@ -1,34 +1,59 @@
+import { useState } from 'react';
+import GlassCard from '../components/GlassCard';
 import { contact, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
 
 interface ContactSectionProps {
   language: LanguageKey;
 }
 
+const TITLE: Record<LanguageKey, string> = {
+  en: 'Get in touch',
+  es: 'Conversemos',
+};
+
+const COPY_LABELS: Record<LanguageKey, { idle: string; copied: string }> = {
+  en: { idle: 'Copy email', copied: 'Copied ✓' },
+  es: { idle: 'Copiar correo', copied: 'Copiado ✓' },
+};
+
 const ContactSection = ({ language }: ContactSectionProps) => {
-  const contactInfo = contact[language];
+  const c = contact[language];
+  const t = TITLE[language];
+  const copy = COPY_LABELS[language];
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(c.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${c.email}`;
+    }
+  };
 
   return (
-    <section className="dos-section" id="contact">
-      <Prompt path="~/contact" cmd="./connect.sh" />
-      <p className="dos-highlight">{contactInfo.blurb}</p>
-      <p>
-        {contactInfo.emailLabel.toUpperCase()}:{' '}
-        <a className="dos-link" href={`mailto:${contactInfo.email}`}>
-          {contactInfo.email}
+    <GlassCard span="xl" id="contact" className="section-block contact-block" hoverLift={false}>
+      <h2 className="section-title">{t}</h2>
+      <p className="display contact-email">{c.email}</p>
+      <p className="contact-blurb">{c.blurb}</p>
+      <div className="contact-actions">
+        <button type="button" className="btn btn-primary" onClick={handleCopy}>
+          {copied ? copy.copied : copy.idle}
+        </button>
+        <a className="btn btn-secondary" href={`mailto:${c.email}`}>
+          {c.emailLabel}
         </a>
-      </p>
-      <ul className="dos-list">
-        {contactInfo.social.map((social) => (
-          <li key={social.label}>
-            {social.label.toUpperCase()}:{' '}
-            <a className="dos-link" href={social.url} target="_blank" rel="noreferrer">
-              {social.url}
-            </a>
-          </li>
+      </div>
+      <div className="contact-social">
+        {c.social.map((s) => (
+          <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
+            {s.label}
+          </a>
         ))}
-      </ul>
-    </section>
+      </div>
+      <p className="contact-response">{c.responseTime}</p>
+    </GlassCard>
   );
 };
 
