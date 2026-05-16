@@ -21,15 +21,6 @@ export const trustEarned: Record<
   },
 };
 
-/** @deprecated Removed in the redesign. Temporary shim — delete in Task 21. */
-export const availability: Record<
-  LanguageKey,
-  { open: boolean; label: string; location: string; timezone: string; cvFile: string }
-> = {
-  en: { open: true, label: '', location: '', timezone: '', cvFile: cvFiles.en },
-  es: { open: true, label: '', location: '', timezone: '', cvFile: cvFiles.es },
-};
-
 export const heroContent: Record<
   LanguageKey,
   {
