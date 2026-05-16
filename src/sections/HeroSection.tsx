@@ -1,39 +1,43 @@
-import { heroContent, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
+import GlassCard from '../components/GlassCard';
+import { cvFiles, heroContent, type LanguageKey } from '../data/profile';
 
 interface HeroSectionProps {
   language: LanguageKey;
 }
 
-const HeroSection = ({ language }: HeroSectionProps) => {
-  const content = heroContent[language];
-  const labels = {
-    name: language === 'es' ? 'NOMBRE' : 'NAME',
-    role: language === 'es' ? 'ROL' : 'ROLE',
-    location: language === 'es' ? 'UBICACIÓN' : 'LOCATION',
-  };
+const META: Record<LanguageKey, { meta: string; cv: string; email: string; tag: string }> = {
+  en: {
+    meta: 'Backend developer · Montevideo · UTC-3',
+    cv: 'Download CV',
+    email: 'Email me',
+    tag: 'A backend engineer who measures things.',
+  },
+  es: {
+    meta: 'Desarrollador backend · Montevideo · UTC-3',
+    cv: 'Descargar CV',
+    email: 'Escribime',
+    tag: 'Un ingeniero backend que mide lo que hace.',
+  },
+};
 
+const HeroSection = ({ language }: HeroSectionProps) => {
+  const c = heroContent[language];
+  const t = META[language];
   return (
-    <section className="dos-section" id="hero">
-      <Prompt path="~/about" cmd="cat about.md" />
-      <p>
-        {labels.name}: {content.name}
-      </p>
-      <p>
-        {labels.role}: {content.title}
-      </p>
-      <p className="dos-highlight">{content.summary}</p>
-      <ul className="dos-list">
-        <li>
-          {labels.location}: {content.location}
-        </li>
-      </ul>
-      <div className="dos-actions">
-        <a className="dos-link" href={content.cta.href}>
-          {content.cta.label.toUpperCase()}
+    <GlassCard span="xl" delay={0} className="hero-card" hoverLift={false}>
+      <p className="label">{t.meta}</p>
+      <h1 className="display hero-name">{c.name}</h1>
+      <p className="display-italic hero-tag">{t.tag}</p>
+      <p className="body hero-summary">{c.summary}</p>
+      <div className="hero-ctas">
+        <a className="btn btn-primary" href={cvFiles[language]} download>
+          {t.cv}
+        </a>
+        <a className="btn btn-secondary" href="#contact">
+          {t.email}
         </a>
       </div>
-    </section>
+    </GlassCard>
   );
 };
 
