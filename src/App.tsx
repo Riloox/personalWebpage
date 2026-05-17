@@ -3,9 +3,6 @@ import { useState } from 'react';
 import BackgroundMesh from './components/BackgroundMesh';
 import FloatingControls from './components/FloatingControls';
 import GithubStrip from './components/GithubStrip';
-import NowCard from './components/NowCard';
-import StackCard from './components/StackCard';
-import TrustCard from './components/TrustCard';
 import ContactSection from './sections/ContactSection';
 import EducationCertsSection from './sections/EducationCertsSection';
 import ExperienceSection from './sections/ExperienceSection';
@@ -36,26 +33,19 @@ const App = () => {
         theme={theme}
         onThemeChange={setTheme}
       />
-      <main className="app-shell">
-        <section className="bento">
-          <HeroSection language={language} />
-          <TrustCard language={language} delay={0.05} />
-          <StackCard language={language} delay={0.10} />
-          <ProjectsSection language={language} />
-          <NowCard language={language} delay={0.20} />
-          <SkillsSection language={language} />
-        </section>
-        <div className="below-bento">
-          <ExperienceSection language={language} />
-          <EducationCertsSection language={language} />
-          <GithubStrip
-            username={GITHUB_USERNAME}
-            language={language}
-            excludeNames={CURATED_REPO_NAMES}
-            limit={6}
-          />
-          <ContactSection language={language} />
-        </div>
+      <main className="ed-shell">
+        <HeroSection language={language} />
+        <ProjectsSection language={language} />
+        <ExperienceSection language={language} />
+        <SkillsSection language={language} />
+        <EducationCertsSection language={language} />
+        <GithubStrip
+          username={GITHUB_USERNAME}
+          language={language}
+          excludeNames={CURATED_REPO_NAMES}
+          limit={6}
+        />
+        <ContactSection language={language} />
       </main>
     </>
   );

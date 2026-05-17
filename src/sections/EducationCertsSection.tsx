@@ -1,50 +1,53 @@
-import GlassCard from '../components/GlassCard';
 import { certifications, education, type LanguageKey } from '../data/profile';
 
 interface EducationCertsSectionProps {
   language: LanguageKey;
 }
 
-const TITLE: Record<LanguageKey, string> = {
-  en: 'Education & credentials',
-  es: 'Educación y credenciales',
+const COPY: Record<LanguageKey, { label: string; title: string }> = {
+  en: { label: 'Education & credentials', title: 'Where I studied' },
+  es: { label: 'Educación y credenciales', title: 'Dónde estudié' },
 };
 
 const EducationCertsSection = ({ language }: EducationCertsSectionProps) => {
   const ed = education[language];
   const c = certifications[language];
+  const t = COPY[language];
   return (
-    <GlassCard span="xl" className="section-block" hoverLift={false}>
-      <h2 className="section-title">{TITLE[language]}</h2>
-      <div className="eduCerts-grid">
-        <div>
-          {ed.map((e) => (
-            <div key={e.school}>
-              <h3 className="school-name">{e.school}</h3>
-              <p className="school-degree">{e.degree}</p>
-              <p className="school-meta">{e.duration}</p>
+    <section className="ed-section">
+      <p className="ed-eyebrow">{t.label}</p>
+      <h2 className="ed-section-title">{t.title}</h2>
+
+      <div className="ed-edu">
+        {ed.map((e) => (
+          <div key={e.school} className="ed-edu-row">
+            <div className="ed-exp-meta">{e.duration}</div>
+            <div className="ed-exp-body">
+              <h3 className="ed-exp-role">{e.school}</h3>
+              <p className="ed-edu-degree">{e.degree}</p>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      <dl className="ed-skills ed-credentials">
+        <div className="ed-skill-row">
+          <dt>{c.certLabel.toLowerCase()}</dt>
+          <dd>{c.certs.join(', ')}</dd>
         </div>
-        <div>
-          <p className="label">{c.certLabel}</p>
-          <ul className="cert-list">
-            {c.certs.map((cert) => (
-              <li key={cert}>{cert}</li>
-            ))}
-          </ul>
-          <p className="lang-inline">
-            <span className="lang-key">{c.langLabel.toLowerCase()}</span>
+        <div className="ed-skill-row">
+          <dt>{c.langLabel.toLowerCase()}</dt>
+          <dd>
             {c.languages.map((l, i) => (
               <span key={l.name}>
                 {i > 0 && ' · '}
                 {l.name} {l.level}
               </span>
             ))}
-          </p>
+          </dd>
         </div>
-      </div>
-    </GlassCard>
+      </dl>
+    </section>
   );
 };
 

@@ -1,4 +1,3 @@
-import GlassCard from './GlassCard';
 import { useGithubProjects } from '../hooks/useGithubProjects';
 import type { LanguageKey } from '../data/profile';
 
@@ -9,48 +8,54 @@ interface GithubStripProps {
   limit?: number;
 }
 
-const LABELS: Record<LanguageKey, { header: string; loading: string; empty: string }> = {
-  en: { header: 'More from GitHub', loading: 'fetching repos…', empty: 'no public repos' },
-  es: { header: 'Más en GitHub', loading: 'cargando repos…', empty: 'sin repos públicos' },
+const COPY: Record<
+  LanguageKey,
+  { label: string; title: string; loading: string; empty: string }
+> = {
+  en: {
+    label: 'Open source',
+    title: 'More from GitHub',
+    loading: 'fetching repos…',
+    empty: 'no public repos',
+  },
+  es: {
+    label: 'Código abierto',
+    title: 'Más en GitHub',
+    loading: 'cargando repos…',
+    empty: 'sin repos públicos',
+  },
 };
 
 const GithubStrip = ({ username, language, excludeNames = [], limit = 6 }: GithubStripProps) => {
   const { repos, loading, error } = useGithubProjects(username, { limit, excludeNames });
-  const t = LABELS[language];
+  const t = COPY[language];
 
   if (error && repos.length === 0) return null;
 
   return (
-    <GlassCard span="xl" className="section-block" hoverLift={false}>
-      <h2 className="section-title">{t.header}</h2>
+    <section className="ed-section">
+      <p className="ed-eyebrow">{t.label}</p>
+      <h2 className="ed-section-title">{t.title}</h2>
+
       {loading && repos.length === 0 ? (
-        <p className="body body-muted">{t.loading}</p>
+        <p className="ed-summary">{t.loading}</p>
       ) : repos.length === 0 ? (
-        <p className="github-empty">{t.empty}</p>
+        <p className="ed-summary">{t.empty}</p>
       ) : (
-        <ul className="github-strip-cards">
+        <ul className="ed-repos">
           {repos.map((repo) => (
-            <li key={repo.id}>
-              <a
-                className="github-strip-card"
-                href={repo.html_url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="gh-name">{repo.name}</span>
-                {repo.description && <span className="gh-desc">{repo.description}</span>}
-                <span className="gh-meta">
-                  {repo.language && <span>{repo.language}</span>}
-                  <span aria-label={`${repo.stargazers_count} stars`}>
-                    ★ {repo.stargazers_count}
-                  </span>
-                </span>
+            <li key={repo.id} className="ed-repo">
+              <a className="ed-repo-link" href={repo.html_url} target="_blank" rel="noreferrer">
+                <span className="ed-repo-name">{repo.name}</span>
+                <span className="ed-repo-stars">★ {repo.stargazers_count}</span>
               </a>
+              {repo.description && <p className="ed-repo-desc">{repo.description}</p>}
+              {repo.language && <p className="ed-repo-lang">{repo.language}</p>}
             </li>
           ))}
         </ul>
       )}
-    </GlassCard>
+    </section>
   );
 };
 

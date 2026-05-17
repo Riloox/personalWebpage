@@ -1,8 +1,8 @@
 export type LanguageKey = 'en' | 'es';
 
 export const cvFiles: Record<LanguageKey, string> = {
-  en: '/cv.pdf',
-  es: '/cv-es.pdf',
+  en: 'https://drive.google.com/file/d/1G-YQ3Jd7F6X9cM4N3NqbSRbXPoTtoMdg/view?usp=sharing',
+  es: 'https://drive.google.com/file/d/1G-YQ3Jd7F6X9cM4N3NqbSRbXPoTtoMdg/view?usp=sharing',
 };
 
 export const trustEarned: Record<
@@ -35,8 +35,8 @@ export const heroContent: Record<
   en: {
     name: 'Federico Prunell',
     title: 'Backend Software Developer',
-    currentRole: 'Software Dev Analyst @ Bantotal',
-    win: '~20 % p95 latency cut on core banking',
+    currentRole: 'Software Development Analyst @ Bantotal',
+    win: 'Working on our latest projects',
     stack: 'Java · Python · SQL · AWS · GCP',
     summary:
       'Backend engineer with 1+ year at Bantotal building Java services for core banking. Shipped a ~20 % p95 latency reduction via I/O and caching, resolved 50+ production incidents, and graduated UTEC (with a semester at Karelia, Finland). Comfortable across Python, SQL, AWS and GCP. Open to backend or full-stack roles, remote-friendly.',
@@ -44,8 +44,8 @@ export const heroContent: Record<
   es: {
     name: 'Federico Prunell',
     title: 'Desarrollador Backend',
-    currentRole: 'Analista de Desarrollo @ Bantotal',
-    win: '~20 % menos latencia p95 en core bancario',
+    currentRole: 'Analista de Desarrollo de Software @ Bantotal',
+    win: 'Trabajando en nuestros últimos proyectos',
     stack: 'Java · Python · SQL · AWS · GCP',
     summary:
       'Ingeniero backend con más de 1 año en Bantotal desarrollando servicios Java para core bancario. Logré ~20 % menos de latencia p95 con optimización de E/S y caché, resolví más de 50 incidentes en producción, y soy egresado de UTEC (con un semestre en Karelia, Finlandia). Cómodo en Python, SQL, AWS y GCP. Abierto a roles backend o full-stack, modalidad remota.',
@@ -62,23 +62,25 @@ export const skills: Record<
   en: {
     primary: ['Java', 'Python', 'SQL', 'AWS', 'GCP', 'Docker', 'Linux', 'Git'],
     groups: [
-      { group: 'Languages', items: ['Java', 'Python', 'SQL', 'TypeScript'] },
-      { group: 'Backend', items: ['REST APIs', 'Node.js', 'Event-driven', 'Concurrency'] },
+      { group: 'Languages', items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'] },
+      { group: 'Backend', items: ['REST APIs', 'Node.js', 'Event-driven', 'Concurrency', 'Spigot API'] },
       { group: 'Frontend', items: ['React', 'React Native', 'HTML/CSS'] },
-      { group: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux'] },
+      { group: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
       { group: 'Foundations', items: ['Data Structures', 'Algorithms', 'OOP', 'Complexity'] },
-      { group: 'Quality', items: ['JUnit', 'PyTest', 'Observability', 'Code Reviews'] },
+      { group: 'Quality', items: ['JUnit', 'PyTest', 'Logging', 'Observability', 'Code Reviews'] },
+      { group: 'Tools', items: ['Postman', 'VS Code'] },
     ],
   },
   es: {
     primary: ['Java', 'Python', 'SQL', 'AWS', 'GCP', 'Docker', 'Linux', 'Git'],
     groups: [
-      { group: 'Lenguajes', items: ['Java', 'Python', 'SQL', 'TypeScript'] },
-      { group: 'Backend', items: ['APIs REST', 'Node.js', 'Event-driven', 'Concurrencia'] },
+      { group: 'Lenguajes', items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'] },
+      { group: 'Backend', items: ['APIs REST', 'Node.js', 'Event-driven', 'Concurrencia', 'Spigot API'] },
       { group: 'Frontend', items: ['React', 'React Native', 'HTML/CSS'] },
-      { group: 'Cloud y DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux'] },
+      { group: 'Cloud y DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
       { group: 'Fundamentos', items: ['Estructuras de Datos', 'Algoritmos', 'POO', 'Complejidad'] },
-      { group: 'Calidad', items: ['JUnit', 'PyTest', 'Observabilidad', 'Revisiones de Código'] },
+      { group: 'Calidad', items: ['JUnit', 'PyTest', 'Logging', 'Observabilidad', 'Revisiones de Código'] },
+      { group: 'Herramientas', items: ['Postman', 'VS Code'] },
     ],
   },
 };
@@ -103,15 +105,6 @@ export const experience: Record<
         'Participated in peer code reviews and maintained documentation for system modules.',
       ],
     },
-    {
-      company: 'Karelia University of Applied Sciences',
-      role: 'Exchange Program · Information Technology',
-      duration: 'Aug 2023 - Dec 2023 · Joensuu, Finland',
-      highlights: [
-        'Semester of IT coursework focused on software engineering, networks and project work in English.',
-        'Collaborated with international student teams on agile project assignments.',
-      ],
-    },
   ],
   es: [
     {
@@ -122,15 +115,6 @@ export const experience: Record<
         'Optimización de servicios backend en Java para módulos de core bancario, reduciendo ~20 % la latencia p95 mediante optimización de E/S y caché.',
         'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
         'Participación en revisiones de código entre pares y mantenimiento de documentación de módulos del sistema.',
-      ],
-    },
-    {
-      company: 'Karelia University of Applied Sciences',
-      role: 'Programa de Intercambio · Tecnologías de la Información',
-      duration: 'Ago 2023 - Dic 2023 · Joensuu, Finlandia',
-      highlights: [
-        'Semestre de cursos de TI enfocados en ingeniería de software, redes y trabajo en proyectos, cursado en inglés.',
-        'Colaboración con equipos internacionales en proyectos ágiles.',
       ],
     },
   ],
@@ -245,12 +229,22 @@ export const education: Record<
       degree: 'B.Sc. in Information Technology',
       duration: 'Graduated · Montevideo, Uruguay',
     },
+    {
+      school: 'Karelia University of Applied Sciences',
+      degree: 'Exchange Program · Information Technology',
+      duration: 'Aug 2023 - Dec 2023 · Joensuu, Finland',
+    },
   ],
   es: [
     {
       school: 'Universidad Tecnológica del Uruguay (UTEC)',
       degree: 'Licenciatura en Tecnologías de la Información',
       duration: 'Graduado · Montevideo, Uruguay',
+    },
+    {
+      school: 'Karelia University of Applied Sciences',
+      degree: 'Programa de Intercambio · Tecnologías de la Información',
+      duration: 'Ago 2023 - Dic 2023 · Joensuu, Finlandia',
     },
   ],
 };
@@ -269,7 +263,7 @@ export const certifications: Record<
     langLabel: 'LANGUAGES',
     certs: [
       'AWS Academy Cloud Foundations',
-      'Google Cloud Computing Foundations',
+      'Google Cloud Computing',
       'Google Cloud Cybersecurity',
       'Kaggle: Machine Learning',
     ],
@@ -283,7 +277,7 @@ export const certifications: Record<
     langLabel: 'IDIOMAS',
     certs: [
       'AWS Academy Cloud Foundations',
-      'Google Cloud Computing Foundations',
+      'Google Cloud Computing',
       'Google Cloud Cybersecurity',
       'Kaggle: Machine Learning',
     ],

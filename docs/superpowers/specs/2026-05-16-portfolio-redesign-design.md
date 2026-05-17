@@ -1,4 +1,4 @@
-# Portfolio Redesign — Editorial-Warm Bento (Framer Aesthetic)
+1dw# Portfolio Redesign — Editorial-Warm Bento (Framer Aesthetic)
 
 **Date:** 2026-05-16
 **Status:** Approved, ready for implementation planning

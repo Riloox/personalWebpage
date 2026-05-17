@@ -1,43 +1,94 @@
-import GlassCard from '../components/GlassCard';
 import { cvFiles, heroContent, type LanguageKey } from '../data/profile';
 
 interface HeroSectionProps {
   language: LanguageKey;
 }
 
-const META: Record<LanguageKey, { meta: string; cv: string; email: string; tag: string }> = {
+const COPY: Record<
+  LanguageKey,
+  {
+    eyebrow: string;
+    tag: string;
+    currently: string;
+    latest: string;
+    stack: string;
+    cv: string;
+    email: string;
+    status: string;
+  }
+> = {
   en: {
-    meta: 'Backend developer · Montevideo · UTC-3',
+    eyebrow: 'Backend engineer · Montevideo · UTC-3',
+    tag: 'Built fast, never sloppy.',
+    currently: 'Currently',
+    latest: 'Latest',
+    stack: 'Stack',
     cv: 'Download CV',
     email: 'Email me',
-    tag: 'A backend engineer who measures things.',
+    status: 'Open to work',
   },
   es: {
-    meta: 'Desarrollador backend · Montevideo · UTC-3',
+    eyebrow: 'Ingeniero backend · Montevideo · UTC-3',
+    tag: 'Hecho rápido, nunca descuidado.',
+    currently: 'Ahora',
+    latest: 'Último',
+    stack: 'Stack',
     cv: 'Descargar CV',
     email: 'Escribime',
-    tag: 'Un ingeniero backend que mide lo que hace.',
+    status: 'Disponible',
   },
 };
 
 const HeroSection = ({ language }: HeroSectionProps) => {
   const c = heroContent[language];
-  const t = META[language];
+  const t = COPY[language];
   return (
-    <GlassCard span="xl" delay={0} className="hero-card" hoverLift={false}>
-      <p className="label">{t.meta}</p>
-      <h1 className="display hero-name">{c.name}</h1>
-      <p className="display-italic hero-tag">{t.tag}</p>
-      <p className="body hero-summary">{c.summary}</p>
-      <div className="hero-ctas">
-        <a className="btn btn-primary" href={cvFiles[language]} download>
+    <section className="ed-hero">
+      <p className="ed-eyebrow">{t.eyebrow}</p>
+
+      <h1 className="ed-display">
+        {c.name}.
+        <br />
+        <span className="ed-display-italic">{t.tag}</span>
+      </h1>
+
+      <dl className="ed-meta">
+        <div className="ed-meta-row">
+          <dt>{t.currently}</dt>
+          <dd>{c.currentRole}</dd>
+        </div>
+        <div className="ed-meta-row">
+          <dt>{t.latest}</dt>
+          <dd>{c.win}</dd>
+        </div>
+        <div className="ed-meta-row">
+          <dt>{t.stack}</dt>
+          <dd>{c.stack}</dd>
+        </div>
+      </dl>
+
+      <hr className="ed-rule" />
+
+      <p className="ed-summary">{c.summary}</p>
+
+      <div className="ed-ctas">
+        <a
+          className="ed-btn ed-btn-primary"
+          href={cvFiles[language]}
+          target="_blank"
+          rel="noreferrer"
+        >
           {t.cv}
         </a>
-        <a className="btn btn-secondary" href="#contact">
+        <a className="ed-btn ed-btn-ghost" href="#contact">
           {t.email}
         </a>
+        <span className="ed-status">
+          <span className="ed-status-dot" />
+          {t.status}
+        </span>
       </div>
-    </GlassCard>
+    </section>
   );
 };
 

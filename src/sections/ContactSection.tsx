@@ -1,25 +1,21 @@
 import { useState } from 'react';
-import GlassCard from '../components/GlassCard';
 import { contact, type LanguageKey } from '../data/profile';
 
 interface ContactSectionProps {
   language: LanguageKey;
 }
 
-const TITLE: Record<LanguageKey, string> = {
-  en: 'Get in touch',
-  es: 'Conversemos',
-};
-
-const COPY_LABELS: Record<LanguageKey, { idle: string; copied: string }> = {
-  en: { idle: 'Copy email', copied: 'Copied ✓' },
-  es: { idle: 'Copiar correo', copied: 'Copiado ✓' },
+const COPY: Record<
+  LanguageKey,
+  { label: string; title: string; idle: string; copied: string }
+> = {
+  en: { label: 'Contact', title: 'Get in touch', idle: 'Copy email', copied: 'Copied ✓' },
+  es: { label: 'Contacto', title: 'Conversemos', idle: 'Copiar correo', copied: 'Copiado ✓' },
 };
 
 const ContactSection = ({ language }: ContactSectionProps) => {
   const c = contact[language];
-  const t = TITLE[language];
-  const copy = COPY_LABELS[language];
+  const t = COPY[language];
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -33,27 +29,38 @@ const ContactSection = ({ language }: ContactSectionProps) => {
   };
 
   return (
-    <GlassCard span="xl" id="contact" className="section-block contact-block" hoverLift={false}>
-      <h2 className="section-title">{t}</h2>
-      <p className="display contact-email">{c.email}</p>
-      <p className="contact-blurb">{c.blurb}</p>
-      <div className="contact-actions">
-        <button type="button" className="btn btn-primary" onClick={handleCopy}>
-          {copied ? copy.copied : copy.idle}
+    <section id="contact" className="ed-section">
+      <p className="ed-eyebrow">{t.label}</p>
+      <h2 className="ed-section-title">{t.title}</h2>
+
+      <p className="ed-contact-email">
+        <a href={`mailto:${c.email}`}>{c.email}</a>
+      </p>
+
+      <p className="ed-summary">{c.blurb}</p>
+
+      <div className="ed-ctas">
+        <button type="button" className="ed-btn ed-btn-primary" onClick={handleCopy}>
+          {copied ? t.copied : t.idle}
         </button>
-        <a className="btn btn-secondary" href={`mailto:${c.email}`}>
+        <a className="ed-btn ed-btn-ghost" href={`mailto:${c.email}`}>
           {c.emailLabel}
         </a>
       </div>
-      <div className="contact-social">
-        {c.social.map((s) => (
-          <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
-            {s.label}
-          </a>
+
+      <p className="ed-contact-social">
+        {c.social.map((s, i) => (
+          <span key={s.label}>
+            {i > 0 && <span className="ed-contact-sep">·</span>}
+            <a href={s.url} target="_blank" rel="noreferrer">
+              {s.label}
+            </a>
+          </span>
         ))}
-      </div>
-      <p className="contact-response">{c.responseTime}</p>
-    </GlassCard>
+      </p>
+
+      <p className="ed-contact-response">{c.responseTime}</p>
+    </section>
   );
 };
 
