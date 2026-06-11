@@ -3,14 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#eff1f5" />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Set the document language before paint so screen readers and
+      // translators see the stored preference, not the hardcoded default.
+      try {
+        var l = localStorage.getItem('riloox-lang');
+        if (l === 'en' || l === 'es') document.documentElement.lang = l;
+      } catch (e) {}
+    </script>
     <link rel="canonical" href="https://riloox.site/" />
 
     <title>Federico Prunell — Backend Software Developer | Java · Python · Cloud</title>
     <meta
       name="description"
-      content="Software Development Analyst at Bantotal building Java backend services for core banking. Java, Python, TypeScript, SQL, AWS, GCP. UTEC graduate. Open to backend / full-stack roles, remote-friendly."
+      content="Backend engineer at Bantotal building Java services for core banking. Creator of Picadito — a live React + TypeScript + Express platform with a real ELO rating engine. Open to backend / full-stack roles, remote-friendly."
     />
 
     <!-- Preconnect to font CDN to shave the render-blocking request -->
@@ -18,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
     />
 
     <!-- Open Graph -->

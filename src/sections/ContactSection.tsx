@@ -1,66 +1,78 @@
-import { useState } from 'react';
-import { contact, type LanguageKey } from '../data/profile';
+import { useEffect, useRef, useState } from 'react';
+
+import Reveal from '../components/Reveal';
+import { contact, cvFiles, ui, type LanguageKey } from '../data/profile';
 
 interface ContactSectionProps {
   language: LanguageKey;
 }
 
-const COPY: Record<
-  LanguageKey,
-  { label: string; title: string; idle: string; copied: string }
-> = {
-  en: { label: 'Contact', title: 'Get in touch', idle: 'Copy email', copied: 'Copied ✓' },
-  es: { label: 'Contacto', title: 'Conversemos', idle: 'Copiar correo', copied: 'Copiado ✓' },
-};
-
 const ContactSection = ({ language }: ContactSectionProps) => {
-  const c = contact[language];
-  const t = COPY[language];
+  const t = ui[language];
+  const data = contact[language];
   const [copied, setCopied] = useState(false);
+  const timer = useRef<number | undefined>(undefined);
 
-  const handleCopy = async () => {
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(c.email);
+      await navigator.clipboard.writeText(data.email);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      window.location.href = `mailto:${c.email}`;
+      window.location.href = `mailto:${data.email}`;
     }
   };
 
   return (
-    <section id="contact" className="ed-section">
-      <p className="ed-eyebrow">{t.label}</p>
-      <h2 className="ed-section-title">{t.title}</h2>
-
-      <p className="ed-contact-email">
-        <a href={`mailto:${c.email}`}>{c.email}</a>
-      </p>
-
-      <p className="ed-summary">{c.blurb}</p>
-
-      <div className="ed-ctas">
-        <button type="button" className="ed-btn ed-btn-primary" onClick={handleCopy}>
-          {copied ? t.copied : t.idle}
-        </button>
-        <a className="ed-btn ed-btn-ghost" href={`mailto:${c.email}`}>
-          {c.emailLabel}
-        </a>
-      </div>
-
-      <p className="ed-contact-social">
-        {c.social.map((s, i) => (
-          <span key={s.label}>
-            {i > 0 && <span className="ed-contact-sep">·</span>}
-            <a href={s.url} target="_blank" rel="noreferrer">
-              {s.label}
+    <footer className="fl-contact" id="contact" aria-label={t.sections.contact}>
+      <div className="fl-shell fl-contact-inner">
+        <Reveal>
+          <p className="fl-contact-kicker">
+            {t.sections.contact} — {data.responseTime}
+          </p>
+          <a
+            className="fl-talk"
+            href={`mailto:${data.email}`}
+            aria-label={`${t.letsTalk} — ${t.emailMe}: ${data.email}`}
+          >
+            {t.letsTalk}
+          </a>
+          <p className="fl-contact-blurb">{data.blurb}</p>
+          <div className="fl-contact-row">
+            <a
+              className="fl-btn fl-btn-primary"
+              href={`mailto:${data.email}`}
+              aria-label={`${t.emailMe}: ${data.email}`}
+            >
+              {data.email}
             </a>
-          </span>
-        ))}
-      </p>
-
-      <p className="ed-contact-response">{c.responseTime}</p>
-    </section>
+            <button className="fl-btn fl-btn-ghost" type="button" onClick={copyEmail}>
+              {copied ? t.copied : t.copyEmail}
+            </button>
+            <a className="fl-btn fl-btn-ghost" href={cvFiles[language]} target="_blank" rel="noreferrer">
+              {t.downloadCv}
+            </a>
+          </div>
+          <div className="fl-socials">
+            {data.social.map((social) => (
+              <a key={social.label} className="fl-social" href={social.url} target="_blank" rel="noreferrer">
+                {social.label}
+                <span className="arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+        <div className="fl-footer">
+          <span>© {new Date().getFullYear()} Federico Prunell — Montevideo, UY</span>
+          <span>{t.footerNote}</span>
+        </div>
+      </div>
+    </footer>
   );
 };
 

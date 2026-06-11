@@ -1,92 +1,89 @@
-import { cvFiles, heroContent, type LanguageKey } from '../data/profile';
+import { motion, useReducedMotion } from 'motion/react';
+
+import Marquee from '../components/Marquee';
+import { contact, cvFiles, heroContent, picadito, ui, type LanguageKey } from '../data/profile';
 
 interface HeroSectionProps {
   language: LanguageKey;
 }
 
-const COPY: Record<
-  LanguageKey,
-  {
-    eyebrow: string;
-    tag: string;
-    currently: string;
-    latest: string;
-    stack: string;
-    cv: string;
-    email: string;
-    status: string;
-  }
-> = {
-  en: {
-    eyebrow: 'Backend engineer · Montevideo · UTC-3',
-    tag: 'Built fast, never sloppy.',
-    currently: 'Currently',
-    latest: 'Latest',
-    stack: 'Stack',
-    cv: 'Download CV',
-    email: 'Email me',
-    status: 'Open to work',
-  },
-  es: {
-    eyebrow: 'Ingeniero backend · Montevideo · UTC-3',
-    tag: 'Hecho rápido, nunca descuidado.',
-    currently: 'Ahora',
-    latest: 'Último',
-    stack: 'Stack',
-    cv: 'Descargar CV',
-    email: 'Escribime',
-    status: 'Disponible',
-  },
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const HeroSection = ({ language }: HeroSectionProps) => {
-  const c = heroContent[language];
-  const t = COPY[language];
+  const hero = heroContent[language];
+  const t = ui[language];
+  const reduced = useReducedMotion();
+
+  const rise = (delay: number) =>
+    reduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay, ease: EASE },
+        };
+
+  // Each name line slides up from behind an overflow-hidden mask.
+  const lineReveal = (delay: number) =>
+    reduced
+      ? {}
+      : {
+          initial: { y: '110%' },
+          animate: { y: '0%' },
+          transition: { duration: 1, delay, ease: EASE },
+        };
+
   return (
-    <section className="ed-hero">
-      <p className="ed-eyebrow">{t.eyebrow}</p>
+    <section className="fl-hero" id="top" aria-label="Intro">
+      <div className="fl-shell">
+        <motion.div className="fl-hero-badge" {...rise(0.1)}>
+          <span className="fl-dot" aria-hidden="true" />
+          {t.available}
+        </motion.div>
 
-      <h1 className="ed-display">
-        {c.name}.
-        <br />
-        <span className="ed-display-italic">{t.tag}</span>
-      </h1>
+        <motion.p className="fl-hero-kicker" {...rise(0.2)}>
+          {hero.kicker}
+        </motion.p>
 
-      <dl className="ed-meta">
-        <div className="ed-meta-row">
-          <dt>{t.currently}</dt>
-          <dd>{c.currentRole}</dd>
-        </div>
-        <div className="ed-meta-row">
-          <dt>{t.latest}</dt>
-          <dd>{c.win}</dd>
-        </div>
-        <div className="ed-meta-row">
-          <dt>{t.stack}</dt>
-          <dd>{c.stack}</dd>
-        </div>
-      </dl>
+        <h1 className="fl-hero-name">
+          <span className="line">
+            <motion.span {...lineReveal(0.25)}>{hero.firstName}</motion.span>
+          </span>
+          <span className="line outline">
+            <motion.span {...lineReveal(0.4)}>{hero.lastName}</motion.span>
+          </span>
+        </h1>
 
-      <hr className="ed-rule" />
+        <motion.p className="fl-hero-role" {...rise(0.6)}>
+          {hero.role}
+        </motion.p>
 
-      <p className="ed-summary">{c.summary}</p>
+        <motion.p className="fl-hero-summary" {...rise(0.7)}>
+          {hero.summary}
+        </motion.p>
 
-      <div className="ed-ctas">
-        <a
-          className="ed-btn ed-btn-primary"
-          href={cvFiles[language]}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t.cv}
-        </a>
-        <a className="ed-btn ed-btn-ghost" href="#contact">
-          {t.email}
-        </a>
-        <span className="ed-status">
-          <span className="ed-status-dot" />
-          {t.status}
-        </span>
+        <motion.div className="fl-hero-ctas" {...rise(0.8)}>
+          <a
+            className="fl-btn fl-btn-primary"
+            href={picadito[language].links.demo}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t.seePicadito} <span className="arrow">↗</span>
+          </a>
+          <a className="fl-btn fl-btn-ghost" href={cvFiles[language]} target="_blank" rel="noreferrer">
+            {t.downloadCv}
+          </a>
+          <a className="fl-btn fl-btn-ghost" href={`mailto:${contact[language].email}`}>
+            {t.emailMe}
+          </a>
+        </motion.div>
+
+        <Marquee items={hero.marquee} />
+      </div>
+
+      <div className="fl-hero-scroll" aria-hidden="true">
+        {t.scrollHint}
       </div>
     </section>
   );

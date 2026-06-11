@@ -1,29 +1,43 @@
-import { skills, type LanguageKey } from '../data/profile';
+import Reveal from '../components/Reveal';
+import SectionHead from '../components/SectionHead';
+import { skills, ui, type LanguageKey } from '../data/profile';
 
 interface SkillsSectionProps {
   language: LanguageKey;
 }
 
-const COPY: Record<LanguageKey, { label: string; title: string }> = {
-  en: { label: 'Skills', title: 'What I reach for' },
-  es: { label: 'Habilidades', title: 'Con lo que trabajo' },
-};
-
 const SkillsSection = ({ language }: SkillsSectionProps) => {
-  const groups = skills[language].groups;
-  const t = COPY[language];
+  const t = ui[language];
+  const data = skills[language];
+
   return (
-    <section className="ed-section">
-      <p className="ed-eyebrow">{t.label}</p>
-      <h2 className="ed-section-title">{t.title}</h2>
-      <dl className="ed-skills">
-        {groups.map((g) => (
-          <div key={g.group} className="ed-skill-row">
-            <dt>{g.group}</dt>
-            <dd>{g.items.join(', ')}</dd>
+    <section className="fl-section" id="skills" aria-label={t.sections.skills}>
+      <div className="fl-shell">
+        <SectionHead index="03" title={t.sections.skills} />
+        <Reveal>
+          <div className="fl-skills-primary">
+            {data.primary.map((skill) => (
+              <span className="fl-skill-big" key={skill}>
+                {skill}
+              </span>
+            ))}
           </div>
-        ))}
-      </dl>
+        </Reveal>
+        <div className="fl-skill-groups">
+          {data.groups.map((group, i) => (
+            <Reveal key={group.group} delay={i * 0.06}>
+              <div className="fl-skill-group">
+                <h3>{group.group}</h3>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

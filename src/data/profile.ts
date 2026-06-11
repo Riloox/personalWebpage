@@ -1,89 +1,308 @@
 export type LanguageKey = 'en' | 'es';
 
 export const cvFiles: Record<LanguageKey, string> = {
-  en: 'https://drive.google.com/file/d/1G-YQ3Jd7F6X9cM4N3NqbSRbXPoTtoMdg/view?usp=sharing',
-  es: 'https://drive.google.com/file/d/1G-YQ3Jd7F6X9cM4N3NqbSRbXPoTtoMdg/view?usp=sharing',
+  en: `${import.meta.env.BASE_URL}cv.pdf`,
+  es: `${import.meta.env.BASE_URL}cv-es.pdf`,
 };
 
-export const trustEarned: Record<
+/* ------------------------------------------------------------------ */
+/* UI strings                                                          */
+/* ------------------------------------------------------------------ */
+
+export const ui: Record<
   LanguageKey,
-  { label: string; display: string; sub: string }
+  {
+    nav: { work: string; experience: string; skills: string; contact: string };
+    available: string;
+    scrollHint: string;
+    sections: {
+      work: string;
+      workSub: string;
+      experience: string;
+      skills: string;
+      education: string;
+      contact: string;
+    };
+    featured: string;
+    liveDemo: string;
+    sourceCode: string;
+    privateRepo: string;
+    watchDemo: string;
+    moreGithub: string;
+    moreGithubSub: string;
+    viewAllGithub: string;
+    copyEmail: string;
+    copied: string;
+    downloadCv: string;
+    emailMe: string;
+    seePicadito: string;
+    letsTalk: string;
+    footerNote: string;
+    updatedRepo: string;
+  }
 > = {
   en: {
-    label: 'Trust earned',
-    display: "On Bantotal's newest project",
-    sub: 'Picked by my supervisors despite being < 1 year in the company.',
+    nav: { work: 'Work', experience: 'Experience', skills: 'Skills', contact: 'Contact' },
+    available: 'Open to remote work',
+    scrollHint: 'scroll',
+    sections: {
+      work: 'Selected work',
+      workSub: 'Shipped, tested, and live — not tutorial code.',
+      experience: 'Experience',
+      skills: 'Skills',
+      education: 'Education & certs',
+      contact: 'Contact',
+    },
+    featured: 'Featured project',
+    liveDemo: 'Live demo',
+    sourceCode: 'Source code',
+    privateRepo: 'Private repo — built for UTEC',
+    watchDemo: 'Watch demo',
+    moreGithub: 'More on GitHub',
+    moreGithubSub: 'Smaller experiments and utilities.',
+    viewAllGithub: 'All repositories',
+    copyEmail: 'Copy email',
+    copied: 'Copied!',
+    downloadCv: 'Download CV',
+    emailMe: 'Email me',
+    seePicadito: 'See Picadito live',
+    letsTalk: "Let's talk",
+    footerNote: 'Designed & built by Federico Prunell — React, TypeScript, Vite.',
+    updatedRepo: 'updated',
   },
   es: {
-    label: 'Confianza ganada',
-    display: 'En el proyecto más nuevo de Bantotal',
-    sub: 'Elegido por mis supervisores con menos de 1 año en la empresa.',
+    nav: { work: 'Proyectos', experience: 'Experiencia', skills: 'Skills', contact: 'Contacto' },
+    available: 'Abierto a trabajo remoto',
+    scrollHint: 'scroll',
+    sections: {
+      work: 'Proyectos destacados',
+      workSub: 'Publicados, testeados y en producción — no código de tutorial.',
+      experience: 'Experiencia',
+      skills: 'Skills',
+      education: 'Educación y certificaciones',
+      contact: 'Contacto',
+    },
+    featured: 'Proyecto destacado',
+    liveDemo: 'Demo en vivo',
+    sourceCode: 'Código fuente',
+    privateRepo: 'Repo privado — desarrollado para UTEC',
+    watchDemo: 'Ver demo',
+    moreGithub: 'Más en GitHub',
+    moreGithubSub: 'Experimentos y utilidades más chicas.',
+    viewAllGithub: 'Todos los repositorios',
+    copyEmail: 'Copiar correo',
+    copied: '¡Copiado!',
+    downloadCv: 'Descargar CV',
+    emailMe: 'Escribime',
+    seePicadito: 'Ver Picadito en vivo',
+    letsTalk: 'Hablemos',
+    footerNote: 'Diseñado y desarrollado por Federico Prunell — React, TypeScript, Vite.',
+    updatedRepo: 'actualizado',
   },
 };
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
 
 export const heroContent: Record<
   LanguageKey,
   {
-    name: string;
-    title: string;
-    currentRole: string;
-    win: string;
-    stack: string;
+    kicker: string;
+    firstName: string;
+    lastName: string;
+    role: string;
     summary: string;
+    marquee: string[];
   }
 > = {
   en: {
-    name: 'Federico Prunell',
-    title: 'Backend Software Developer',
-    currentRole: 'Software Development Analyst @ Bantotal',
-    win: 'Working on our latest projects',
-    stack: 'Java · Python · SQL · AWS · GCP',
+    kicker: 'Backend engineer — Montevideo, Uruguay · GMT-3',
+    firstName: 'Federico',
+    lastName: 'Prunell',
+    role: 'I build banking-grade backends by day and ship my own products by night.',
     summary:
-      'Backend engineer with 1+ year at Bantotal building Java services for core banking. Shipped a ~20 % p95 latency reduction via I/O and caching, resolved 50+ production incidents, and graduated UTEC (with a semester at Karelia, Finland). Comfortable across Python, SQL, AWS and GCP. Open to backend or full-stack roles, remote-friendly.',
+      'Software Development Analyst at Bantotal, writing Java services for core banking — ~20% p95 latency cut, 50+ production incidents resolved. After hours I ship Picadito: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+    marquee: [
+      'Java',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Python',
+      'SQL',
+      'AWS',
+      'GCP',
+      'Docker',
+      'Drizzle ORM',
+    ],
   },
   es: {
-    name: 'Federico Prunell',
-    title: 'Desarrollador Backend',
-    currentRole: 'Analista de Desarrollo de Software @ Bantotal',
-    win: 'Trabajando en nuestros últimos proyectos',
-    stack: 'Java · Python · SQL · AWS · GCP',
+    kicker: 'Ingeniero backend — Montevideo, Uruguay · GMT-3',
+    firstName: 'Federico',
+    lastName: 'Prunell',
+    role: 'De día construyo backends bancarios; de noche publico mis propios productos.',
     summary:
-      'Ingeniero backend con más de 1 año en Bantotal desarrollando servicios Java para core bancario. Logré ~20 % menos de latencia p95 con optimización de E/S y caché, resolví más de 50 incidentes en producción, y soy egresado de UTEC (con un semestre en Karelia, Finlandia). Cómodo en Python, SQL, AWS y GCP. Abierto a roles backend o full-stack, modalidad remota.',
+      'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario — ~20% menos de latencia p95 y 50+ incidentes de producción resueltos. Fuera de hora desarrollo Picadito: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+    marquee: [
+      'Java',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Python',
+      'SQL',
+      'AWS',
+      'GCP',
+      'Docker',
+      'Drizzle ORM',
+    ],
   },
 };
 
-export const skills: Record<
-  LanguageKey,
-  {
-    primary: string[];
-    groups: Array<{ group: string; items: string[] }>;
-  }
-> = {
+/* ------------------------------------------------------------------ */
+/* Projects                                                            */
+/* ------------------------------------------------------------------ */
+
+export interface ProjectLink {
+  repo?: string;
+  demo?: string;
+  video?: string;
+}
+
+export interface FeaturedProject {
+  name: string;
+  tagline: string;
+  description: string;
+  stats: Array<{ value: string; label: string }>;
+  features: string[];
+  stack: string[];
+  links: ProjectLink;
+}
+
+export const picadito: Record<LanguageKey, FeaturedProject> = {
   en: {
-    primary: ['Java', 'Python', 'SQL', 'AWS', 'GCP', 'Docker', 'Linux', 'Git'],
-    groups: [
-      { group: 'Languages', items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'] },
-      { group: 'Backend', items: ['REST APIs', 'Node.js', 'Event-driven', 'Concurrency', 'Spigot API'] },
-      { group: 'Frontend', items: ['React', 'React Native', 'HTML/CSS'] },
-      { group: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
-      { group: 'Foundations', items: ['Data Structures', 'Algorithms', 'OOP', 'Complexity'] },
-      { group: 'Quality', items: ['JUnit', 'PyTest', 'Logging', 'Observability', 'Code Reviews'] },
-      { group: 'Tools', items: ['Postman', 'VS Code'] },
+    name: 'Picadito',
+    tagline: 'Pickup-football platform with a real rating engine',
+    description:
+      'A football pickup-match organizer for Uruguay & Argentina, live in production. Most sports apps are CRUD with a leaderboard — Picadito is an algorithmic backend: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
+    stats: [
+      { value: '10.8k', label: 'lines of TypeScript' },
+      { value: '123', label: 'conventional commits' },
+      { value: '6', label: 'tested domains, unit + integration' },
+      { value: '1', label: 'security audit — run, then fixed' },
     ],
+    features: [
+      'Full match lifecycle: create → join → play → vote result → ELO updates',
+      'Team balancing by rating, friend-group aware, with manual override',
+      'Vote-consensus result engine with idempotent ELO application',
+      'Hardened: helmet, CORS, rate limiting, bcrypt, Supabase JWT auth',
+    ],
+    stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
+    links: {
+      demo: 'https://picadito-kg25.onrender.com',
+      repo: 'https://github.com/Riloox/picadito',
+    },
   },
   es: {
-    primary: ['Java', 'Python', 'SQL', 'AWS', 'GCP', 'Docker', 'Linux', 'Git'],
-    groups: [
-      { group: 'Lenguajes', items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'] },
-      { group: 'Backend', items: ['APIs REST', 'Node.js', 'Event-driven', 'Concurrencia', 'Spigot API'] },
-      { group: 'Frontend', items: ['React', 'React Native', 'HTML/CSS'] },
-      { group: 'Cloud y DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
-      { group: 'Fundamentos', items: ['Estructuras de Datos', 'Algoritmos', 'POO', 'Complejidad'] },
-      { group: 'Calidad', items: ['JUnit', 'PyTest', 'Logging', 'Observabilidad', 'Revisiones de Código'] },
-      { group: 'Herramientas', items: ['Postman', 'VS Code'] },
+    name: 'Picadito',
+    tagline: 'Plataforma de fútbol 5 con un motor de rating real',
+    description:
+      'Un organizador de picaditos para Uruguay y Argentina, en producción. La mayoría de las apps deportivas son CRUD con una tabla de posiciones — Picadito es un backend algorítmico: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
+    stats: [
+      { value: '10.8k', label: 'líneas de TypeScript' },
+      { value: '123', label: 'commits convencionales' },
+      { value: '6', label: 'dominios testeados, unit + integración' },
+      { value: '1', label: 'auditoría de seguridad — hecha y corregida' },
     ],
+    features: [
+      'Ciclo completo del partido: crear → unirse → jugar → votar resultado → ELO',
+      'Balanceo de equipos por rating, consciente de grupos de amigos, con override manual',
+      'Motor de resultados por consenso de votos con aplicación idempotente de ELO',
+      'Endurecido: helmet, CORS, rate limiting, bcrypt, auth JWT con Supabase',
+    ],
+    stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
+    links: {
+      demo: 'https://picadito-kg25.onrender.com',
+      repo: 'https://github.com/Riloox/picadito',
+    },
   },
 };
+
+export interface Project {
+  name: string;
+  tagline: string;
+  description: string;
+  highlights: string[];
+  stack: string[];
+  links?: ProjectLink;
+  privateRepo?: boolean;
+}
+
+export const projects: Record<LanguageKey, Project[]> = {
+  en: [
+    {
+      name: 'Cleta',
+      tagline: 'Campus bike-sharing platform, validated by industry',
+      description:
+        'Capstone project: a free bicycle-lending system for the UTEC Fray Bentos campus — mobile app, web admin panel, and a backend integrating Allegion smart locks over BLE. Built by a team of three over 16 weeks of Scrum; architecture validated by Atos and Urudata Software.',
+      highlights: [
+        'Owned backend architecture, API design, PostgreSQL schema, and security',
+        'Google OAuth 2.0 + revocable JWTs, RBAC with ownership checks',
+        'Encryption at rest & in transit, audit logging, CI/CD on Google Cloud',
+      ],
+      stack: ['React Native', 'TypeScript', 'Node.js', 'PostgreSQL', 'GCP', 'Docker'],
+      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
+      privateRepo: true,
+    },
+    {
+      name: 'RilooxDB',
+      tagline: 'An encrypted key-value store, from scratch',
+      description:
+        'A small database built in Python to learn the primitives real databases hide: in-memory indexing, file persistence, JSON serialization, and AES-128 encryption via Fernet. Every write encrypts and persists the full store; a resilient CLI drives CRUD.',
+      highlights: [
+        'Symmetric encryption with key generation and InvalidToken handling',
+        'Deliberate limitations documented — built to understand trade-offs',
+      ],
+      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
+      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+    },
+  ],
+  es: [
+    {
+      name: 'Cleta',
+      tagline: 'Plataforma de bicicletas compartidas, validada por la industria',
+      description:
+        'Proyecto final de grado: un sistema gratuito de préstamo de bicicletas para el campus de UTEC Fray Bentos — app móvil, panel web de administración y un backend que integra candados inteligentes Allegion por BLE. Construido por un equipo de tres en 16 semanas de Scrum; arquitectura validada por Atos y Urudata Software.',
+      highlights: [
+        'Responsable de la arquitectura backend, diseño de API, esquema PostgreSQL y seguridad',
+        'Google OAuth 2.0 + JWTs revocables, RBAC con chequeos de propiedad',
+        'Cifrado en reposo y en tránsito, audit logging, CI/CD en Google Cloud',
+      ],
+      stack: ['React Native', 'TypeScript', 'Node.js', 'PostgreSQL', 'GCP', 'Docker'],
+      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
+      privateRepo: true,
+    },
+    {
+      name: 'RilooxDB',
+      tagline: 'Un almacén clave-valor cifrado, desde cero',
+      description:
+        'Una pequeña base de datos construida en Python para aprender las primitivas que las bases de datos reales esconden: indexación en memoria, persistencia en archivos, serialización JSON y cifrado AES-128 vía Fernet. Cada escritura cifra y persiste el store completo; una CLI resiliente maneja el CRUD.',
+      highlights: [
+        'Cifrado simétrico con generación de claves y manejo de InvalidToken',
+        'Limitaciones deliberadas y documentadas — construido para entender trade-offs',
+      ],
+      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
+      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+    },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
+/* Experience                                                          */
+/* ------------------------------------------------------------------ */
 
 export const experience: Record<
   LanguageKey,
@@ -98,11 +317,11 @@ export const experience: Record<
     {
       company: 'Bantotal',
       role: 'Software Development Analyst',
-      duration: 'Apr 2025 - Present · Montevideo, Uruguay',
+      duration: 'Apr 2025 — Present · Montevideo, Uruguay',
       highlights: [
-        'Optimized Java backend services for core banking modules, cutting p95 latency ~20 % through I/O optimization and caching.',
+        'Optimized Java backend services for core banking modules, cutting p95 latency ~20% through I/O optimization and caching.',
         'Resolved 50+ production incidents via triage, improving system reliability and logging practices.',
-        'Participated in peer code reviews and maintained documentation for system modules.',
+        'Picked for the company’s newest project by supervisors at under one year in the role.',
       ],
     },
   ],
@@ -110,110 +329,54 @@ export const experience: Record<
     {
       company: 'Bantotal',
       role: 'Analista de Desarrollo de Software',
-      duration: 'Abr 2025 - Presente · Montevideo, Uruguay',
+      duration: 'Abr 2025 — Presente · Montevideo, Uruguay',
       highlights: [
-        'Optimización de servicios backend en Java para módulos de core bancario, reduciendo ~20 % la latencia p95 mediante optimización de E/S y caché.',
+        'Optimización de servicios backend en Java para módulos de core bancario, reduciendo ~20% la latencia p95 mediante optimización de E/S y caché.',
         'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
-        'Participación en revisiones de código entre pares y mantenimiento de documentación de módulos del sistema.',
+        'Elegido por mis supervisores para el proyecto más nuevo de la empresa con menos de un año en el rol.',
       ],
     },
   ],
 };
 
-export interface ProjectLink {
-  repo?: string;
-  demo?: string;
-  video?: string;
-}
+/* ------------------------------------------------------------------ */
+/* Skills                                                              */
+/* ------------------------------------------------------------------ */
 
-export const projects: Record<
+export const skills: Record<
   LanguageKey,
-  Array<{
-    name: string;
-    stack: string;
-    highlights: string[];
-    links?: ProjectLink;
-  }>
+  {
+    primary: string[];
+    groups: Array<{ group: string; items: string[] }>;
+  }
 > = {
-  en: [
-    {
-      name: 'Cleta — Shared Bike Management Platform',
-      stack: 'TypeScript · React Native · Node.js · GCP',
-      highlights: [
-        'Final degree project: designed and built a full-stack shared mobility system with a mobile interface.',
-        'Developed cross-platform features with React Native, integrating Google Maps and Firebase Auth.',
-        'Implemented backend services on Google Cloud Run with PostgreSQL and automated CI/CD pipelines.',
-      ],
-      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
-    },
-    {
-      name: 'RilooxDB',
-      stack: 'Python · Data Engineering',
-      highlights: [
-        'In-memory key-value store with file-based persistence and data encryption.',
-        'Custom storage logic for serialization and secure retrieval — no external DB dependencies.',
-      ],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
-    },
-    {
-      name: 'Windows 11 Debloater',
-      stack: 'PowerShell · Automation',
-      highlights: [
-        'System utility that automates removal of bloatware and telemetry from Windows 11.',
-        'Focused on OS-level optimization through scripted configuration changes.',
-      ],
-      links: { repo: 'https://github.com/Riloox/windows11debloater2024' },
-    },
-    {
-      name: 'AFK Timeskip — Spigot Plugin',
-      stack: 'Java · Spigot API · Minecraft 1.21',
-      highlights: [
-        'Event-driven plugin that detects AFK players and speeds up tick rate to fast-forward nights.',
-        'Maintains server stability under tick-rate adjustments via careful event handling.',
-      ],
-      links: { repo: 'https://github.com/Riloox/AFK-Timeskip-for-SMP-1.21' },
-    },
-  ],
-  es: [
-    {
-      name: 'Cleta — Plataforma de Bicicletas Compartidas',
-      stack: 'TypeScript · React Native · Node.js · GCP',
-      highlights: [
-        'Proyecto final de grado: diseño e implementación de un sistema full-stack de movilidad compartida con interfaz móvil.',
-        'Desarrollo de funcionalidades multiplataforma con React Native, integrando Google Maps y Firebase Auth.',
-        'Servicios backend en Google Cloud Run con PostgreSQL y pipelines de CI/CD automatizados.',
-      ],
-      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
-    },
-    {
-      name: 'RilooxDB',
-      stack: 'Python · Ingeniería de Datos',
-      highlights: [
-        'Almacén clave-valor en memoria con persistencia basada en archivos y cifrado de datos.',
-        'Lógica de almacenamiento propia para serialización y recuperación segura, sin dependencias externas de base de datos.',
-      ],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
-    },
-    {
-      name: 'Windows 11 Debloater',
-      stack: 'PowerShell · Automatización',
-      highlights: [
-        'Utilidad que automatiza la eliminación de bloatware y telemetría en Windows 11.',
-        'Enfocado en optimización a nivel de SO mediante scripts de configuración.',
-      ],
-      links: { repo: 'https://github.com/Riloox/windows11debloater2024' },
-    },
-    {
-      name: 'AFK Timeskip — Plugin de Spigot',
-      stack: 'Java · Spigot API · Minecraft 1.21',
-      highlights: [
-        'Plugin orientado a eventos que detecta jugadores AFK y acelera el tick-rate para avanzar la noche.',
-        'Mantiene la estabilidad del servidor bajo cambios de tick-rate con manejo cuidadoso de eventos.',
-      ],
-      links: { repo: 'https://github.com/Riloox/AFK-Timeskip-for-SMP-1.21' },
-    },
-  ],
+  en: {
+    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
+    groups: [
+      { group: 'Languages', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
+      { group: 'Backend', items: ['Node.js', 'Express', 'REST APIs', 'Drizzle ORM', 'Event-driven', 'Concurrency'] },
+      { group: 'Frontend', items: ['React', 'React Native', 'Vite', 'Tailwind'] },
+      { group: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
+      { group: 'Data', items: ['PostgreSQL', 'Oracle SQL', 'Supabase', 'SQLite'] },
+      { group: 'Quality', items: ['JUnit', 'PyTest', 'Integration tests', 'Code reviews', 'Security audits'] },
+    ],
+  },
+  es: {
+    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
+    groups: [
+      { group: 'Lenguajes', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
+      { group: 'Backend', items: ['Node.js', 'Express', 'APIs REST', 'Drizzle ORM', 'Event-driven', 'Concurrencia'] },
+      { group: 'Frontend', items: ['React', 'React Native', 'Vite', 'Tailwind'] },
+      { group: 'Cloud y DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
+      { group: 'Datos', items: ['PostgreSQL', 'Oracle SQL', 'Supabase', 'SQLite'] },
+      { group: 'Calidad', items: ['JUnit', 'PyTest', 'Tests de integración', 'Code reviews', 'Auditorías de seguridad'] },
+    ],
+  },
 };
+
+/* ------------------------------------------------------------------ */
+/* Education & certifications                                          */
+/* ------------------------------------------------------------------ */
 
 export const education: Record<
   LanguageKey,
@@ -227,24 +390,24 @@ export const education: Record<
     {
       school: 'Technological University of Uruguay (UTEC)',
       degree: 'B.Sc. in Information Technology',
-      duration: 'Graduated · Montevideo, Uruguay',
+      duration: 'Graduated 2025 · Montevideo, Uruguay',
     },
     {
       school: 'Karelia University of Applied Sciences',
       degree: 'Exchange Program · Information Technology',
-      duration: 'Aug 2023 - Dec 2023 · Joensuu, Finland',
+      duration: 'Aug 2023 — Dec 2023 · Joensuu, Finland',
     },
   ],
   es: [
     {
       school: 'Universidad Tecnológica del Uruguay (UTEC)',
       degree: 'Licenciatura en Tecnologías de la Información',
-      duration: 'Graduado · Montevideo, Uruguay',
+      duration: 'Graduado 2025 · Montevideo, Uruguay',
     },
     {
       school: 'Karelia University of Applied Sciences',
       degree: 'Programa de Intercambio · Tecnologías de la Información',
-      duration: 'Ago 2023 - Dic 2023 · Joensuu, Finlandia',
+      duration: 'Ago 2023 — Dic 2023 · Joensuu, Finlandia',
     },
   ],
 };
@@ -259,8 +422,8 @@ export const certifications: Record<
   }
 > = {
   en: {
-    certLabel: 'CERTIFICATIONS',
-    langLabel: 'LANGUAGES',
+    certLabel: 'Certifications',
+    langLabel: 'Languages',
     certs: [
       'AWS Academy Cloud Foundations',
       'Google Cloud Computing',
@@ -273,8 +436,8 @@ export const certifications: Record<
     ],
   },
   es: {
-    certLabel: 'CERTIFICACIONES',
-    langLabel: 'IDIOMAS',
+    certLabel: 'Certificaciones',
+    langLabel: 'Idiomas',
     certs: [
       'AWS Academy Cloud Foundations',
       'Google Cloud Computing',
@@ -288,10 +451,13 @@ export const certifications: Record<
   },
 };
 
+/* ------------------------------------------------------------------ */
+/* Contact                                                             */
+/* ------------------------------------------------------------------ */
+
 export const contact: Record<
   LanguageKey,
   {
-    emailLabel: string;
     email: string;
     blurb: string;
     responseTime: string;
@@ -299,10 +465,10 @@ export const contact: Record<
   }
 > = {
   en: {
-    emailLabel: 'Email',
     email: 'fprunell10@gmail.com',
-    blurb: 'Best reached by email. Open to backend / full-stack roles, remote or Montevideo-based — happy to discuss take-home tests or live coding.',
-    responseTime: 'usually reply within 24h',
+    blurb:
+      'Open to backend / full-stack roles, remote or Montevideo-based. Happy to do take-home tests or live coding.',
+    responseTime: 'Usually replies within 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
@@ -310,10 +476,10 @@ export const contact: Record<
     ],
   },
   es: {
-    emailLabel: 'Correo',
     email: 'fprunell10@gmail.com',
-    blurb: 'La mejor vía es el correo. Abierto a roles backend / full-stack, remoto o desde Montevideo — me adapto a pruebas técnicas o entrevistas en vivo.',
-    responseTime: 'normalmente respondo en 24h',
+    blurb:
+      'Abierto a roles backend / full-stack, remoto o desde Montevideo. Me adapto a pruebas técnicas o entrevistas en vivo.',
+    responseTime: 'Normalmente respondo en 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },

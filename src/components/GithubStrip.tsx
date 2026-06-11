@@ -1,5 +1,6 @@
 import { useGithubProjects } from '../hooks/useGithubProjects';
-import type { LanguageKey } from '../data/profile';
+import { ui, type LanguageKey } from '../data/profile';
+import Reveal from './Reveal';
 
 interface GithubStripProps {
   username: string;
@@ -8,54 +9,68 @@ interface GithubStripProps {
   limit?: number;
 }
 
-const COPY: Record<
-  LanguageKey,
-  { label: string; title: string; loading: string; empty: string }
-> = {
-  en: {
-    label: 'Open source',
-    title: 'More from GitHub',
-    loading: 'fetching repos…',
-    empty: 'no public repos',
-  },
-  es: {
-    label: 'Código abierto',
-    title: 'Más en GitHub',
-    loading: 'cargando repos…',
-    empty: 'sin repos públicos',
-  },
+const formatDate = (iso: string, language: LanguageKey) => {
+  try {
+    return new Date(iso).toLocaleDateString(language === 'en' ? 'en-US' : 'es-UY', {
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return '';
+  }
 };
 
-const GithubStrip = ({ username, language, excludeNames = [], limit = 6 }: GithubStripProps) => {
-  const { repos, loading, error } = useGithubProjects(username, { limit, excludeNames });
-  const t = COPY[language];
+const GithubStrip = ({ username, language, excludeNames, limit }: GithubStripProps) => {
+  const t = ui[language];
+  const { repos, loading, error } = useGithubProjects(username, { excludeNames, limit });
 
-  if (error && repos.length === 0) return null;
+  if (loading || error || repos.length === 0) return null;
 
   return (
-    <section className="ed-section">
-      <p className="ed-eyebrow">{t.label}</p>
-      <h2 className="ed-section-title">{t.title}</h2>
-
-      {loading && repos.length === 0 ? (
-        <p className="ed-summary">{t.loading}</p>
-      ) : repos.length === 0 ? (
-        <p className="ed-summary">{t.empty}</p>
-      ) : (
-        <ul className="ed-repos">
-          {repos.map((repo) => (
-            <li key={repo.id} className="ed-repo">
-              <a className="ed-repo-link" href={repo.html_url} target="_blank" rel="noreferrer">
-                <span className="ed-repo-name">{repo.name}</span>
-                <span className="ed-repo-stars">★ {repo.stargazers_count}</span>
-              </a>
-              {repo.description && <p className="ed-repo-desc">{repo.description}</p>}
-              {repo.language && <p className="ed-repo-lang">{repo.language}</p>}
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+    <>
+      <Reveal>
+        <div className="fl-gh-head">
+        <h3 className="fl-gh-title">{t.moreGithub}</h3>
+        <span className="fl-gh-sub">{t.moreGithubSub}</span>
+        <a
+          className="fl-link fl-gh-all"
+          href={`https://github.com/${username}?tab=repositories`}
+          target="_blank"
+          rel="noreferrer"
+        >
+            {t.viewAllGithub} <span className="arrow">↗</span>
+          </a>
+        </div>
+      </Reveal>
+      <div className="fl-gh-grid">
+        {repos.map((repo, i) => (
+          <Reveal key={repo.id} delay={i * 0.07} style={{ height: '100%' }}>
+            <a
+              className="fl-gh-card"
+              href={repo.html_url}
+              target="_blank"
+              rel="noreferrer"
+              style={{ height: '100%' }}
+            >
+            <span className="fl-gh-name">
+              {repo.name}
+              <span className="arrow" aria-hidden="true">
+                ↗
+              </span>
+            </span>
+            {repo.description ? <span className="fl-gh-desc">{repo.description}</span> : null}
+              <span className="fl-gh-meta">
+                {repo.language ? <span className="lang">{repo.language}</span> : null}
+                {repo.stargazers_count > 0 ? <span>★ {repo.stargazers_count}</span> : null}
+                <span>
+                  {t.updatedRepo} {formatDate(repo.updated_at, language)}
+                </span>
+              </span>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </>
   );
 };
 
