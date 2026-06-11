@@ -54,11 +54,7 @@ const HeroSection = ({ language }: HeroSectionProps) => {
           </span>
         </h1>
 
-        <motion.p className="fl-hero-role" {...rise(0.6)}>
-          {hero.role}
-        </motion.p>
-
-        <motion.p className="fl-hero-summary" {...rise(0.7)}>
+        <motion.p className="fl-hero-summary" {...rise(0.6)}>
           {hero.summary}
         </motion.p>
 
