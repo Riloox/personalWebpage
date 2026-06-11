@@ -111,7 +111,6 @@ export const heroContent: Record<
     kicker: string;
     firstName: string;
     lastName: string;
-    role: string;
     summary: string;
     marquee: string[];
   }
@@ -120,9 +119,8 @@ export const heroContent: Record<
     kicker: 'Backend engineer — Montevideo, Uruguay · GMT-3',
     firstName: 'Federico',
     lastName: 'Prunell',
-    role: 'I build banking-grade backends by day and ship my own products by night.',
-    summary:
-      'Software Development Analyst at Bantotal, writing Java services for core banking — ~20% p95 latency cut, 50+ production incidents resolved. After hours I ship Picadito: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+      summary:
+        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Picadito: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
     marquee: [
       'Java',
       'TypeScript',
@@ -142,9 +140,8 @@ export const heroContent: Record<
     kicker: 'Ingeniero backend — Montevideo, Uruguay · GMT-3',
     firstName: 'Federico',
     lastName: 'Prunell',
-    role: 'De día construyo backends bancarios; de noche publico mis propios productos.',
-    summary:
-      'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario — ~20% menos de latencia p95 y 50+ incidentes de producción resueltos. Fuera de hora desarrollo Picadito: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+      summary:
+        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Picadito: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
     marquee: [
       'Java',
       'TypeScript',
@@ -245,9 +242,9 @@ export const projects: Record<LanguageKey, Project[]> = {
   en: [
     {
       name: 'Cleta',
-      tagline: 'Campus bike-sharing platform, validated by industry',
+      tagline: 'Campus bike-sharing platform',
       description:
-        'Capstone project: a free bicycle-lending system for the UTEC Fray Bentos campus — mobile app, web admin panel, and a backend integrating Allegion smart locks over BLE. Built by a team of three over 16 weeks of Scrum; architecture validated by Atos and Urudata Software.',
+        'Capstone project: a free bicycle-lending system for the UTEC Fray Bentos campus — mobile app, web admin panel, and a backend integrating Allegion smart locks over BLE. Built by a team of three over 16 weeks of Scrum.',
       highlights: [
         'Owned backend architecture, API design, PostgreSQL schema, and security',
         'Google OAuth 2.0 + revocable JWTs, RBAC with ownership checks',
@@ -273,9 +270,9 @@ export const projects: Record<LanguageKey, Project[]> = {
   es: [
     {
       name: 'Cleta',
-      tagline: 'Plataforma de bicicletas compartidas, validada por la industria',
+      tagline: 'Plataforma de bicicletas compartidas',
       description:
-        'Proyecto final de grado: un sistema gratuito de préstamo de bicicletas para el campus de UTEC Fray Bentos — app móvil, panel web de administración y un backend que integra candados inteligentes Allegion por BLE. Construido por un equipo de tres en 16 semanas de Scrum; arquitectura validada por Atos y Urudata Software.',
+        'Proyecto final de grado: un sistema gratuito de préstamo de bicicletas para el campus de UTEC Fray Bentos — app móvil, panel web de administración y un backend que integra candados inteligentes Allegion por BLE. Construido por un equipo de tres en 16 semanas de Scrum.',
       highlights: [
         'Responsable de la arquitectura backend, diseño de API, esquema PostgreSQL y seguridad',
         'Google OAuth 2.0 + JWTs revocables, RBAC con chequeos de propiedad',
@@ -319,7 +316,6 @@ export const experience: Record<
       role: 'Software Development Analyst',
       duration: 'Apr 2025 — Present · Montevideo, Uruguay',
       highlights: [
-        'Optimized Java backend services for core banking modules, cutting p95 latency ~20% through I/O optimization and caching.',
         'Resolved 50+ production incidents via triage, improving system reliability and logging practices.',
         'Picked for the company’s newest project by supervisors at under one year in the role.',
       ],
@@ -331,7 +327,6 @@ export const experience: Record<
       role: 'Analista de Desarrollo de Software',
       duration: 'Abr 2025 — Presente · Montevideo, Uruguay',
       highlights: [
-        'Optimización de servicios backend en Java para módulos de core bancario, reduciendo ~20% la latencia p95 mediante optimización de E/S y caché.',
         'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
         'Elegido por mis supervisores para el proyecto más nuevo de la empresa con menos de un año en el rol.',
       ],
