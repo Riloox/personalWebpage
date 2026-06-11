@@ -1,37 +1,92 @@
-import { heroContent, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
+import { cvFiles, heroContent, type LanguageKey } from '../data/profile';
 
 interface HeroSectionProps {
   language: LanguageKey;
 }
 
-const HeroSection = ({ language }: HeroSectionProps) => {
-  const content = heroContent[language];
-  const labels = {
-    name: language === 'es' ? 'NOMBRE' : 'NAME',
-    role: language === 'es' ? 'ROL' : 'ROLE',
-    location: language === 'es' ? 'UBICACIÓN' : 'LOCATION',
-  };
+const COPY: Record<
+  LanguageKey,
+  {
+    eyebrow: string;
+    tag: string;
+    currently: string;
+    latest: string;
+    stack: string;
+    cv: string;
+    email: string;
+    status: string;
+  }
+> = {
+  en: {
+    eyebrow: 'Backend engineer · Montevideo · UTC-3',
+    tag: 'Built fast, never sloppy.',
+    currently: 'Currently',
+    latest: 'Latest',
+    stack: 'Stack',
+    cv: 'Download CV',
+    email: 'Email me',
+    status: 'Open to work',
+  },
+  es: {
+    eyebrow: 'Ingeniero backend · Montevideo · UTC-3',
+    tag: 'Hecho rápido, nunca descuidado.',
+    currently: 'Ahora',
+    latest: 'Último',
+    stack: 'Stack',
+    cv: 'Descargar CV',
+    email: 'Escribime',
+    status: 'Disponible',
+  },
+};
 
+const HeroSection = ({ language }: HeroSectionProps) => {
+  const c = heroContent[language];
+  const t = COPY[language];
   return (
-    <section className="dos-section" id="hero">
-      <Prompt path="~/about" cmd="cat about.md" />
-      <p>
-        {labels.name}: {content.name}
-      </p>
-      <p>
-        {labels.role}: {content.title}
-      </p>
-      <p className="dos-highlight">{content.summary}</p>
-      <ul className="dos-list">
-        <li>
-          {labels.location}: {content.location}
-        </li>
-      </ul>
-      <div className="dos-actions">
-        <a className="dos-link" href={content.cta.href}>
-          {content.cta.label.toUpperCase()}
+    <section className="ed-hero">
+      <p className="ed-eyebrow">{t.eyebrow}</p>
+
+      <h1 className="ed-display">
+        {c.name}.
+        <br />
+        <span className="ed-display-italic">{t.tag}</span>
+      </h1>
+
+      <dl className="ed-meta">
+        <div className="ed-meta-row">
+          <dt>{t.currently}</dt>
+          <dd>{c.currentRole}</dd>
+        </div>
+        <div className="ed-meta-row">
+          <dt>{t.latest}</dt>
+          <dd>{c.win}</dd>
+        </div>
+        <div className="ed-meta-row">
+          <dt>{t.stack}</dt>
+          <dd>{c.stack}</dd>
+        </div>
+      </dl>
+
+      <hr className="ed-rule" />
+
+      <p className="ed-summary">{c.summary}</p>
+
+      <div className="ed-ctas">
+        <a
+          className="ed-btn ed-btn-primary"
+          href={cvFiles[language]}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t.cv}
         </a>
+        <a className="ed-btn ed-btn-ghost" href="#contact">
+          {t.email}
+        </a>
+        <span className="ed-status">
+          <span className="ed-status-dot" />
+          {t.status}
+        </span>
       </div>
     </section>
   );

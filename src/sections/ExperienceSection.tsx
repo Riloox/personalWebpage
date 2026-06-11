@@ -1,27 +1,41 @@
 import { experience, type LanguageKey } from '../data/profile';
-import Prompt from '../components/Prompt';
 
 interface ExperienceSectionProps {
   language: LanguageKey;
 }
 
-const ExperienceSection = ({ language }: ExperienceSectionProps) => (
-  <section className="dos-section" id="experience">
-    <Prompt path="~/experience" cmd="tail -n 20 history.log" />
-    {experience[language].map((role) => (
-      <article key={role.company} className="dos-entry">
-        <p className="dos-muted">[{role.duration}]</p>
-        <p>
-          <span className="dos-highlight">{role.role}</span> @ {role.company}
-        </p>
-        <ul className="dos-list">
-          {role.highlights.map((item) => (
-            <li key={item}>- {item}</li>
-          ))}
-        </ul>
-      </article>
-    ))}
-  </section>
-);
+const COPY: Record<LanguageKey, { label: string; title: string }> = {
+  en: { label: 'Experience', title: 'Where I’ve worked' },
+  es: { label: 'Experiencia', title: 'Dónde trabajé' },
+};
+
+const ExperienceSection = ({ language }: ExperienceSectionProps) => {
+  const items = experience[language];
+  const t = COPY[language];
+  return (
+    <section className="ed-section">
+      <p className="ed-eyebrow">{t.label}</p>
+      <h2 className="ed-section-title">{t.title}</h2>
+      <ol className="ed-experience">
+        {items.map((item) => (
+          <li key={item.company + item.role} className="ed-exp">
+            <div className="ed-exp-meta">{item.duration}</div>
+            <div className="ed-exp-body">
+              <h3 className="ed-exp-role">
+                {item.role}{' '}
+                <span className="ed-exp-company">· {item.company}</span>
+              </h3>
+              <ul className="ed-exp-points">
+                {item.highlights.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+};
 
 export default ExperienceSection;
