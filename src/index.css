@@ -278,42 +278,7 @@ button {
   to { opacity: 1; }
 }
 
-/* Center stage — sits above the gates. */
-.intro-stage {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  min-height: clamp(4rem, 14vw, 8rem);
-  padding: 0 var(--shell-pad);
-}
-
-.intro-word-mask {
-  overflow: hidden;
-  display: block;
-  padding: 0.12em 0;
-}
-.intro-word {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.25rem, 9vw, 6rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-shadow: 0 0 28px rgba(42, 255, 127, 0.25);
-  transition: color 0.18s ease, text-shadow 0.18s ease;
-}
-/* Final word at full power — the whistle is about to blow. */
-.intro-word.is-go {
-  color: var(--green);
-  text-shadow:
-    0 0 18px var(--green),
-    0 0 48px var(--green-dim);
-}
-
-/* The pitch center circle, framing the word. */
+/* The pitch center circle. */
 .intro-circle {
   position: absolute;
   left: 50%;
@@ -327,7 +292,7 @@ button {
   filter: drop-shadow(0 0 10px var(--green-glow));
 }
 
-/* Bottom HUD: label, live counter, floodlight-intensity meter. */
+/* Bottom HUD: live counter + floodlight-intensity meter. */
 .intro-hud {
   position: absolute;
   left: 0;
@@ -348,9 +313,6 @@ button {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-}
-.intro-hud-label {
-  color: var(--ink-faint);
 }
 .intro-hud-count {
   color: var(--green);
