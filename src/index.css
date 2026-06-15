@@ -341,7 +341,7 @@ button {
 .intro-hud-row {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 0.6rem;
   font-family: var(--font-mono);

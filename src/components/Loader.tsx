@@ -11,12 +11,6 @@ interface LoaderProps {
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** Stadium-announcer words swapped while the floodlights warm up, synced to the counter. */
-const phases: Record<LanguageKey, [string, string, string]> = {
-  en: ['STADIUM', 'FLOODLIGHTS', 'GO'],
-  es: ['CANCHA', 'REFLECTORES', 'DALE'],
-};
-
 const hudLabel: Record<LanguageKey, string> = {
   en: 'POWERING THE STADIUM',
   es: 'ENCENDIENDO LA CANCHA',
@@ -31,10 +25,6 @@ const gateTop: Variants = {
 const gateBottom: Variants = {
   enter: { y: 0 },
   exit: { y: '101%', transition: { duration: 0.65, ease: EASE, delay: 0.3 } },
-};
-const stageVariants: Variants = {
-  enter: { opacity: 1 },
-  exit: { opacity: 0, transition: { duration: 0.28, ease: 'easeIn' } },
 };
 const circleVariants: Variants = {
   enter: { opacity: 1 },
@@ -57,18 +47,16 @@ const burstVariants: Variants = {
 
 /**
  * Cinematic intro — "the kickoff whistle". Stadium floodlights flicker on, the
- * pitch center circle draws itself in, and a live counter climbs 00 → 100 while
- * announcer words swap STADIUM / FLOODLIGHTS / GO. At full power the whistle
- * fires: a burst of light punches out from the center spot and the curtain
- * splits like stadium gates — handing the eye straight to the hero, which
- * begins its own entrance the instant the gates start to open.
+ * pitch center circle draws itself in, and a live counter climbs 00 → 100. At
+ * full power the whistle fires: a burst of light punches out from the center
+ * spot and the curtain splits like stadium gates — handing the eye straight to
+ * the hero, which begins its own entrance the instant the gates start to open.
  * Skipped entirely under reduced motion — the page paints immediately.
  */
 const Loader = ({ language, onDone }: LoaderProps) => {
   const reduced = useReducedMotion();
   const [done, setDone] = useState(reduced ?? false);
   const [count, setCount] = useState(0);
-  const [ready, setReady] = useState(false);
 
   // Drive the counter; words derive from it, and 100% triggers the whistle.
   useEffect(() => {
@@ -82,8 +70,7 @@ const Loader = ({ language, onDone }: LoaderProps) => {
       ease: [0.45, 0, 0.1, 1],
       onUpdate: (v) => setCount(Math.round(v)),
       onComplete: () => {
-        setReady(true);
-        // Hold on the bright "GO" flash, then fire everything on the same tick:
+        // Hold at full power, then fire everything on the same tick:
         // gates start opening AND the hero starts its entrance together.
         window.setTimeout(() => {
           onDone();
@@ -107,9 +94,6 @@ const Loader = ({ language, onDone }: LoaderProps) => {
   }, [done]);
 
   if (reduced) return null;
-
-  const words = phases[language];
-  const wordIndex = count < 40 ? 0 : count < 80 ? 1 : 2;
 
   return (
     <AnimatePresence>
@@ -164,26 +148,9 @@ const Loader = ({ language, onDone }: LoaderProps) => {
             />
           </motion.svg>
 
-          {/* Center stage: the swapping announcer word, framed by the circle. */}
-          <motion.div className="intro-stage" variants={stageVariants}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={wordIndex}
-                className="intro-word-mask"
-                initial={{ y: '110%' }}
-                animate={{ y: '0%' }}
-                exit={{ y: '-110%' }}
-                transition={{ duration: 0.5, ease: EASE }}
-              >
-                <span className={`intro-word${ready ? ' is-go' : ''}`}>{words[wordIndex]}</span>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Bottom HUD: label, live counter, floodlight-intensity meter. */}
+          {/* Bottom HUD: live counter + floodlight-intensity meter (no labels). */}
           <motion.div className="intro-hud" variants={hudVariants}>
             <div className="intro-hud-row">
-              <span className="intro-hud-label">{hudLabel[language]}</span>
               <span className="intro-hud-count">{String(count).padStart(3, '0')}%</span>
             </div>
             <span className="intro-meter" aria-hidden="true">
