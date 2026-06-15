@@ -47,7 +47,7 @@ export const ui: Record<
     scrollHint: 'scroll',
     sections: {
       work: 'Selected work',
-      workSub: 'Shipped, tested, and live — not tutorial code.',
+      workSub: 'Live projects with real users and test coverage.',
       experience: 'Experience',
       skills: 'Skills',
       education: 'Education & certs',
@@ -76,7 +76,7 @@ export const ui: Record<
     scrollHint: 'scroll',
     sections: {
       work: 'Proyectos destacados',
-      workSub: 'Publicados, testeados y en producción — no código de tutorial.',
+      workSub: 'Proyectos en producción, con tests y usuarios reales.',
       experience: 'Experiencia',
       skills: 'Skills',
       education: 'Educación y certificaciones',
@@ -184,7 +184,7 @@ export const faltaUno: Record<LanguageKey, FeaturedProject> = {
     name: 'Falta Uno',
     tagline: 'Pickup-football platform with a real rating engine',
     description:
-      'A football pickup-match organizer for Uruguay & Argentina, live in production. Most sports apps are CRUD with a leaderboard — Falta Uno is an algorithmic backend: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
+      'A football pickup-match organizer for Uruguay & Argentina, live in production. Under the hood: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
     stats: [
       { value: '10.8k', label: 'lines of TypeScript' },
       { value: '123', label: 'conventional commits' },
@@ -206,7 +206,7 @@ export const faltaUno: Record<LanguageKey, FeaturedProject> = {
     name: 'Falta Uno',
     tagline: 'Plataforma de fútbol 5 con un motor de rating real',
     description:
-      'Un organizador de partidos de fútbol para Uruguay y Argentina, en producción. La mayoría de las apps deportivas son CRUD con una tabla de posiciones — Falta Uno es un backend algorítmico: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
+      'Un organizador de partidos de fútbol para Uruguay y Argentina, en producción. Por dentro: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
     stats: [
       { value: '10.8k', label: 'líneas de TypeScript' },
       { value: '123', label: 'commits convencionales' },

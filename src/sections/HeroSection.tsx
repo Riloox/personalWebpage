@@ -6,11 +6,13 @@ import { contact, cvFiles, heroContent, faltaUno, ui, type LanguageKey } from '.
 
 interface HeroSectionProps {
   language: LanguageKey;
+  /** Hero holds at its initial frame until the intro hands off, then enters. */
+  introDone: boolean;
 }
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const HeroSection = ({ language }: HeroSectionProps) => {
+const HeroSection = ({ language, introDone }: HeroSectionProps) => {
   const hero = heroContent[language];
   const t = ui[language];
   const reduced = useReducedMotion();
@@ -20,7 +22,8 @@ const HeroSection = ({ language }: HeroSectionProps) => {
       ? {}
       : {
           initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
+          // Stay parked behind the curtain until the gates start opening.
+          animate: introDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
           transition: { duration: 0.8, delay, ease: EASE },
         };
 
@@ -30,38 +33,38 @@ const HeroSection = ({ language }: HeroSectionProps) => {
       ? {}
       : {
           initial: { y: '110%' },
-          animate: { y: '0%' },
+          animate: introDone ? { y: '0%' } : { y: '110%' },
           transition: { duration: 1, delay, ease: EASE },
         };
 
   return (
     <section className="fl-hero" id="top" aria-label="Intro">
       <div className="fl-shell">
-        <motion.div className="fl-hero-badge" {...rise(0.1)}>
+        <motion.div className="fl-hero-badge" {...rise(0)}>
           <span className="fl-dot" aria-hidden="true" />
           {t.available}
         </motion.div>
 
-        <motion.p className="fl-hero-kicker" {...rise(0.2)}>
+        <motion.p className="fl-hero-kicker" {...rise(0.05)}>
           {hero.kicker}
         </motion.p>
 
         <h1 className="fl-hero-name">
           <span className="line">
-            <motion.span className="shimmer" {...lineReveal(0.25)}>
+            <motion.span className="shimmer" {...lineReveal(0.15)}>
               {hero.firstName}
             </motion.span>
           </span>
           <span className="line outline">
-            <motion.span {...lineReveal(0.4)}>{hero.lastName}</motion.span>
+            <motion.span {...lineReveal(0.28)}>{hero.lastName}</motion.span>
           </span>
         </h1>
 
-        <motion.p className="fl-hero-summary" {...rise(0.6)}>
+        <motion.p className="fl-hero-summary" {...rise(0.45)}>
           {hero.summary}
         </motion.p>
 
-        <motion.div className="fl-hero-ctas" {...rise(0.8)}>
+        <motion.div className="fl-hero-ctas" {...rise(0.65)}>
           <MagneticButton
             className="fl-btn fl-btn-primary"
             href={faltaUno[language].links.demo}

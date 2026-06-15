@@ -179,75 +179,219 @@ button {
    Intro loader
    ------------------------------------------------------------------ */
 
-.fl-loader {
+.intro {
   position: fixed;
   inset: 0;
   z-index: 80;
   display: grid;
   place-items: center;
-  background: var(--black);
   overflow: hidden;
-  will-change: transform;
+  isolation: isolate;
 }
 
-.fl-loader-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  position: relative;
+/* The curtain itself: two black gates that split apart on exit. */
+.intro-gate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--black);
   z-index: 1;
 }
-
-.fl-loader-mark {
-  width: clamp(64px, 16vw, 96px);
-  height: auto;
-  filter: drop-shadow(0 0 24px rgba(42, 255, 127, 0.4));
+.intro-gate-top {
+  top: 0;
+  box-shadow: 0 1px 0 var(--line);
+}
+.intro-gate-bottom {
+  bottom: 0;
+  box-shadow: 0 -1px 0 var(--line);
 }
 
-.fl-loader-text {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.1rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-
-.fl-loader-cursor {
-  width: 0.5rem;
-  height: 0.9rem;
-  margin-left: 0.35rem;
-  background: var(--green);
-  animation: fl-blink 0.9s steps(2, start) infinite;
-}
-
-@keyframes fl-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Floodlight sweep across the curtain */
-.fl-loader-sweep {
+/* Floodlight beams fanning down from the top corners, warming up with a
+   stadium-light flicker. */
+.intro-beam {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(42, 255, 127, 0.08) 50%,
-    transparent 70%
+  top: -12%;
+  width: 60vmax;
+  height: 120vmax;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+  filter: blur(8px);
+  animation: intro-flicker 1.7s var(--ease-out-expo) forwards;
+}
+.intro-beam-l {
+  left: -8vmax;
+  background: conic-gradient(
+    from 96deg at 0% 0%,
+    transparent 0deg,
+    rgba(42, 255, 127, 0.16) 14deg,
+    rgba(42, 255, 127, 0.03) 30deg,
+    transparent 42deg
   );
-  transform: translateX(-100%);
-  animation: fl-sweep 1.5s var(--ease-out-expo);
+}
+.intro-beam-r {
+  right: -8vmax;
+  background: conic-gradient(
+    from 222deg at 100% 0%,
+    transparent 0deg,
+    rgba(42, 255, 127, 0.16) 14deg,
+    rgba(42, 255, 127, 0.03) 30deg,
+    transparent 42deg
+  );
+  animation-delay: 0.12s;
 }
 
-@keyframes fl-sweep {
-  to {
-    transform: translateX(100%);
-  }
+@keyframes intro-flicker {
+  0% { opacity: 0; }
+  7% { opacity: 0.55; }
+  9% { opacity: 0.05; }
+  14% { opacity: 0.8; }
+  17% { opacity: 0.12; }
+  23% { opacity: 1; }
+  27% { opacity: 0.35; }
+  31% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+/* Floodlit pitch glow rising from below. */
+.intro-pitch {
+  position: absolute;
+  left: 50%;
+  bottom: -30%;
+  width: 120vmax;
+  height: 70vmax;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(42, 255, 127, 0.1),
+    transparent 60%
+  );
+  opacity: 0;
+  animation: intro-fade-in 1.2s 0.5s var(--ease-out-expo) forwards;
+}
+
+@keyframes intro-fade-in {
+  to { opacity: 1; }
+}
+
+/* Center stage — sits above the gates. */
+.intro-stage {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  min-height: clamp(4rem, 14vw, 8rem);
+  padding: 0 var(--shell-pad);
+}
+
+.intro-word-mask {
+  overflow: hidden;
+  display: block;
+  padding: 0.12em 0;
+}
+.intro-word {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 9vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-shadow: 0 0 28px rgba(42, 255, 127, 0.25);
+  transition: color 0.18s ease, text-shadow 0.18s ease;
+}
+/* Final word at full power — the whistle is about to blow. */
+.intro-word.is-go {
+  color: var(--green);
+  text-shadow:
+    0 0 18px var(--green),
+    0 0 48px var(--green-dim);
+}
+
+/* The pitch center circle, framing the word. */
+.intro-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(78vmin, 30rem);
+  height: min(78vmin, 30rem);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0 0 10px var(--green-glow));
+}
+
+/* Bottom HUD: label, live counter, floodlight-intensity meter. */
+.intro-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(1.5rem, 5vh, 3rem);
+  z-index: 3;
+  width: min(var(--shell-max), 100%);
+  margin: 0 auto;
+  padding: 0 var(--shell-pad);
+}
+.intro-hud-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.intro-hud-label {
+  color: var(--ink-faint);
+}
+.intro-hud-count {
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 16px var(--green-dim);
+}
+.intro-meter {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--line);
+  overflow: hidden;
+}
+.intro-meter-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--green-dim), var(--green));
+  box-shadow: 0 0 12px var(--green-dim);
+}
+
+/* Whistle burst on exit — a punch of stadium light from the center spot. */
+.intro-burst {
+  position: absolute;
+  /* Centered via calc — motion owns `transform` for the scale, so CSS must not
+     also set it (a CSS translate here would be wiped and the burst would fire
+     from the top-left corner). */
+  left: calc(50% - 30vmax);
+  top: calc(50% - 30vmax);
+  width: 60vmax;
+  height: 60vmax;
+  z-index: 4;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95),
+    rgba(42, 255, 127, 0.5) 32%,
+    transparent 62%
+  );
 }
 
 /* ------------------------------------------------------------------
@@ -1801,8 +1945,8 @@ button {
   }
   .fl-dot::after,
   .fl-hero-scroll::after,
-  .fl-loader-sweep,
-  .fl-loader-cursor {
+  .intro-beam,
+  .intro-pitch {
     animation: none;
   }
   /* Solid ink headline — no looping gradient sweep. */

@@ -29,6 +29,7 @@ const readStoredLanguage = (): LanguageKey => {
 
 const App = () => {
   const [language, setLanguage] = useState<LanguageKey>(readStoredLanguage);
+  const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
     try {
@@ -41,14 +42,14 @@ const App = () => {
 
   return (
     <>
-      <Loader language={language} />
+      <Loader language={language} onDone={() => setIntroDone(true)} />
       <a className="fl-skip" href="#main-content">
         {language === 'es' ? 'Saltar al contenido' : 'Skip to content'}
       </a>
       <Backdrop />
       <Nav language={language} onLanguageChange={setLanguage} />
       <main id="main-content">
-        <HeroSection language={language} />
+        <HeroSection language={language} introDone={introDone} />
         <WorkSection
           language={language}
           githubUsername={GITHUB_USERNAME}
