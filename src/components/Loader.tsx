@@ -14,12 +14,12 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 /** Stadium-announcer words swapped while the floodlights warm up, synced to the counter. */
 const phases: Record<LanguageKey, [string, string, string]> = {
   en: ['STADIUM', 'FLOODLIGHTS', 'GO'],
-  es: ['ESTADIO', 'REFLECTORES', 'ARRANQUE'],
+  es: ['CANCHA', 'REFLECTORES', 'DALE'],
 };
 
 const hudLabel: Record<LanguageKey, string> = {
   en: 'POWERING THE STADIUM',
-  es: 'ENCENDIENDO EL ESTADIO',
+  es: 'ENCENDIENDO LA CANCHA',
 };
 
 /* Variant trees — the parent drives enter/exit, children inherit the state. */
