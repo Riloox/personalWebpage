@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Backdrop from './components/Backdrop';
+import Loader from './components/Loader';
 import Nav from './components/Nav';
 import ContactSection from './sections/ContactSection';
 import EducationCertsSection from './sections/EducationCertsSection';
@@ -40,6 +41,7 @@ const App = () => {
 
   return (
     <>
+      <Loader language={language} />
       <a className="fl-skip" href="#main-content">
         {language === 'es' ? 'Saltar al contenido' : 'Skip to content'}
       </a>

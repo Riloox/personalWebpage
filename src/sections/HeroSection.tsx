@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from 'motion/react';
 
+import MagneticButton from '../components/MagneticButton';
 import Marquee from '../components/Marquee';
-import { contact, cvFiles, heroContent, picadito, ui, type LanguageKey } from '../data/profile';
+import { contact, cvFiles, heroContent, faltaUno, ui, type LanguageKey } from '../data/profile';
 
 interface HeroSectionProps {
   language: LanguageKey;
@@ -47,7 +48,9 @@ const HeroSection = ({ language }: HeroSectionProps) => {
 
         <h1 className="fl-hero-name">
           <span className="line">
-            <motion.span {...lineReveal(0.25)}>{hero.firstName}</motion.span>
+            <motion.span className="shimmer" {...lineReveal(0.25)}>
+              {hero.firstName}
+            </motion.span>
           </span>
           <span className="line outline">
             <motion.span {...lineReveal(0.4)}>{hero.lastName}</motion.span>
@@ -59,14 +62,14 @@ const HeroSection = ({ language }: HeroSectionProps) => {
         </motion.p>
 
         <motion.div className="fl-hero-ctas" {...rise(0.8)}>
-          <a
+          <MagneticButton
             className="fl-btn fl-btn-primary"
-            href={picadito[language].links.demo}
+            href={faltaUno[language].links.demo}
             target="_blank"
             rel="noreferrer"
           >
-            {t.seePicadito} <span className="arrow">↗</span>
-          </a>
+            {t.seeFaltaUno} <span className="arrow">↗</span>
+          </MagneticButton>
           <a className="fl-btn fl-btn-ghost" href={cvFiles[language]} target="_blank" rel="noreferrer">
             {t.downloadCv}
           </a>

@@ -1,6 +1,6 @@
 /* ==================================================================
    FLOODLIGHT — riloox.site
-   Picadito's design system (pure black, pitch green, neon #2aff7f,
+   Falta Uno's design system (pure black, pitch green, neon #2aff7f,
    Lexend) scaled up to a portfolio: stadium-at-night atmosphere,
    giant display type, mono metadata, generous radii.
    ================================================================== */
@@ -30,6 +30,11 @@
   --shell-pad: clamp(1.25rem, 4vw, 3rem);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Liquid-glass surfaces */
+  --glass-bg: rgba(14, 21, 15, 0.55);
+  --glass-blur: blur(16px);
+  --glass-border: rgba(42, 255, 127, 0.12);
 }
 
 *,
@@ -149,6 +154,16 @@ button {
   color: var(--green);
 }
 
+/* Animated floodlight-mote particle field (canvas). Sits above the gradient
+   backdrop but below all content and the grain overlay. */
+.fl-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
 .fl-grain {
   position: fixed;
   inset: 0;
@@ -158,6 +173,81 @@ button {
   mix-blend-mode: soft-light;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   background-size: 256px 256px;
+}
+
+/* ------------------------------------------------------------------
+   Intro loader
+   ------------------------------------------------------------------ */
+
+.fl-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: var(--black);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.fl-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.fl-loader-mark {
+  width: clamp(64px, 16vw, 96px);
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba(42, 255, 127, 0.4));
+}
+
+.fl-loader-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.fl-loader-cursor {
+  width: 0.5rem;
+  height: 0.9rem;
+  margin-left: 0.35rem;
+  background: var(--green);
+  animation: fl-blink 0.9s steps(2, start) infinite;
+}
+
+@keyframes fl-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Floodlight sweep across the curtain */
+.fl-loader-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(42, 255, 127, 0.08) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: fl-sweep 1.5s var(--ease-out-expo);
+}
+
+@keyframes fl-sweep {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 /* ------------------------------------------------------------------
@@ -640,9 +730,12 @@ button {
   padding: 0.85rem 1.6rem;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: transform 0.3s var(--ease-out-expo), background 0.25s ease,
-    color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  will-change: transform;
+  /* Magnetic offset (set by MagneticButton) uses the `translate` longhand so
+     it composes with transform-based hover effects and eases back on leave. */
+  translate: var(--mag-x, 0px) var(--mag-y, 0px);
+  transition: translate 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo),
+    background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform, translate;
 }
 
 .fl-btn .arrow {
@@ -730,7 +823,7 @@ button {
 }
 
 /* ------------------------------------------------------------------
-   Featured project (Picadito)
+   Featured project (Falta Uno)
    ------------------------------------------------------------------ */
 
 .fl-featured {
@@ -933,7 +1026,9 @@ button {
   flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--card);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   padding: clamp(1.4rem, 3vw, 2rem);
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s var(--ease-out-expo),
     box-shadow 0.3s ease;
@@ -1146,7 +1241,9 @@ button {
   gap: 0.5rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: var(--card);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   padding: 1.1rem 1.2rem;
   text-decoration: none;
   transition: border-color 0.25s ease, transform 0.35s var(--ease-out-expo);
@@ -1372,7 +1469,9 @@ button {
 .fl-edu-card {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--card);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   padding: clamp(1.3rem, 3vw, 1.8rem);
 }
 
@@ -1594,6 +1693,92 @@ button {
 }
 
 /* ------------------------------------------------------------------
+   Liquid glass · cursor spotlight · 3D tilt · headline shimmer
+   ------------------------------------------------------------------ */
+
+/* Frosted translucent surface so the particle field glimmers through. */
+.fl-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-color: var(--glass-border);
+}
+
+/* Pointer-driven 3D tilt + radial spotlight. Custom props --rx/--ry/--mx/--my
+   are written by the useTilt hook; they default to a neutral resting state. */
+.fl-tilt {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+}
+
+.fl-tilt > * {
+  position: relative;
+  z-index: 1;
+}
+
+.fl-tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle 260px at var(--mx, 50%) var(--my, 50%),
+    rgba(42, 255, 127, 0.12),
+    transparent 70%
+  );
+  transition: opacity 0.35s ease;
+}
+
+.fl-tilt:hover::after {
+  opacity: 1;
+}
+
+/* Keep the project card's lift on hover while layering the tilt on top. */
+.fl-project.fl-tilt {
+  transition: border-color 0.3s ease, background 0.3s ease,
+    transform 0.2s var(--ease-out-expo), box-shadow 0.3s ease;
+}
+
+.fl-project.fl-tilt:hover {
+  transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+}
+
+.fl-featured.fl-tilt {
+  transition: transform 0.2s var(--ease-out-expo);
+}
+
+/* Headline shimmer: a slow green light sweep clipped to the first-name text. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .fl-hero-name .shimmer {
+    background: linear-gradient(
+      100deg,
+      var(--ink) 0%,
+      var(--ink) 42%,
+      var(--green) 50%,
+      var(--ink) 58%,
+      var(--ink) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: fl-shimmer 7s linear infinite;
+  }
+}
+
+@keyframes fl-shimmer {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+/* ------------------------------------------------------------------
    Reduced motion
    ------------------------------------------------------------------ */
 
@@ -1615,7 +1800,16 @@ button {
     display: none;
   }
   .fl-dot::after,
-  .fl-hero-scroll::after {
+  .fl-hero-scroll::after,
+  .fl-loader-sweep,
+  .fl-loader-cursor {
+    animation: none;
+  }
+  /* Solid ink headline — no looping gradient sweep. */
+  .fl-hero-name .shimmer {
+    background: none;
+    color: var(--ink);
+    -webkit-text-fill-color: var(--ink);
     animation: none;
   }
   *,

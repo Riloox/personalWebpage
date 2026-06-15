@@ -1,8 +1,9 @@
 import GithubStrip from '../components/GithubStrip';
+import ProjectCard from '../components/ProjectCard';
 import Reveal from '../components/Reveal';
 import SectionHead from '../components/SectionHead';
-import YoutubeEmbed from '../components/YoutubeEmbed';
-import { picadito, projects, ui, type LanguageKey } from '../data/profile';
+import useTilt from '../hooks/useTilt';
+import { faltaUno, projects, ui, type LanguageKey } from '../data/profile';
 
 interface WorkSectionProps {
   language: LanguageKey;
@@ -12,17 +13,23 @@ interface WorkSectionProps {
 
 const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSectionProps) => {
   const t = ui[language];
-  const featured = picadito[language];
+  const featured = faltaUno[language];
   const rest = projects[language];
+  const featuredTilt = useTilt<HTMLElement>(3);
 
   return (
     <section className="fl-section" id="work" aria-label={t.sections.work}>
       <div className="fl-shell">
         <SectionHead index="01" title={t.sections.work} sub={t.sections.workSub} />
 
-        {/* Featured: Picadito */}
+        {/* Featured: Falta Uno */}
         <Reveal>
-          <article className="fl-featured">
+          <article
+            ref={featuredTilt.ref}
+            onPointerMove={featuredTilt.onPointerMove}
+            onPointerLeave={featuredTilt.onPointerLeave}
+            className="fl-featured fl-tilt fl-glass"
+          >
             <span className="fl-featured-tag">{t.featured}</span>
             <div className="fl-featured-grid">
               <div>
@@ -47,14 +54,16 @@ const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSecti
                   >
                     {t.liveDemo} <span className="arrow">↗</span>
                   </a>
-                  <a
-                    className="fl-btn fl-btn-ghost"
-                    href={featured.links.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {t.sourceCode} <span className="arrow">↗</span>
-                  </a>
+                  {featured.links.repo && (
+                    <a
+                      className="fl-btn fl-btn-ghost"
+                      href={featured.links.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {t.sourceCode} <span className="arrow">↗</span>
+                    </a>
+                  )}
                 </div>
               </div>
               <div>
@@ -81,45 +90,12 @@ const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSecti
         {/* Cleta + RilooxDB */}
         <div className="fl-projects">
           {rest.map((project, i) => (
-            <Reveal key={project.name} delay={i * 0.12} style={{ height: '100%' }}>
-              <article className="fl-project" style={{ height: '100%' }}>
-                <h3 className="fl-project-name">{project.name}</h3>
-                <p className="fl-project-tagline">{project.tagline}</p>
-                <p className="fl-project-desc">{project.description}</p>
-                <ul className="fl-project-highlights">
-                  {project.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-                {project.links?.video ? (
-                  <YoutubeEmbed url={project.links.video} title={`${project.name} demo`} />
-                ) : null}
-                <div className="fl-project-footer">
-                  <div className="fl-stack-row" style={{ marginTop: 0 }}>
-                    {project.stack.map((item) => (
-                      <span className="fl-chip" key={item}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="fl-project-links">
-                    {project.links?.repo ? (
-                      <a className="fl-link" href={project.links.repo} target="_blank" rel="noreferrer">
-                        {t.sourceCode} <span className="arrow">↗</span>
-                      </a>
-                    ) : null}
-                    {project.links?.demo ? (
-                      <a className="fl-link" href={project.links.demo} target="_blank" rel="noreferrer">
-                        {t.liveDemo} <span className="arrow">↗</span>
-                      </a>
-                    ) : null}
-                    {project.privateRepo ? (
-                      <span className="fl-private-note">{t.privateRepo}</span>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
-            </Reveal>
+            <ProjectCard
+              key={project.name}
+              project={project}
+              index={i}
+              labels={{ sourceCode: t.sourceCode, liveDemo: t.liveDemo, privateRepo: t.privateRepo }}
+            />
           ))}
         </div>
 

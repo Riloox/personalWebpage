@@ -1,6 +1,9 @@
+import ParticleField from './ParticleField';
+
 /**
- * Fixed page atmosphere: floodlight gradients (CSS), faint football-pitch
- * line art tying the page to Picadito, and a film-grain overlay.
+ * Fixed page atmosphere: floodlight gradients (CSS), an animated particle
+ * field of "floodlight motes", faint football-pitch line art tying the page
+ * to Falta Uno, and a film-grain overlay.
  */
 const Backdrop = () => (
   <>
@@ -28,6 +31,7 @@ const Backdrop = () => (
         <path d="M 600 760 A 120 120 0 0 1 840 760" />
       </svg>
     </div>
+    <ParticleField />
     <div className="fl-grain" aria-hidden="true" />
   </>
 );

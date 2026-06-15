@@ -30,9 +30,7 @@ const ContactSection = ({ language }: ContactSectionProps) => {
     <footer className="fl-contact" id="contact" aria-label={t.sections.contact}>
       <div className="fl-shell fl-contact-inner">
         <Reveal>
-          <p className="fl-contact-kicker">
-            {t.sections.contact} — {data.responseTime}
-          </p>
+          <p className="fl-contact-kicker">{t.sections.contact}</p>
           <a
             className="fl-talk"
             href={`mailto:${data.email}`}

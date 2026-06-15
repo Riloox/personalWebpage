@@ -35,7 +35,7 @@ export const ui: Record<
     copied: string;
     downloadCv: string;
     emailMe: string;
-    seePicadito: string;
+    seeFaltaUno: string;
     letsTalk: string;
     footerNote: string;
     updatedRepo: string;
@@ -65,9 +65,9 @@ export const ui: Record<
     copied: 'Copied!',
     downloadCv: 'Download CV',
     emailMe: 'Email me',
-    seePicadito: 'See Picadito live',
+    seeFaltaUno: 'See Falta Uno live',
     letsTalk: "Let's talk",
-    footerNote: 'Designed & built by Federico Prunell — React, TypeScript, Vite.',
+    footerNote: 'React · TypeScript · Vite',
     updatedRepo: 'updated',
   },
   es: {
@@ -94,9 +94,9 @@ export const ui: Record<
     copied: '¡Copiado!',
     downloadCv: 'Descargar CV',
     emailMe: 'Escribime',
-    seePicadito: 'Ver Picadito en vivo',
+    seeFaltaUno: 'Ver Falta Uno en vivo',
     letsTalk: 'Hablemos',
-    footerNote: 'Diseñado y desarrollado por Federico Prunell — React, TypeScript, Vite.',
+    footerNote: 'React · TypeScript · Vite',
     updatedRepo: 'actualizado',
   },
 };
@@ -120,7 +120,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Picadito: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
     marquee: [
       'Java',
       'TypeScript',
@@ -141,7 +141,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Picadito: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
     marquee: [
       'Java',
       'TypeScript',
@@ -179,12 +179,12 @@ export interface FeaturedProject {
   links: ProjectLink;
 }
 
-export const picadito: Record<LanguageKey, FeaturedProject> = {
+export const faltaUno: Record<LanguageKey, FeaturedProject> = {
   en: {
-    name: 'Picadito',
+    name: 'Falta Uno',
     tagline: 'Pickup-football platform with a real rating engine',
     description:
-      'A football pickup-match organizer for Uruguay & Argentina, live in production. Most sports apps are CRUD with a leaderboard — Picadito is an algorithmic backend: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
+      'A football pickup-match organizer for Uruguay & Argentina, live in production. Most sports apps are CRUD with a leaderboard — Falta Uno is an algorithmic backend: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
     stats: [
       { value: '10.8k', label: 'lines of TypeScript' },
       { value: '123', label: 'conventional commits' },
@@ -199,15 +199,14 @@ export const picadito: Record<LanguageKey, FeaturedProject> = {
     ],
     stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
     links: {
-      demo: 'https://picadito-kg25.onrender.com',
-      repo: 'https://github.com/Riloox/picadito',
+      demo: 'https://faltauno.onrender.com/',
     },
   },
   es: {
-    name: 'Picadito',
+    name: 'Falta Uno',
     tagline: 'Plataforma de fútbol 5 con un motor de rating real',
     description:
-      'Un organizador de picaditos para Uruguay y Argentina, en producción. La mayoría de las apps deportivas son CRUD con una tabla de posiciones — Picadito es un backend algorítmico: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
+      'Un organizador de partidos de fútbol para Uruguay y Argentina, en producción. La mayoría de las apps deportivas son CRUD con una tabla de posiciones — Falta Uno es un backend algorítmico: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
     stats: [
       { value: '10.8k', label: 'líneas de TypeScript' },
       { value: '123', label: 'commits convencionales' },
@@ -222,8 +221,7 @@ export const picadito: Record<LanguageKey, FeaturedProject> = {
     ],
     stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
     links: {
-      demo: 'https://picadito-kg25.onrender.com',
-      repo: 'https://github.com/Riloox/picadito',
+      demo: 'https://faltauno.onrender.com/',
     },
   },
 };
@@ -462,7 +460,7 @@ export const contact: Record<
   en: {
     email: 'fprunell10@gmail.com',
     blurb:
-      'Open to backend / full-stack roles, remote or Montevideo-based. Happy to do take-home tests or live coding.',
+      'Open to backend / full-stack roles, remote or Montevideo-based.',
     responseTime: 'Usually replies within 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
@@ -473,7 +471,7 @@ export const contact: Record<
   es: {
     email: 'fprunell10@gmail.com',
     blurb:
-      'Abierto a roles backend / full-stack, remoto o desde Montevideo. Me adapto a pruebas técnicas o entrevistas en vivo.',
+      'Abierto a roles backend / full-stack, remoto o desde Montevideo.',
     responseTime: 'Normalmente respondo en 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
