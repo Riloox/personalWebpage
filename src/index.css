@@ -189,12 +189,15 @@ button {
   isolation: isolate;
 }
 
-/* The curtain itself: two black gates that split apart on exit. */
+/* The curtain itself: two black gates that split apart on exit. Each is
+   exactly half the viewport so their meeting edge — and the box-shadow
+   seam line below — lands on the dead-center spot, bisecting the center
+   circle. The 1px box-shadows overlap at the seam, so no gap flashes. */
 .intro-gate {
   position: absolute;
   left: 0;
   right: 0;
-  height: 50.5%;
+  height: 50%;
   background: var(--black);
   z-index: 1;
 }
@@ -240,7 +243,9 @@ button {
     rgba(42, 255, 127, 0.03) 30deg,
     transparent 42deg
   );
-  animation-delay: 0.12s;
+  /* No flicker stagger vs. beam-l: staggering left/right makes the combined
+     lit column lopsided at every instant, so the floodlit "center" drifts off
+     the center spot. In sync, the two beams stay left/right symmetric. */
 }
 
 @keyframes intro-flicker {
