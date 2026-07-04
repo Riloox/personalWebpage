@@ -1,99 +1,327 @@
 export type LanguageKey = 'en' | 'es';
 
-export const heroContent: Record<
+export const cvFiles: Record<LanguageKey, string> = {
+  en: `${import.meta.env.BASE_URL}cv.pdf`,
+  es: `${import.meta.env.BASE_URL}cv-es.pdf`,
+};
+
+/* ------------------------------------------------------------------ */
+/* UI strings                                                          */
+/* ------------------------------------------------------------------ */
+
+export const ui: Record<
   LanguageKey,
   {
-    name: string;
-    title: string;
-    summary: string;
-    location: string;
-    cta: { label: string; href: string };
+    nav: { work: string; experience: string; skills: string; contact: string };
+    available: string;
+    scrollHint: string;
+    sections: {
+      work: string;
+      workSub: string;
+      experience: string;
+      skills: string;
+      education: string;
+      contact: string;
+    };
+    featured: string;
+    liveDemo: string;
+    sourceCode: string;
+    privateRepo: string;
+    watchDemo: string;
+    moreGithub: string;
+    moreGithubSub: string;
+    viewAllGithub: string;
+    copyEmail: string;
+    copied: string;
+    downloadCv: string;
+    emailMe: string;
+    seeFaltaUno: string;
+    letsTalk: string;
+    footerNote: string;
+    updatedRepo: string;
   }
 > = {
   en: {
-    name: 'Federico Prunell',
-    title: 'Software Development Analyst',
-    summary:
-      'Software Development Analyst at Bantotal and B.Sc. in IT graduate. Experience building and maintaining backend services using Java and Python. Knowledgeable in data structures, algorithms, and cloud infrastructure. Focused on developing reliable, production-ready software and improving system performance.',
-    location: 'Montevideo, Uruguay',
-    cta: {
-      label: 'Open contact',
-      href: '#contact',
+    nav: { work: 'Work', experience: 'Experience', skills: 'Skills', contact: 'Contact' },
+    available: 'Open to remote work',
+    scrollHint: 'scroll',
+    sections: {
+      work: 'Selected work',
+      workSub: 'Live projects with real users and test coverage.',
+      experience: 'Experience',
+      skills: 'Skills',
+      education: 'Education & certs',
+      contact: 'Contact',
+    },
+    featured: 'Featured project',
+    liveDemo: 'Live demo',
+    sourceCode: 'Source code',
+    privateRepo: 'Private repo — built for UTEC',
+    watchDemo: 'Watch demo',
+    moreGithub: 'More on GitHub',
+    moreGithubSub: 'Smaller experiments and utilities.',
+    viewAllGithub: 'All repositories',
+    copyEmail: 'Copy email',
+    copied: 'Copied!',
+    downloadCv: 'Download CV',
+    emailMe: 'Email me',
+    seeFaltaUno: 'See Falta Uno live',
+    letsTalk: "Let's talk",
+    footerNote: 'React · TypeScript · Vite',
+    updatedRepo: 'updated',
+  },
+  es: {
+    nav: { work: 'Proyectos', experience: 'Experiencia', skills: 'Skills', contact: 'Contacto' },
+    available: 'Abierto a trabajo remoto',
+    scrollHint: 'scroll',
+    sections: {
+      work: 'Proyectos destacados',
+      workSub: 'Proyectos en producción, con tests y usuarios reales.',
+      experience: 'Experiencia',
+      skills: 'Skills',
+      education: 'Educación y certificaciones',
+      contact: 'Contacto',
+    },
+    featured: 'Proyecto destacado',
+    liveDemo: 'Demo en vivo',
+    sourceCode: 'Código fuente',
+    privateRepo: 'Repo privado — desarrollado para UTEC',
+    watchDemo: 'Ver demo',
+    moreGithub: 'Más en GitHub',
+    moreGithubSub: 'Experimentos y utilidades más chicas.',
+    viewAllGithub: 'Todos los repositorios',
+    copyEmail: 'Copiar correo',
+    copied: '¡Copiado!',
+    downloadCv: 'Descargar CV',
+    emailMe: 'Escribime',
+    seeFaltaUno: 'Ver Falta Uno en vivo',
+    letsTalk: 'Hablemos',
+    footerNote: 'React · TypeScript · Vite',
+    updatedRepo: 'actualizado',
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+
+export const heroContent: Record<
+  LanguageKey,
+  {
+    kicker: string;
+    firstName: string;
+    lastName: string;
+    summary: string;
+    marquee: string[];
+  }
+> = {
+  en: {
+    kicker: 'Backend engineer — Montevideo, Uruguay · GMT-3',
+    firstName: 'Federico',
+    lastName: 'Prunell',
+      summary:
+        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+    marquee: [
+      'Java',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Python',
+      'SQL',
+      'AWS',
+      'GCP',
+      'Docker',
+      'Drizzle ORM',
+    ],
+  },
+  es: {
+    kicker: 'Ingeniero backend — Montevideo, Uruguay · GMT-3',
+    firstName: 'Federico',
+    lastName: 'Prunell',
+      summary:
+        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+    marquee: [
+      'Java',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Python',
+      'SQL',
+      'AWS',
+      'GCP',
+      'Docker',
+      'Drizzle ORM',
+    ],
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* Projects                                                            */
+/* ------------------------------------------------------------------ */
+
+export interface ProjectLink {
+  repo?: string;
+  demo?: string;
+  video?: string;
+}
+
+export interface FeaturedProject {
+  name: string;
+  tagline: string;
+  description: string;
+  stats: Array<{ value: string; label: string }>;
+  features: string[];
+  stack: string[];
+  links: ProjectLink;
+}
+
+export const faltaUno: Record<LanguageKey, FeaturedProject> = {
+  en: {
+    name: 'Falta Uno',
+    tagline: 'Pickup-football platform with a real rating engine',
+    description:
+      'A football pickup-match organizer for Uruguay & Argentina, live in production. Under the hood: an ELO rating engine with placement matches and k-factor scaling, a team-balancing algorithm that respects friend groups, and a vote-consensus state machine that applies rating updates idempotently.',
+    stats: [
+      { value: '10.8k', label: 'lines of TypeScript' },
+      { value: '123', label: 'conventional commits' },
+      { value: '6', label: 'tested domains, unit + integration' },
+      { value: '1', label: 'security audit — run, then fixed' },
+    ],
+    features: [
+      'Full match lifecycle: create → join → play → vote result → ELO updates',
+      'Team balancing by rating, friend-group aware, with manual override',
+      'Vote-consensus result engine with idempotent ELO application',
+      'Hardened: helmet, CORS, rate limiting, bcrypt, Supabase JWT auth',
+    ],
+    stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
+    links: {
+      demo: 'https://faltauno.onrender.com/',
     },
   },
   es: {
-    name: 'Federico Prunell',
-    title: 'Analista de Desarrollo de Software',
-    summary:
-      'Analista de Desarrollo de Software en Bantotal y Licenciado en Tecnologías de la Información. Experiencia construyendo y manteniendo servicios backend con Java y Python. Conocimientos en estructuras de datos, algoritmos e infraestructura en la nube. Enfocado en software confiable y listo para producción, y en mejorar el rendimiento de los sistemas.',
-    location: 'Montevideo, Uruguay',
-    cta: {
-      label: 'Abrir contacto',
-      href: '#contact',
+    name: 'Falta Uno',
+    tagline: 'Plataforma de fútbol 5 con un motor de rating real',
+    description:
+      'Un organizador de partidos de fútbol para Uruguay y Argentina, en producción. Por dentro: un motor de rating ELO con partidos de colocación y k-factor escalado, un algoritmo de balanceo de equipos que respeta grupos de amigos, y una máquina de estados de consenso por votos que aplica los cambios de rating de forma idempotente.',
+    stats: [
+      { value: '10.8k', label: 'líneas de TypeScript' },
+      { value: '123', label: 'commits convencionales' },
+      { value: '6', label: 'dominios testeados, unit + integración' },
+      { value: '1', label: 'auditoría de seguridad — hecha y corregida' },
+    ],
+    features: [
+      'Ciclo completo del partido: crear → unirse → jugar → votar resultado → ELO',
+      'Balanceo de equipos por rating, consciente de grupos de amigos, con override manual',
+      'Motor de resultados por consenso de votos con aplicación idempotente de ELO',
+      'Endurecido: helmet, CORS, rate limiting, bcrypt, auth JWT con Supabase',
+    ],
+    stack: ['React 19', 'TypeScript', 'Express', 'Drizzle ORM', 'PostgreSQL', 'Tailwind 4', 'Capacitor'],
+    links: {
+      demo: 'https://faltauno.onrender.com/',
     },
   },
 };
 
-export const skills: Record<
-  LanguageKey,
-  Array<{
-    group: string;
-    items: string[];
-  }>
-> = {
+export interface Project {
+  name: string;
+  tagline: string;
+  description: string;
+  highlights: string[];
+  stack: string[];
+  links?: ProjectLink;
+  privateRepo?: boolean;
+}
+
+export const projects: Record<LanguageKey, Project[]> = {
   en: [
     {
-      group: 'Languages',
-      items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
+      name: 'Cleta',
+      tagline: 'Campus bike-sharing platform',
+      description:
+        'Capstone project: a free bicycle-lending system for the UTEC Fray Bentos campus — mobile app, web admin panel, and a backend integrating Allegion smart locks over BLE. Built by a team of three over 16 weeks of Scrum.',
+      highlights: [
+        'Owned backend architecture, API design, PostgreSQL schema, and security',
+        'Google OAuth 2.0 + revocable JWTs, RBAC with ownership checks',
+        'Encryption at rest & in transit, audit logging, CI/CD on Google Cloud',
+      ],
+      stack: ['React Native', 'TypeScript', 'Node.js', 'PostgreSQL', 'GCP', 'Docker'],
+      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
+      privateRepo: true,
     },
     {
-      group: 'Backend',
-      items: ['REST APIs', 'Node.js', 'Event-driven architecture', 'Concurrency', 'Spigot API'],
+      name: 'Freecam',
+      tagline: 'Server-side freecam mod for Hytale',
+      description:
+        'An open-source, server-side Hytale mod that adds a toggleable freecam via /freecam commands — detaching the camera while preserving and restoring each player’s original state and position, with adjustable speed and block-interaction guards.',
+      highlights: [
+        'Published on CurseForge with 3,900+ downloads; actively maintained across Early Access releases',
+        'Careful player-state save/restore so toggling never corrupts position or interaction state',
+      ],
+      stack: ['Java'],
+      links: { demo: 'https://www.curseforge.com/hytale/mods/freecam' },
     },
     {
-      group: 'Frontend / Mobile',
-      items: ['React Native', 'React.js', 'HTML/CSS'],
-    },
-    {
-      group: 'CS Foundations',
-      items: ['Data Structures', 'Algorithms', 'Complexity Analysis', 'OOP'],
-    },
-    {
-      group: 'Testing & Quality',
-      items: ['JUnit', 'PyTest', 'Logging', 'Observability', 'Code Reviews'],
-    },
-    {
-      group: 'Tools & Cloud',
-      items: ['Git', 'Docker', 'Linux', 'AWS', 'Google Cloud', 'CI/CD', 'Postman', 'VS Code'],
+      name: 'RilooxDB',
+      tagline: 'An encrypted key-value store, from scratch',
+      description:
+        'A small database built in Python to learn the primitives real databases hide: in-memory indexing, file persistence, JSON serialization, and AES-128 encryption via Fernet. Every write encrypts and persists the full store; a resilient CLI drives CRUD.',
+      highlights: [
+        'Symmetric encryption with key generation and InvalidToken handling',
+        'Deliberate limitations documented — built to understand trade-offs',
+      ],
+      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
+      links: { repo: 'https://github.com/Riloox/RilooxDB' },
     },
   ],
   es: [
     {
-      group: 'Lenguajes',
-      items: ['Java', 'Python', 'SQL', 'TypeScript', 'JavaScript'],
+      name: 'Cleta',
+      tagline: 'Plataforma de bicicletas compartidas',
+      description:
+        'Proyecto final de grado: un sistema gratuito de préstamo de bicicletas para el campus de UTEC Fray Bentos — app móvil, panel web de administración y un backend que integra candados inteligentes Allegion por BLE. Construido por un equipo de tres en 16 semanas de Scrum.',
+      highlights: [
+        'Responsable de la arquitectura backend, diseño de API, esquema PostgreSQL y seguridad',
+        'Google OAuth 2.0 + JWTs revocables, RBAC con chequeos de propiedad',
+        'Cifrado en reposo y en tránsito, audit logging, CI/CD en Google Cloud',
+      ],
+      stack: ['React Native', 'TypeScript', 'Node.js', 'PostgreSQL', 'GCP', 'Docker'],
+      links: { video: 'https://www.youtube.com/watch?v=lo06qph9CIk' },
+      privateRepo: true,
     },
     {
-      group: 'Backend',
-      items: ['APIs REST', 'Node.js', 'Arquitectura orientada a eventos', 'Concurrencia', 'Spigot API'],
+      name: 'Freecam',
+      tagline: 'Mod de cámara libre del lado del servidor para Hytale',
+      description:
+        'Un mod open-source del lado del servidor para Hytale que agrega una cámara libre activable mediante comandos /freecam — desacoplando la cámara mientras preserva y restaura el estado y la posición original de cada jugador, con velocidad ajustable y bloqueo de interacciones.',
+      highlights: [
+        'Publicado en CurseForge con más de 3.900 descargas; mantenido activamente a lo largo de las versiones de Early Access',
+        'Guardado y restauración cuidadosa del estado del jugador para que activar la cámara nunca corrompa la posición ni las interacciones',
+      ],
+      stack: ['Java'],
+      links: { demo: 'https://www.curseforge.com/hytale/mods/freecam' },
     },
     {
-      group: 'Frontend / Mobile',
-      items: ['React Native', 'React.js', 'HTML/CSS'],
-    },
-    {
-      group: 'Fundamentos de CS',
-      items: ['Estructuras de Datos', 'Algoritmos', 'Análisis de Complejidad', 'POO'],
-    },
-    {
-      group: 'Pruebas y Calidad',
-      items: ['JUnit', 'PyTest', 'Logging', 'Observabilidad', 'Revisiones de Código'],
-    },
-    {
-      group: 'Herramientas y Cloud',
-      items: ['Git', 'Docker', 'Linux', 'AWS', 'Google Cloud', 'CI/CD', 'Postman', 'VS Code'],
+      name: 'RilooxDB',
+      tagline: 'Un almacén clave-valor cifrado, desde cero',
+      description:
+        'Una pequeña base de datos construida en Python para aprender las primitivas que las bases de datos reales esconden: indexación en memoria, persistencia en archivos, serialización JSON y cifrado AES-128 vía Fernet. Cada escritura cifra y persiste el store completo; una CLI resiliente maneja el CRUD.',
+      highlights: [
+        'Cifrado simétrico con generación de claves y manejo de InvalidToken',
+        'Limitaciones deliberadas y documentadas — construido para entender trade-offs',
+      ],
+      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
+      links: { repo: 'https://github.com/Riloox/RilooxDB' },
     },
   ],
 };
+
+/* ------------------------------------------------------------------ */
+/* Experience                                                          */
+/* ------------------------------------------------------------------ */
 
 export const experience: Record<
   LanguageKey,
@@ -108,11 +336,10 @@ export const experience: Record<
     {
       company: 'Bantotal',
       role: 'Software Development Analyst',
-      duration: 'Apr 2025 - Present · Montevideo, Uruguay',
+      duration: 'Apr 2025 — Present · Montevideo, Uruguay',
       highlights: [
-        'Optimized Java backend services for core banking modules, achieving a ~20% improvement in p95 latency through I/O optimization and caching.',
-        'Resolved 50+ production issues via incident triage, improving system reliability and logging practices.',
-        'Participated in peer code reviews and maintained documentation for system modules.',
+        'Resolved 50+ production incidents via triage, improving system reliability and logging practices.',
+        'Picked for the company’s newest project by supervisors at under one year in the role.',
       ],
     },
   ],
@@ -120,109 +347,53 @@ export const experience: Record<
     {
       company: 'Bantotal',
       role: 'Analista de Desarrollo de Software',
-      duration: 'Abr 2025 - Presente · Montevideo, Uruguay',
+      duration: 'Abr 2025 — Presente · Montevideo, Uruguay',
       highlights: [
-        'Optimización de servicios backend en Java para módulos de core bancario, logrando una mejora de ~20 % en latencia p95 mediante optimización de E/S y caché.',
         'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
-        'Participación en revisiones de código entre pares y mantenimiento de documentación de módulos del sistema.',
+        'Elegido por mis supervisores para el proyecto más nuevo de la empresa con menos de un año en el rol.',
       ],
     },
   ],
 };
 
-export const projects: Record<
+/* ------------------------------------------------------------------ */
+/* Skills                                                              */
+/* ------------------------------------------------------------------ */
+
+export const skills: Record<
   LanguageKey,
-  Array<{
-    name: string;
-    stack: string;
-    highlights: string[];
-  }>
+  {
+    primary: string[];
+    groups: Array<{ group: string; items: string[] }>;
+  }
 > = {
-  en: [
-    {
-      name: 'Cleta — Shared Bike Management Platform',
-      stack: 'TypeScript · React Native · Node.js',
-      highlights: [
-        'Final degree project: designed and built a full-stack shared mobility system with a mobile interface.',
-        'Developed cross-platform features with React Native, integrating Google Maps and Firebase Auth.',
-        'Implemented backend services on Google Cloud Run with PostgreSQL and automated CI/CD pipelines.',
-      ],
-    },
-    {
-      name: 'Freecam — Hytale Server Mod',
-      stack: 'Java · CurseForge',
-      highlights: [
-        'Built and published an open-source, server-side mod that adds a toggleable freecam via /freecam commands, preserving and restoring each player\'s original state and position.',
-        'Adopted by the community with 3,900+ downloads on CurseForge; actively maintained across Early Access releases.',
-      ],
-    },
-    {
-      name: 'RilooxDB',
-      stack: 'Python · Data Engineering',
-      highlights: [
-        'Developed a custom in-memory key-value store with file-based persistence and data encryption.',
-        'Implemented custom storage logic for data serialization and secure retrieval without external DB dependencies.',
-      ],
-    },
-    {
-      name: 'Windows 11 Debloater',
-      stack: 'PowerShell · Automation',
-      highlights: [
-        'Created a system utility to automate removal of bloatware and telemetry from Windows 11 environments.',
-        'Focused on system-level optimization and improving OS performance through scripted configuration changes.',
-      ],
-    },
-    {
-      name: 'AFK Timeskip',
-      stack: 'Java · Spigot API',
-      highlights: [
-        'Built an event-driven system to optimize server tick progression and maintain stability under high load.',
-      ],
-    },
-  ],
-  es: [
-    {
-      name: 'Cleta — Plataforma de Bicicletas Compartidas',
-      stack: 'TypeScript · React Native · Node.js',
-      highlights: [
-        'Proyecto final de grado: diseño e implementación de un sistema full-stack de movilidad compartida con interfaz móvil.',
-        'Desarrollo de funcionalidades multiplataforma con React Native, integrando Google Maps y Firebase Auth.',
-        'Servicios backend en Google Cloud Run con PostgreSQL y pipelines de CI/CD automatizados.',
-      ],
-    },
-    {
-      name: 'Freecam — Mod de Servidor para Hytale',
-      stack: 'Java · CurseForge',
-      highlights: [
-        'Desarrollé y publiqué un mod open-source del lado del servidor que agrega una cámara freecam activable mediante comandos /freecam, preservando y restaurando el estado y la posición original de cada jugador.',
-        'Adoptado por la comunidad con más de 3.900 descargas en CurseForge; mantenido activamente a lo largo de las versiones de Early Access.',
-      ],
-    },
-    {
-      name: 'RilooxDB',
-      stack: 'Python · Ingeniería de Datos',
-      highlights: [
-        'Desarrollo de un almacén clave-valor en memoria con persistencia basada en archivos y cifrado de datos.',
-        'Implementación de lógica de almacenamiento propia para serialización y recuperación segura sin dependencias externas de base de datos.',
-      ],
-    },
-    {
-      name: 'Windows 11 Debloater',
-      stack: 'PowerShell · Automatización',
-      highlights: [
-        'Utilidad que automatiza la eliminación de bloatware y telemetría en entornos Windows 11.',
-        'Enfocado en optimización a nivel de sistema y mejora del rendimiento del SO mediante scripts de configuración.',
-      ],
-    },
-    {
-      name: 'AFK Timeskip',
-      stack: 'Java · Spigot API',
-      highlights: [
-        'Sistema orientado a eventos que optimiza la progresión de ticks del servidor y mantiene la estabilidad bajo alta carga.',
-      ],
-    },
-  ],
+  en: {
+    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
+    groups: [
+      { group: 'Languages', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
+      { group: 'Backend', items: ['Node.js', 'Express', 'REST APIs', 'Drizzle ORM', 'Event-driven', 'Concurrency'] },
+      { group: 'Frontend', items: ['React', 'React Native', 'Vite', 'Tailwind'] },
+      { group: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
+      { group: 'Data', items: ['PostgreSQL', 'Oracle SQL', 'Supabase', 'SQLite'] },
+      { group: 'Quality', items: ['JUnit', 'PyTest', 'Integration tests', 'Code reviews', 'Security audits'] },
+    ],
+  },
+  es: {
+    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
+    groups: [
+      { group: 'Lenguajes', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
+      { group: 'Backend', items: ['Node.js', 'Express', 'APIs REST', 'Drizzle ORM', 'Event-driven', 'Concurrencia'] },
+      { group: 'Frontend', items: ['React', 'React Native', 'Vite', 'Tailwind'] },
+      { group: 'Cloud y DevOps', items: ['AWS', 'GCP', 'Docker', 'CI/CD', 'Linux', 'Git'] },
+      { group: 'Datos', items: ['PostgreSQL', 'Oracle SQL', 'Supabase', 'SQLite'] },
+      { group: 'Calidad', items: ['JUnit', 'PyTest', 'Tests de integración', 'Code reviews', 'Auditorías de seguridad'] },
+    ],
+  },
 };
+
+/* ------------------------------------------------------------------ */
+/* Education & certifications                                          */
+/* ------------------------------------------------------------------ */
 
 export const education: Record<
   LanguageKey,
@@ -236,24 +407,24 @@ export const education: Record<
     {
       school: 'Technological University of Uruguay (UTEC)',
       degree: 'B.Sc. in Information Technology',
-      duration: 'Graduated · Montevideo, Uruguay',
+      duration: 'Graduated 2025 · Montevideo, Uruguay',
     },
     {
       school: 'Karelia University of Applied Sciences',
-      degree: 'Exchange Program (Information Technology)',
-      duration: 'Aug 2023 - Dec 2023 · Finland',
+      degree: 'Exchange Program · Information Technology',
+      duration: 'Aug 2023 — Dec 2023 · Joensuu, Finland',
     },
   ],
   es: [
     {
       school: 'Universidad Tecnológica del Uruguay (UTEC)',
       degree: 'Licenciatura en Tecnologías de la Información',
-      duration: 'Graduado · Montevideo, Uruguay',
+      duration: 'Graduado 2025 · Montevideo, Uruguay',
     },
     {
       school: 'Karelia University of Applied Sciences',
-      degree: 'Programa de Intercambio (Tecnologías de la Información)',
-      duration: 'Ago 2023 - Dic 2023 · Finlandia',
+      degree: 'Programa de Intercambio · Tecnologías de la Información',
+      duration: 'Ago 2023 — Dic 2023 · Joensuu, Finlandia',
     },
   ],
 };
@@ -268,11 +439,11 @@ export const certifications: Record<
   }
 > = {
   en: {
-    certLabel: 'CERTIFICATIONS',
-    langLabel: 'LANGUAGES',
+    certLabel: 'Certifications',
+    langLabel: 'Languages',
     certs: [
       'AWS Academy Cloud Foundations',
-      'Google Cloud Computing Foundations',
+      'Google Cloud Computing',
       'Google Cloud Cybersecurity',
       'Kaggle: Machine Learning',
     ],
@@ -282,11 +453,11 @@ export const certifications: Record<
     ],
   },
   es: {
-    certLabel: 'CERTIFICACIONES',
-    langLabel: 'IDIOMAS',
+    certLabel: 'Certificaciones',
+    langLabel: 'Idiomas',
     certs: [
       'AWS Academy Cloud Foundations',
-      'Google Cloud Computing Foundations',
+      'Google Cloud Computing',
       'Google Cloud Cybersecurity',
       'Kaggle: Machine Learning',
     ],
@@ -297,19 +468,24 @@ export const certifications: Record<
   },
 };
 
+/* ------------------------------------------------------------------ */
+/* Contact                                                             */
+/* ------------------------------------------------------------------ */
+
 export const contact: Record<
   LanguageKey,
   {
-    emailLabel: string;
     email: string;
     blurb: string;
+    responseTime: string;
     social: Array<{ label: string; url: string }>;
   }
 > = {
   en: {
-    emailLabel: 'Email',
     email: 'fprunell10@gmail.com',
-    blurb: "Let's talk about how I can help ship your next release.",
+    blurb:
+      'Open to backend / full-stack roles, remote or Montevideo-based.',
+    responseTime: 'Usually replies within 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
@@ -317,9 +493,10 @@ export const contact: Record<
     ],
   },
   es: {
-    emailLabel: 'Correo',
     email: 'fprunell10@gmail.com',
-    blurb: 'Conversemos sobre cómo puedo ayudar con tu próximo lanzamiento.',
+    blurb:
+      'Abierto a roles backend / full-stack, remoto o desde Montevideo.',
+    responseTime: 'Normalmente respondo en 24h',
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },

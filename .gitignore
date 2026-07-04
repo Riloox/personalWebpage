@@ -3,8 +3,14 @@ node_modules
 dist
 .vscode
 .env
+.env.*
+*.local
 *.tsbuildinfo
 CLAUDE.md
+coverage/
+
+# Stray PDFs at repo root (CVs belong in public/)
+/*.pdf
 
 # Logs
 *.log
