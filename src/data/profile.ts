@@ -149,6 +149,14 @@ export const projects: Record<
       ],
     },
     {
+      name: 'Freecam — Hytale Server Mod',
+      stack: 'Java · CurseForge',
+      highlights: [
+        'Built and published an open-source, server-side mod that adds a toggleable freecam via /freecam commands, preserving and restoring each player\'s original state and position.',
+        'Adopted by the community with 3,900+ downloads on CurseForge; actively maintained across Early Access releases.',
+      ],
+    },
+    {
       name: 'RilooxDB',
       stack: 'Python · Data Engineering',
       highlights: [
@@ -180,6 +188,14 @@ export const projects: Record<
         'Proyecto final de grado: diseño e implementación de un sistema full-stack de movilidad compartida con interfaz móvil.',
         'Desarrollo de funcionalidades multiplataforma con React Native, integrando Google Maps y Firebase Auth.',
         'Servicios backend en Google Cloud Run con PostgreSQL y pipelines de CI/CD automatizados.',
+      ],
+    },
+    {
+      name: 'Freecam — Mod de Servidor para Hytale',
+      stack: 'Java · CurseForge',
+      highlights: [
+        'Desarrollé y publiqué un mod open-source del lado del servidor que agrega una cámara freecam activable mediante comandos /freecam, preservando y restaurando el estado y la posición original de cada jugador.',
+        'Adoptado por la comunidad con más de 3.900 descargas en CurseForge; mantenido activamente a lo largo de las versiones de Early Access.',
       ],
     },
     {
