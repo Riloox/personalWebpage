@@ -25,6 +25,7 @@ export const ui: Record<
     };
     featured: string;
     liveDemo: string;
+    downloadPage: string;
     sourceCode: string;
     privateRepo: string;
     watchDemo: string;
@@ -55,6 +56,7 @@ export const ui: Record<
     },
     featured: 'Featured project',
     liveDemo: 'Live demo',
+    downloadPage: 'Download page',
     sourceCode: 'Source code',
     privateRepo: 'Private repo — built for UTEC',
     watchDemo: 'Watch demo',
@@ -84,6 +86,7 @@ export const ui: Record<
     },
     featured: 'Proyecto destacado',
     liveDemo: 'Demo en vivo',
+    downloadPage: 'Página de descarga',
     sourceCode: 'Código fuente',
     privateRepo: 'Repo privado — desarrollado para UTEC',
     watchDemo: 'Ver demo',
@@ -167,6 +170,7 @@ export interface ProjectLink {
   repo?: string;
   demo?: string;
   video?: string;
+  download?: string;
 }
 
 export interface FeaturedProject {
@@ -253,16 +257,20 @@ export const projects: Record<LanguageKey, Project[]> = {
       privateRepo: true,
     },
     {
-      name: 'RilooxDB',
-      tagline: 'An encrypted key-value store, from scratch',
+      name: 'Freecam',
+      tagline: 'Hytale server mod · 3,900+ downloads',
       description:
-        'A small database built in Python to learn the primitives real databases hide: in-memory indexing, file persistence, JSON serialization, and AES-128 encryption via Fernet. Every write encrypts and persists the full store; a resilient CLI drives CRUD.',
+        'A small server-side Java mod that lets Hytale players detach the camera from their character, adjust movement speed, and return safely to their original state and position.',
       highlights: [
-        'Symmetric encryption with key generation and InvalidToken handling',
-        'Deliberate limitations documented — built to understand trade-offs',
+        '3,900+ verified downloads on CurseForge',
+        'Preserves player state and blocks world interaction while active',
+        'Shipped publicly with user feedback, fixes, and versioned releases',
       ],
-      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+      stack: ['Java', 'Hytale Server API', 'Maven'],
+      links: {
+        repo: 'https://github.com/Riloox/freecam',
+        download: 'https://www.curseforge.com/hytale/mods/freecam',
+      },
     },
   ],
   es: [
@@ -281,16 +289,20 @@ export const projects: Record<LanguageKey, Project[]> = {
       privateRepo: true,
     },
     {
-      name: 'RilooxDB',
-      tagline: 'Un almacén clave-valor cifrado, desde cero',
+      name: 'Freecam',
+      tagline: 'Mod de servidor para Hytale · 3.900+ descargas',
       description:
-        'Una pequeña base de datos construida en Python para aprender las primitivas que las bases de datos reales esconden: indexación en memoria, persistencia en archivos, serialización JSON y cifrado AES-128 vía Fernet. Cada escritura cifra y persiste el store completo; una CLI resiliente maneja el CRUD.',
+        'Un pequeño mod server-side en Java que permite separar la cámara del personaje en Hytale, ajustar la velocidad y volver de forma segura al estado y posición originales.',
       highlights: [
-        'Cifrado simétrico con generación de claves y manejo de InvalidToken',
-        'Limitaciones deliberadas y documentadas — construido para entender trade-offs',
+        'Más de 3.900 descargas verificadas en CurseForge',
+        'Preserva el estado del jugador y bloquea la interacción con el mundo mientras está activo',
+        'Publicado con feedback de usuarios, correcciones y releases versionadas',
       ],
-      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+      stack: ['Java', 'Hytale Server API', 'Maven'],
+      links: {
+        repo: 'https://github.com/Riloox/freecam',
+        download: 'https://www.curseforge.com/hytale/mods/freecam',
+      },
     },
   ],
 };
@@ -339,12 +351,10 @@ export const experience: Record<
 export const skills: Record<
   LanguageKey,
   {
-    primary: string[];
     groups: Array<{ group: string; items: string[] }>;
   }
 > = {
   en: {
-    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
     groups: [
       { group: 'Languages', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
       { group: 'Backend', items: ['Node.js', 'Express', 'REST APIs', 'Drizzle ORM', 'Event-driven', 'Concurrency'] },
@@ -355,7 +365,6 @@ export const skills: Record<
     ],
   },
   es: {
-    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
     groups: [
       { group: 'Lenguajes', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
       { group: 'Backend', items: ['Node.js', 'Express', 'APIs REST', 'Drizzle ORM', 'Event-driven', 'Concurrencia'] },

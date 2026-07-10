@@ -372,7 +372,7 @@ button {
 }
 
 .fl-section {
-  padding: clamp(4.5rem, 10vw, 8rem) 0 0;
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0 0;
 }
 
 /* Section heading: mono index + display title */
@@ -381,8 +381,8 @@ button {
   align-items: baseline;
   gap: 1.25rem;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 1.25rem;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: 0.9rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .fl-section-index {
@@ -672,7 +672,7 @@ button {
   flex-direction: column;
   justify-content: center;
   padding-top: 6rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2.5rem;
 }
 
 .fl-hero-badge {
@@ -689,7 +689,7 @@ button {
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
   width: fit-content;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.1rem;
 }
 
 .fl-dot {
@@ -733,7 +733,7 @@ button {
 .fl-hero-name {
   margin: 0;
   font-weight: 800;
-  font-size: clamp(3rem, 12.5vw, 9.5rem);
+  font-size: clamp(3rem, 10.5vw, 8rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -769,7 +769,7 @@ button {
 }
 
 .fl-hero-summary {
-  margin: 1.25rem 0 0;
+  margin: 1rem 0 0;
   max-width: 58ch;
   color: var(--ink-dim);
   font-size: clamp(0.95rem, 1.8vw, 1.05rem);
@@ -785,7 +785,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 2.5rem;
+  margin-top: 1.6rem;
 }
 
 .fl-hero-scroll {
@@ -884,10 +884,10 @@ button {
    ------------------------------------------------------------------ */
 
 .fl-marquee {
-  margin-top: clamp(3rem, 8vw, 5rem);
+  margin-top: clamp(2rem, 5vw, 3rem);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 1.1rem 0;
+  padding: 0.8rem 0;
   overflow: hidden;
   display: flex;
   user-select: none;
@@ -944,7 +944,7 @@ button {
   background:
     radial-gradient(ellipse 90% 70% at 10% 0%, rgba(42, 255, 127, 0.07), transparent 55%),
     linear-gradient(160deg, var(--pitch), var(--card) 55%);
-  padding: clamp(1.75rem, 4.5vw, 3.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
   overflow: hidden;
 }
 
@@ -979,7 +979,7 @@ button {
 .fl-featured-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(1.75rem, 4vw, 3.5rem);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: start;
 }
 
@@ -1023,7 +1023,7 @@ button {
 }
 
 .fl-featured-features {
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
   padding: 0;
   list-style: none;
   display: grid;
@@ -1049,7 +1049,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 1.4rem;
 }
 
 /* Stats */
@@ -1122,8 +1122,8 @@ button {
 .fl-projects {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 @media (max-width: 56rem) {
@@ -1140,7 +1140,7 @@ button {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  padding: clamp(1.4rem, 3vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.65rem);
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s var(--ease-out-expo),
     box-shadow 0.3s ease;
 }
@@ -1308,7 +1308,7 @@ button {
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  margin: clamp(2.5rem, 6vw, 4rem) 0 1.25rem;
+  margin: clamp(2rem, 4vw, 2.75rem) 0 1rem;
 }
 
 .fl-gh-title {
@@ -1482,6 +1482,66 @@ button {
   content: '▸';
   color: var(--green);
   flex: none;
+}
+
+/* Background information reads as one compact chapter on larger screens.
+   The individual section IDs remain intact for navigation and deep links. */
+.fl-background-grid {
+  width: min(var(--shell-max), 100%);
+  margin: 0 auto;
+  padding: 0 var(--shell-pad);
+}
+
+.fl-background-grid > .fl-section > .fl-shell {
+  width: 100%;
+  padding-inline: 0;
+}
+
+@media (min-width: 64rem) {
+  .fl-background-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+    gap: 0 3.5rem;
+  }
+
+  .fl-background-grid > .fl-section {
+    min-width: 0;
+  }
+
+  .fl-background-grid > #education {
+    grid-column: 1 / -1;
+  }
+
+  .fl-background-grid .fl-section-head {
+    gap: 0.8rem;
+  }
+
+  .fl-background-grid .fl-section-title {
+    font-size: clamp(1.55rem, 2.5vw, 2.25rem);
+  }
+
+  .fl-background-grid .fl-xp {
+    gap: 1.6rem;
+  }
+
+  .fl-background-grid .fl-skills-primary {
+    margin-bottom: 1.5rem;
+  }
+
+  .fl-background-grid .fl-skill-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+
+  .fl-background-grid .fl-edu-grid,
+  .fl-background-grid .fl-certs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .fl-background-grid .fl-certs > * {
+    grid-column: span 1;
+  }
 }
 
 /* ------------------------------------------------------------------
@@ -1801,6 +1861,185 @@ button {
 
 .fl-footer a:hover {
   color: var(--green);
+}
+
+/* ------------------------------------------------------------------
+   Editorial density
+
+   Projects and credentials use rules and alignment instead of a field of
+   floating cards. This keeps the floodlight identity while making the page
+   read more like a concise engineering dossier.
+   ------------------------------------------------------------------ */
+
+.fl-featured {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding-inline: 0;
+}
+
+.fl-featured::before {
+  display: none;
+}
+
+.fl-stats {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  gap: 0;
+}
+
+.fl-stat {
+  background: transparent;
+  border-top: 1px solid var(--line);
+  padding: 1rem 0;
+}
+
+.fl-stat:nth-child(odd) {
+  padding-right: 1rem;
+}
+
+.fl-stat:nth-child(even) {
+  border-left: 1px solid var(--line);
+  padding-left: 1rem;
+}
+
+.fl-stat:hover {
+  background: transparent;
+}
+
+.fl-projects {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-bottom: 0;
+}
+
+.fl-projects > * {
+  border-top: 0;
+}
+
+.fl-projects > * + * {
+  border-top: 1px solid var(--line);
+}
+
+.fl-project {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+  column-gap: clamp(2rem, 5vw, 5rem);
+  align-content: start;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 1.6rem 0;
+}
+
+.fl-project:hover {
+  border-color: transparent;
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.fl-project-name,
+.fl-project-tagline,
+.fl-project > .yt-embed {
+  grid-column: 1;
+}
+
+.fl-project-desc,
+.fl-project-highlights,
+.fl-project-footer {
+  grid-column: 2;
+}
+
+.fl-project-desc {
+  grid-row: 1 / span 2;
+  margin-top: 0.15rem;
+}
+
+.fl-project-highlights {
+  grid-row: 3 / span 2;
+}
+
+.fl-project-footer {
+  grid-row: 5;
+  padding-top: 1rem;
+}
+
+.fl-project > .yt-embed {
+  grid-row: 3 / span 3;
+  margin-top: 1rem;
+}
+
+.fl-gh-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-bottom: 0;
+}
+
+.fl-gh-grid > * {
+  border-top: 0;
+}
+
+.fl-gh-grid > * + * {
+  border-top: 1px solid var(--line);
+}
+
+.fl-gh-card {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.6fr) minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0.8rem 0;
+}
+
+.fl-gh-card:hover {
+  border-color: transparent;
+  background: transparent;
+  transform: none;
+}
+
+.fl-gh-meta {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.fl-edu-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 1rem 0 0;
+}
+
+@media (max-width: 48rem) {
+  .fl-project {
+    display: block;
+  }
+
+  .fl-gh-card {
+    grid-template-columns: 1fr auto;
+  }
+
+  .fl-gh-desc {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .fl-gh-meta {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    white-space: normal;
+  }
 }
 
 /* ------------------------------------------------------------------

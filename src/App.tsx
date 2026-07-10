@@ -13,7 +13,7 @@ import type { LanguageKey } from './data/profile';
 
 const GITHUB_USERNAME = 'Riloox';
 // Repos already shown as curated projects — hide from the GitHub strip.
-const CURATED_REPO_NAMES = ['picadito', 'RilooxDB', 'personalWebpage'];
+const CURATED_REPO_NAMES = ['picadito', 'freecam', 'personalWebpage'];
 
 const LANG_KEY = 'riloox-lang';
 
@@ -55,9 +55,11 @@ const App = () => {
           githubUsername={GITHUB_USERNAME}
           githubExcludeNames={CURATED_REPO_NAMES}
         />
-        <ExperienceSection language={language} />
-        <SkillsSection language={language} />
-        <EducationCertsSection language={language} />
+        <div className="fl-background-grid">
+          <ExperienceSection language={language} />
+          <SkillsSection language={language} />
+          <EducationCertsSection language={language} />
+        </div>
       </main>
       <ContactSection language={language} />
     </>
