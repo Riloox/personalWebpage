@@ -123,7 +123,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ incidents triaged and resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine.',
     marquee: [
       'Java',
       'TypeScript',
@@ -144,7 +144,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes atendidos y resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
     marquee: [
       'Java',
       'TypeScript',
@@ -326,7 +326,7 @@ export const experience: Record<
       role: 'Software Development Analyst',
       duration: 'Apr 2025 — Present · Montevideo, Uruguay',
       highlights: [
-        'Resolved 50+ production incidents via triage, improving system reliability and logging practices.',
+        'Triaged and resolved 50+ incidents across dev environments, improving system reliability and logging practices.',
         'Picked for the company’s newest project by supervisors at under one year in the role.',
       ],
     },
@@ -337,7 +337,7 @@ export const experience: Record<
       role: 'Analista de Desarrollo de Software',
       duration: 'Abr 2025 — Presente · Montevideo, Uruguay',
       highlights: [
-        'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
+        'Atención y resolución de más de 50 incidentes en entornos de desarrollo mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
         'Elegido por mis supervisores para el proyecto más nuevo de la empresa con menos de un año en el rol.',
       ],
     },
@@ -474,7 +474,7 @@ export const contact: Record<
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
-      { label: 'HackerRank', url: 'https://www.hackerrank.com/profile/fprunell10' },
+      { label: 'Codewars', url: 'https://www.codewars.com/users/Riloox' },
     ],
   },
   es: {
@@ -485,7 +485,7 @@ export const contact: Record<
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
-      { label: 'HackerRank', url: 'https://www.hackerrank.com/profile/fprunell10' },
+      { label: 'Codewars', url: 'https://www.codewars.com/users/Riloox' },
     ],
   },
 };
