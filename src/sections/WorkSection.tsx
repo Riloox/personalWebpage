@@ -2,7 +2,6 @@ import GithubStrip from '../components/GithubStrip';
 import ProjectCard from '../components/ProjectCard';
 import Reveal from '../components/Reveal';
 import SectionHead from '../components/SectionHead';
-import useTilt from '../hooks/useTilt';
 import { faltaUno, projects, ui, type LanguageKey } from '../data/profile';
 
 interface WorkSectionProps {
@@ -15,7 +14,6 @@ const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSecti
   const t = ui[language];
   const featured = faltaUno[language];
   const rest = projects[language];
-  const featuredTilt = useTilt<HTMLElement>(3);
 
   return (
     <section className="fl-section" id="work" aria-label={t.sections.work}>
@@ -24,12 +22,7 @@ const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSecti
 
         {/* Featured: Falta Uno */}
         <Reveal>
-          <article
-            ref={featuredTilt.ref}
-            onPointerMove={featuredTilt.onPointerMove}
-            onPointerLeave={featuredTilt.onPointerLeave}
-            className="fl-featured fl-tilt fl-glass"
-          >
+          <article className="fl-featured">
             <span className="fl-featured-tag">{t.featured}</span>
             <div className="fl-featured-grid">
               <div>
@@ -87,14 +80,19 @@ const WorkSection = ({ language, githubUsername, githubExcludeNames }: WorkSecti
           </article>
         </Reveal>
 
-        {/* Cleta + RilooxDB */}
+        {/* Cleta + Freecam */}
         <div className="fl-projects">
           {rest.map((project, i) => (
             <ProjectCard
               key={project.name}
               project={project}
               index={i}
-              labels={{ sourceCode: t.sourceCode, liveDemo: t.liveDemo, privateRepo: t.privateRepo }}
+              labels={{
+                sourceCode: t.sourceCode,
+                liveDemo: t.liveDemo,
+                downloadPage: t.downloadPage,
+                privateRepo: t.privateRepo,
+              }}
             />
           ))}
         </div>

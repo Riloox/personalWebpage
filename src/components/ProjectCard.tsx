@@ -1,6 +1,5 @@
 import Reveal from './Reveal';
 import YoutubeEmbed from './YoutubeEmbed';
-import useTilt from '../hooks/useTilt';
 import type { Project } from '../data/profile';
 
 interface ProjectCardProps {
@@ -9,23 +8,16 @@ interface ProjectCardProps {
   labels: {
     sourceCode: string;
     liveDemo: string;
+    downloadPage: string;
     privateRepo: string;
   };
 }
 
-/** A single curated-project card with cursor-spotlight tilt. */
+/** A curated project entry in the editorial project index. */
 const ProjectCard = ({ project, index, labels }: ProjectCardProps) => {
-  const tilt = useTilt<HTMLElement>(4);
-
   return (
     <Reveal delay={index * 0.12} style={{ height: '100%' }}>
-      <article
-        ref={tilt.ref}
-        onPointerMove={tilt.onPointerMove}
-        onPointerLeave={tilt.onPointerLeave}
-        className="fl-project fl-tilt"
-        style={{ height: '100%' }}
-      >
+      <article className="fl-project" style={{ height: '100%' }}>
         <h3 className="fl-project-name">{project.name}</h3>
         <p className="fl-project-tagline">{project.tagline}</p>
         <p className="fl-project-desc">{project.description}</p>
@@ -54,6 +46,11 @@ const ProjectCard = ({ project, index, labels }: ProjectCardProps) => {
             {project.links?.demo ? (
               <a className="fl-link" href={project.links.demo} target="_blank" rel="noreferrer">
                 {labels.liveDemo} <span className="arrow">↗</span>
+              </a>
+            ) : null}
+            {project.links?.download ? (
+              <a className="fl-link" href={project.links.download} target="_blank" rel="noreferrer">
+                {labels.downloadPage} <span className="arrow">↗</span>
               </a>
             ) : null}
             {project.privateRepo ? <span className="fl-private-note">{labels.privateRepo}</span> : null}

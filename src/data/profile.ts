@@ -25,6 +25,7 @@ export const ui: Record<
     };
     featured: string;
     liveDemo: string;
+    downloadPage: string;
     sourceCode: string;
     privateRepo: string;
     watchDemo: string;
@@ -55,6 +56,7 @@ export const ui: Record<
     },
     featured: 'Featured project',
     liveDemo: 'Live demo',
+    downloadPage: 'Download page',
     sourceCode: 'Source code',
     privateRepo: 'Private repo — built for UTEC',
     watchDemo: 'Watch demo',
@@ -84,6 +86,7 @@ export const ui: Record<
     },
     featured: 'Proyecto destacado',
     liveDemo: 'Demo en vivo',
+    downloadPage: 'Página de descarga',
     sourceCode: 'Código fuente',
     privateRepo: 'Repo privado — desarrollado para UTEC',
     watchDemo: 'Ver demo',
@@ -120,7 +123,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ production incidents resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine. English C2, remote-ready.',
+        'Software Development Analyst at Bantotal, writing Java services for core banking. 50+ incidents triaged and resolved. After hours I ship Falta Uno: a live React 19 + TypeScript + Express platform with a real ELO rating engine.',
     marquee: [
       'Java',
       'TypeScript',
@@ -141,7 +144,7 @@ export const heroContent: Record<
     firstName: 'Federico',
     lastName: 'Prunell',
       summary:
-        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes de producción resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
+        'Analista de Desarrollo de Software en Bantotal, escribiendo servicios Java para core bancario. 50+ incidentes atendidos y resueltos. Fuera de hora desarrollo Falta Uno: una plataforma en producción con React 19 + TypeScript + Express y un motor de rating ELO real. Inglés C2, listo para remoto.',
     marquee: [
       'Java',
       'TypeScript',
@@ -167,6 +170,7 @@ export interface ProjectLink {
   repo?: string;
   demo?: string;
   video?: string;
+  download?: string;
 }
 
 export interface FeaturedProject {
@@ -254,27 +258,19 @@ export const projects: Record<LanguageKey, Project[]> = {
     },
     {
       name: 'Freecam',
-      tagline: 'Server-side freecam mod for Hytale',
+      tagline: 'Hytale server mod · 3,900+ downloads',
       description:
-        'An open-source, server-side Hytale mod that adds a toggleable freecam via /freecam commands — detaching the camera while preserving and restoring each player’s original state and position, with adjustable speed and block-interaction guards.',
+        'A small server-side Java mod that lets Hytale players detach the camera from their character, adjust movement speed, and return safely to their original state and position.',
       highlights: [
-        'Published on CurseForge with 3,900+ downloads; actively maintained across Early Access releases',
-        'Careful player-state save/restore so toggling never corrupts position or interaction state',
+        '3,900+ verified downloads on CurseForge',
+        'Preserves player state and blocks world interaction while active',
+        'Shipped publicly with user feedback, fixes, and versioned releases',
       ],
-      stack: ['Java'],
-      links: { demo: 'https://www.curseforge.com/hytale/mods/freecam' },
-    },
-    {
-      name: 'RilooxDB',
-      tagline: 'An encrypted key-value store, from scratch',
-      description:
-        'A small database built in Python to learn the primitives real databases hide: in-memory indexing, file persistence, JSON serialization, and AES-128 encryption via Fernet. Every write encrypts and persists the full store; a resilient CLI drives CRUD.',
-      highlights: [
-        'Symmetric encryption with key generation and InvalidToken handling',
-        'Deliberate limitations documented — built to understand trade-offs',
-      ],
-      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+      stack: ['Java', 'Hytale Server API', 'Maven'],
+      links: {
+        repo: 'https://github.com/Riloox/freecam',
+        download: 'https://www.curseforge.com/hytale/mods/freecam',
+      },
     },
   ],
   es: [
@@ -294,27 +290,19 @@ export const projects: Record<LanguageKey, Project[]> = {
     },
     {
       name: 'Freecam',
-      tagline: 'Mod de cámara libre del lado del servidor para Hytale',
+      tagline: 'Mod de servidor para Hytale · 3.900+ descargas',
       description:
-        'Un mod open-source del lado del servidor para Hytale que agrega una cámara libre activable mediante comandos /freecam — desacoplando la cámara mientras preserva y restaura el estado y la posición original de cada jugador, con velocidad ajustable y bloqueo de interacciones.',
+        'Un pequeño mod server-side en Java que permite separar la cámara del personaje en Hytale, ajustar la velocidad y volver de forma segura al estado y posición originales.',
       highlights: [
-        'Publicado en CurseForge con más de 3.900 descargas; mantenido activamente a lo largo de las versiones de Early Access',
-        'Guardado y restauración cuidadosa del estado del jugador para que activar la cámara nunca corrompa la posición ni las interacciones',
+        'Más de 3.900 descargas verificadas en CurseForge',
+        'Preserva el estado del jugador y bloquea la interacción con el mundo mientras está activo',
+        'Publicado con feedback de usuarios, correcciones y releases versionadas',
       ],
-      stack: ['Java'],
-      links: { demo: 'https://www.curseforge.com/hytale/mods/freecam' },
-    },
-    {
-      name: 'RilooxDB',
-      tagline: 'Un almacén clave-valor cifrado, desde cero',
-      description:
-        'Una pequeña base de datos construida en Python para aprender las primitivas que las bases de datos reales esconden: indexación en memoria, persistencia en archivos, serialización JSON y cifrado AES-128 vía Fernet. Cada escritura cifra y persiste el store completo; una CLI resiliente maneja el CRUD.',
-      highlights: [
-        'Cifrado simétrico con generación de claves y manejo de InvalidToken',
-        'Limitaciones deliberadas y documentadas — construido para entender trade-offs',
-      ],
-      stack: ['Python', 'cryptography (Fernet)', 'File I/O'],
-      links: { repo: 'https://github.com/Riloox/RilooxDB' },
+      stack: ['Java', 'Hytale Server API', 'Maven'],
+      links: {
+        repo: 'https://github.com/Riloox/freecam',
+        download: 'https://www.curseforge.com/hytale/mods/freecam',
+      },
     },
   ],
 };
@@ -338,7 +326,7 @@ export const experience: Record<
       role: 'Software Development Analyst',
       duration: 'Apr 2025 — Present · Montevideo, Uruguay',
       highlights: [
-        'Resolved 50+ production incidents via triage, improving system reliability and logging practices.',
+        'Triaged and resolved 50+ incidents across dev environments, improving system reliability and logging practices.',
         'Picked for the company’s newest project by supervisors at under one year in the role.',
       ],
     },
@@ -349,7 +337,7 @@ export const experience: Record<
       role: 'Analista de Desarrollo de Software',
       duration: 'Abr 2025 — Presente · Montevideo, Uruguay',
       highlights: [
-        'Resolución de más de 50 incidentes en producción mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
+        'Atención y resolución de más de 50 incidentes en entornos de desarrollo mediante triage, mejorando la confiabilidad del sistema y las prácticas de logging.',
         'Elegido por mis supervisores para el proyecto más nuevo de la empresa con menos de un año en el rol.',
       ],
     },
@@ -363,12 +351,10 @@ export const experience: Record<
 export const skills: Record<
   LanguageKey,
   {
-    primary: string[];
     groups: Array<{ group: string; items: string[] }>;
   }
 > = {
   en: {
-    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
     groups: [
       { group: 'Languages', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
       { group: 'Backend', items: ['Node.js', 'Express', 'REST APIs', 'Drizzle ORM', 'Event-driven', 'Concurrency'] },
@@ -379,7 +365,6 @@ export const skills: Record<
     ],
   },
   es: {
-    primary: ['Java', 'TypeScript', 'Python', 'SQL', 'React', 'Node.js', 'AWS', 'GCP'],
     groups: [
       { group: 'Lenguajes', items: ['Java', 'TypeScript', 'Python', 'SQL', 'JavaScript'] },
       { group: 'Backend', items: ['Node.js', 'Express', 'APIs REST', 'Drizzle ORM', 'Event-driven', 'Concurrencia'] },
@@ -489,7 +474,7 @@ export const contact: Record<
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
-      { label: 'HackerRank', url: 'https://www.hackerrank.com/profile/fprunell10' },
+      { label: 'Codewars', url: 'https://www.codewars.com/users/Riloox' },
     ],
   },
   es: {
@@ -500,7 +485,7 @@ export const contact: Record<
     social: [
       { label: 'GitHub', url: 'https://github.com/Riloox' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/federico-prunell-36b684207' },
-      { label: 'HackerRank', url: 'https://www.hackerrank.com/profile/fprunell10' },
+      { label: 'Codewars', url: 'https://www.codewars.com/users/Riloox' },
     ],
   },
 };

@@ -9,6 +9,21 @@ dist
 CLAUDE.md
 coverage/
 
+# Local tooling and agent state
+.agents/
+.codex/
+
+# Credentials, auth configuration, and private keys
+.npmrc
+.yarnrc
+.netrc
+credentials.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+
 # Stray PDFs at repo root (CVs belong in public/)
 /*.pdf
 

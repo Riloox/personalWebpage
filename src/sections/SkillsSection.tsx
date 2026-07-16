@@ -13,16 +13,15 @@ const SkillsSection = ({ language }: SkillsSectionProps) => {
   return (
     <section className="fl-section" id="skills" aria-label={t.sections.skills}>
       <div className="fl-shell">
-        <SectionHead index="03" title={t.sections.skills} />
-        <Reveal>
-          <div className="fl-skills-primary">
-            {data.primary.map((skill) => (
-              <span className="fl-skill-big" key={skill}>
-                {skill}
-              </span>
-            ))}
-          </div>
-        </Reveal>
+        <SectionHead
+          index="03"
+          title={t.sections.skills}
+          sub={
+            language === 'es'
+              ? 'Herramientas que usé en trabajo, estudio y proyectos.'
+              : 'Tools I have used across work, study, and projects.'
+          }
+        />
         <div className="fl-skill-groups">
           {data.groups.map((group, i) => (
             <Reveal key={group.group} delay={i * 0.06}>
