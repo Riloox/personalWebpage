@@ -56,6 +56,9 @@ export default function TubeVortex({ pointer }: { pointer: React.MutableRefObjec
   useEffect(() => {
     const el = host.current;
     if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // A renderer can exist even when the browser subsequently blocks WebGL.
+    // Keep the CSS fallback visible until a valid frame is produced.
+    el.dataset.failed = 'true';
     let renderer: THREE.WebGLRenderer;
     try { renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' }); } catch { el.dataset.failed = 'true'; return; }
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -70,17 +73,28 @@ export default function TubeVortex({ pointer }: { pointer: React.MutableRefObjec
     let running = !document.hidden, raf = 0, px = 0, py = 0, start = performance.now();
     const resize = () => { const r = el.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); uniforms.uRes.value.set(r.width * renderer.getPixelRatio(), r.height * renderer.getPixelRatio()); };
     const observer = new ResizeObserver(resize); observer.observe(el); resize();
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      el.dataset.failed = 'true';
+    };
+    renderer.domElement.addEventListener('webglcontextlost', onContextLost);
+    let firstFrame = true;
     const render = () => {
       if (!running) return;
       px += (pointer.current.x - px) * 0.04; py += (pointer.current.y - py) * 0.04;
       uniforms.uPointer.value.set(px, -py);
       uniforms.uTime.value = (performance.now() - start) / 1000;
       renderer.render(scene, camera);
+      if (firstFrame) {
+        firstFrame = false;
+        const gl = renderer.getContext();
+        if (gl.getError() === gl.NO_ERROR) delete el.dataset.failed;
+      }
       raf = requestAnimationFrame(render);
     };
     const visibility = () => { running = !document.hidden; cancelAnimationFrame(raf); if (running) { start = performance.now() - uniforms.uTime.value * 1000; raf = requestAnimationFrame(render); } };
     document.addEventListener('visibilitychange', visibility); raf = requestAnimationFrame(render);
-    return () => { running = false; cancelAnimationFrame(raf); document.removeEventListener('visibilitychange', visibility); observer.disconnect(); geometry.dispose(); material.dispose(); renderer.dispose(); renderer.domElement.remove(); };
+    return () => { running = false; cancelAnimationFrame(raf); document.removeEventListener('visibilitychange', visibility); observer.disconnect(); renderer.domElement.removeEventListener('webglcontextlost', onContextLost); geometry.dispose(); material.dispose(); renderer.dispose(); renderer.domElement.remove(); };
   }, [pointer]);
   return <div className="vortex" ref={host} aria-hidden="true" />;
 }
